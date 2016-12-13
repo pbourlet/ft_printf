@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoalong.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:43:25 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/13 21:39:55 by pbourlet         ###   ########.fr       */
+/*   Created: 2016/12/13 15:52:53 by pbourlet          #+#    #+#             */
+/*   Updated: 2016/12/13 15:53:42 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_itoa(int n)
+char	*ft_itoalong(long int n)
 {
-	char	*str;
-	long	nb;
-	int		i;
-	int		len;
+	char		*str;
+	long		nb;
+	long int	i;
+	long int	len;
 
 	i = 0;
 	nb = n;

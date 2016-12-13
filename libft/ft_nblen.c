@@ -6,13 +6,13 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 17:13:24 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/11/09 17:28:27 by pbourlet         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:25:21 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_nblen(int nb)
+int	ft_nblen(int nb)
 {
 	int	digit;
 

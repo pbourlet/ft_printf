@@ -1,0 +1,6 @@
+SDoOUxXC
+%%
+flags #0-+ et espace
+taille minimum du champ
+précision
+hh h l ll j z
