@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/14 13:22:01 by pbourlet         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:46:05 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 char	**ft_stocksimple(char **tab, char *s, va_list ap, int i, int *a)
 {
 	if (s[i] == 's')
-		tab[*a] = ft_strjoin(tab[*a], va_arg(ap, char *));
+		tab[*a] = ft_strdup(va_arg(ap, char *));
 	else if (s[i] == 'd' || s[i] == 'i')
-		tab[*a] = ft_strjoin(tab[*a], ft_itoa(va_arg(ap, int)));
+		tab[*a] = ft_strdup(ft_itoa(va_arg(ap, int)));
 	else if (s[i] == 'c')
 		tab[*a] = ft_strcjoin(tab[*a], va_arg(ap, int));
 	else if (s[i] == 'u')
@@ -25,7 +25,7 @@ char	**ft_stocksimple(char **tab, char *s, va_list ap, int i, int *a)
 	else if (s[i] == 'p')
 		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
 	else if (s[i] == 'o')
-		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
+		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned int)));
 	return (tab);
 }
 
@@ -49,7 +49,7 @@ char	**ft_stock(char *s, va_list ap)
 	i = -1;
 	c = 0;
 	a = 1;
-	if (!(*tab = malloc(sizeof(va_list) * 100)))
+	if (!(tab = malloc(sizeof(va_list) * 100)))
 		return (NULL);
 	while (s[++i])
 	{

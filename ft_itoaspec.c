@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:57:38 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/14 13:40:24 by pbourlet         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:43:22 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	*ft_itoaoc(unsigned long nb)
 {
 	char	*str;
 	int		i;
-	long 	nres;
 
 	i = 0;
 	if (!(str = ft_strnew(11)))

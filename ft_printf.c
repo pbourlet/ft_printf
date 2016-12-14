@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:26:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/14 13:40:33 by pbourlet         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:14:17 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_solvesimple(char *str, char *s, int *i, char *tab)
 	return (str);
 }
 
-char	*ft_solve(char *str, char *s, va_list ap, int i, char **tab)
+char	*ft_solve(char *str, char *s, int i, char **tab)
 {
 	int	a;
 
@@ -64,7 +64,7 @@ int		ft_printf(const char * restrict format, ...)
 	str = ft_strnew(0);
 	if ((stock = ft_stock(s, ap)) == NULL)
 		return (0);
-	str = ft_solve(str, s, ap, i, stock);
+	str = ft_solve(str, s, i, stock);
 	ft_putstr(str);
 	free(stock);
 	free(s);
@@ -78,8 +78,8 @@ int		main(void)
 	char *p;
 	p = malloc(100);
 	int lu = -42;
-	ft_printf("lol %o \n", 'c');
-	printf("lol %o \n", 'c');
+	ft_printf("lol %o \n", "salut");
+	printf("lol %o \n", "salut");
 //	ft_printf("lol %c %i %d %ld %lu %p\n", 'a', "salut", 19, li, lu, p);
 //	printf("lol %c %i %d %ld %lu %p\n", 'a', "salut", 19, li, lu, p);
 	return (0);
