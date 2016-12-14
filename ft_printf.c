@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:26:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/13 21:39:52 by pbourlet         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:40:33 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_solve(char *str, char *s, va_list ap, int i, char **tab)
 	while (s[i])
 	{
 		if (s[i - 1] == '%' && (s[i] == 's' || s[i] == 'd' || s[i] == 'c'
-					|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p'))
+		|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p' || s[i] == 'o'))
 			str = ft_solvesimple(str, s, &i, tab[a++]);
 		else if (s[i - 1] == '%' && s[i] == 'l')
 			str = ft_solvelong(str, &i, tab[a++]);
@@ -78,9 +78,9 @@ int		main(void)
 	char *p;
 	p = malloc(100);
 	int lu = -42;
-//	ft_printf("lol %p \n", -1025);
-//	printf("lol %p \n", -1025);
-	ft_printf("lol %c %i %d %ld %lu %p\n", 'a', "salut", 19, li, lu, p);
-	printf("lol %c %i %d %ld %lu %p\n", 'a', "salut", 19, li, lu, p);
+	ft_printf("lol %o \n", 'c');
+	printf("lol %o \n", 'c');
+//	ft_printf("lol %c %i %d %ld %lu %p\n", 'a', "salut", 19, li, lu, p);
+//	printf("lol %c %i %d %ld %lu %p\n", 'a', "salut", 19, li, lu, p);
 	return (0);
 }

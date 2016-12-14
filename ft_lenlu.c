@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoalong.c                                      :+:      :+:    :+:   */
+/*   ft_lenlu.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 15:52:53 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/13 15:53:42 by pbourlet         ###   ########.fr       */
+/*   Created: 2016/12/14 12:56:43 by pbourlet          #+#    #+#             */
+/*   Updated: 2016/12/14 12:56:48 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoalong(long int n)
+long int	ft_lenlu(unsigned long nb)
 {
-	char		*str;
-	long		nb;
-	long int	i;
-	long int	len;
+	long int 	digit;
 
-	i = 0;
-	nb = n;
-	if (n < 0)
-		nb = -nb;
-	len = ft_nblen(nb);
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1 + (n < 0)))))
-		return (NULL);
-	if (nb == 0)
-		return (ft_strcpy(str, "0"));
+	digit = 0;
+	if (!nb)
+		return (1);
 	while (nb != 0)
 	{
-		str[i] = (nb % 10) + '0';
 		nb = nb / 10;
-		i++;
+		digit++;
 	}
-	if (n < 0)
-		str[i++] = '-';
-	str[i] = '\0';
-	str = ft_strrev(str);
-	return (str);
+	return (digit);
 }

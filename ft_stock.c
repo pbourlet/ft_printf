@@ -6,37 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/13 21:39:49 by pbourlet         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:22:01 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char	*ft_itohx(unsigned long nb)
-{
-	char	*str;
-	int		i;
-
-	i = 0;
-	if (!(str = ft_strnew(11)))
-		return (NULL);
-	if (nb == 0)
-		return (ft_strcpy(str, "0"));
-	while (nb != 0)
-	{
-		if (nb % 16 <= 15)
-			str[i] = (nb % 16) + '0';
-		if (nb % 16 >= 10)
-			str[i] = 'a' + ((nb % 16) % 10);
-		nb = nb / 16;
-		i++;
-	}
-	str[i++] = 'x';
-	str[i++] = '0';
-	str[i] = '\0';
-	str = ft_strrev(str);
-	return (str);
-}
 
 char	**ft_stocksimple(char **tab, char *s, va_list ap, int i, int *a)
 {
@@ -50,6 +24,8 @@ char	**ft_stocksimple(char **tab, char *s, va_list ap, int i, int *a)
 		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, unsigned int)));
 	else if (s[i] == 'p')
 		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
+	else if (s[i] == 'o')
+		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
 	return (tab);
 }
 
@@ -82,10 +58,11 @@ char	**ft_stock(char *s, va_list ap)
 		{
 			if (!(s[i + c] == 's' || s[i + c] == 'd' || s[i + c] == 'c'
 			|| s[i + c] == 'l' || s[i + c] == 'i' || s[i + c] == 'u'
-			|| s[i + c] == 'p'))
+			|| s[i + c] == 'p' || s[i + c] == 'o'))
 				c++;
 			if (s[i + c] == 's' || s[i + c] == 'd' || s[i + c] == 'c'
-					|| s[i + c] == 'i' || s[i + c] == 'u' || s[i + c] == 'p')
+			|| s[i + c] == 'i' || s[i + c] == 'u' || s[i + c] == 'p'
+			|| s[i + c] == 'o')
 				tab = ft_stocksimple(tab, s, ap, i + c, &a);
 			else if (s[i + c] == 'l')
 				tab = ft_stocklong(tab, s, ap, i + c, &a);
