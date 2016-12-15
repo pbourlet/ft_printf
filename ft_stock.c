@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/14 16:46:05 by pbourlet         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:25:33 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ char	**ft_stocksimple(char **tab, char *s, va_list ap, int i, int *a)
 		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, unsigned int)));
 	else if (s[i] == 'p')
 		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
+	else if (s[i] == 'x')
+		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
 	else if (s[i] == 'o')
 		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned int)));
+	else if (s[i] == 'X')
+		tab[*a] = ft_strdup(ft_strtoupper(ft_itohx(va_arg(ap, unsigned long))));
 	return (tab);
 }
 
@@ -58,11 +62,11 @@ char	**ft_stock(char *s, va_list ap)
 		{
 			if (!(s[i + c] == 's' || s[i + c] == 'd' || s[i + c] == 'c'
 			|| s[i + c] == 'l' || s[i + c] == 'i' || s[i + c] == 'u'
-			|| s[i + c] == 'p' || s[i + c] == 'o'))
+			|| s[i + c] == 'p' || s[i + c] == 'o' || s[i + c] == 'x' || s[i + c] == 'X'))
 				c++;
 			if (s[i + c] == 's' || s[i + c] == 'd' || s[i + c] == 'c'
 			|| s[i + c] == 'i' || s[i + c] == 'u' || s[i + c] == 'p'
-			|| s[i + c] == 'o')
+			|| s[i + c] == 'o' || s[i + c] == 'x' || s[i + c] == 'X')
 				tab = ft_stocksimple(tab, s, ap, i + c, &a);
 			else if (s[i + c] == 'l')
 				tab = ft_stocklong(tab, s, ap, i + c, &a);

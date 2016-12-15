@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:26:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/14 17:14:17 by pbourlet         ###   ########.fr       */
+/*   Updated: 2016/12/15 16:43:03 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ char	*ft_solvelong(char *tmp, int *i, char *tab)
 
 char	*ft_solvesimple(char *str, char *s, int *i, char *tab)
 {
-	if (s[*i] != 'c')
+	if (s[*i] ==  'p')
+	{
+		str = ft_strjoin(str, "0x");
 		str = ft_strjoin(str, tab);
+	}
 	else if (s[*i] == 'c')
 		str = ft_strcjoin(str, tab[0]);
+	else
+		str = ft_strjoin(str, tab);
 	return (str);
 }
 
@@ -37,7 +42,7 @@ char	*ft_solve(char *str, char *s, int i, char **tab)
 	while (s[i])
 	{
 		if (s[i - 1] == '%' && (s[i] == 's' || s[i] == 'd' || s[i] == 'c'
-		|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p' || s[i] == 'o'))
+		|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p' || s[i] == 'o' || s[i] == 'x' || s[i] == 'X'))
 			str = ft_solvesimple(str, s, &i, tab[a++]);
 		else if (s[i - 1] == '%' && s[i] == 'l')
 			str = ft_solvelong(str, &i, tab[a++]);
@@ -50,7 +55,7 @@ char	*ft_solve(char *str, char *s, int i, char **tab)
 	return (str);
 }
 
-int		ft_printf(const char * restrict format, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	char		*s;
@@ -70,17 +75,4 @@ int		ft_printf(const char * restrict format, ...)
 	free(s);
 	va_end(ap);
 	return (1);
-}
-
-int		main(void)
-{
-	long int li = -42;
-	char *p;
-	p = malloc(100);
-	int lu = -42;
-	ft_printf("lol %o \n", "salut");
-	printf("lol %o \n", "salut");
-//	ft_printf("lol %c %i %d %ld %lu %p\n", 'a', "salut", 19, li, lu, p);
-//	printf("lol %c %i %d %ld %lu %p\n", 'a', "salut", 19, li, lu, p);
-	return (0);
 }

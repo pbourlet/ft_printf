@@ -1,4 +1,4 @@
-SDoOUxXC
+SDOUxXC
 %%
 flags #0-+ et espace
 taille minimum du champ

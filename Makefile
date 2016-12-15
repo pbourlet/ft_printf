@@ -6,7 +6,7 @@
 #*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/14 16:37:03 by pbourlet          #+#    #+#             *#
-#*   Updated: 2016/12/14 17:12:24 by pbourlet         ###   ########.fr       *#
+#*   Updated: 2016/12/15 16:44:19 by pbourlet         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -81,6 +81,7 @@ SRC = ft_lenlu.c \
 	  ft_itoaspec.c \
 	  ft_printf.c \
 	  ft_stock.c \
+	  ft_strtoupper.c \
 
 OBJ = $(SRC:.c=.o)
 
