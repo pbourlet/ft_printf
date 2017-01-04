@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/04 17:46:55 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/04 18:42:45 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,22 @@ char	**ft_stocklong(char **tab, char *s, va_list ap, int i, int *a)
 	return (tab);
 }
 
+int	testdiff(char *s, int *i, int *c)
+{
+	if (!(s[*i + *c] == 's' || s[*i + *c] == 'd' || s[*i + *c] == 'c'
+	|| s[*i + *c] == 'l' || s[*i + *c] == 'i' || s[*i + *c] == 'u'
+	|| s[*i + *c] == 'p' || s[*i + *c] == 'o' || s[*i + *c] == 'x'
+	|| s[*i + *c] == 'X'))
+		return (1);
+	if (s[*i + *c] == 's' || s[*i + *c] == 'd' || s[*i + *c] == 'c'
+	|| s[*i + *c] == 'i' || s[*i + *c] == 'u' || s[*i + *c] == 'p'
+	|| s[*i + *c] == 'o' || s[*i + *c] == 'x' || s[*i + *c] == 'X')
+		return (2);
+	if (s[*i + *c] == 'l')
+		return (3);
+	return (0);
+}
+
 char	**ft_stock(char *s, va_list ap)
 {
 	char	**tab;
@@ -60,15 +76,11 @@ char	**ft_stock(char *s, va_list ap)
 		tab[a] = ft_strnew(0);
 		if (!(c = 0) && s[i] == '%')
 		{
-			if (!(s[i + c] == 's' || s[i + c] == 'd' || s[i + c] == 'c'
-			|| s[i + c] == 'l' || s[i + c] == 'i' || s[i + c] == 'u'
-			|| s[i + c] == 'p' || s[i + c] == 'o' || s[i + c] == 'x' || s[i + c] == 'X'))
+			if (testdiff(s, &i, &c) == 1)
 				c++;
-			if (s[i + c] == 's' || s[i + c] == 'd' || s[i + c] == 'c'
-			|| s[i + c] == 'i' || s[i + c] == 'u' || s[i + c] == 'p'
-			|| s[i + c] == 'o' || s[i + c] == 'x' || s[i + c] == 'X')
+			if (testdiff(s, &i, &c) == 2)
 				tab = ft_stocksimple(tab, s, ap, i + c, &a);
-			else if (s[i + c] == 'l')
+			else if (testdiff == 3)
 				tab = ft_stocklong(tab, s, ap, i + c, &a);
 			a++;
 		}
