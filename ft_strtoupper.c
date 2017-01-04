@@ -6,13 +6,13 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 16:37:48 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/15 17:03:44 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/04 17:31:36 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_strtoupper(char *str)
+char	*stup(char *str)
 {
 	int i;
 

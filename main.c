@@ -7,10 +7,12 @@ int	main(void)
 	p = malloc(100);
 	int lu = -42;
 	char ss[]="salut";
+	wchar_t *test;
 
-//	ft_printf("ft: lol %X %x\n", 42, 42);
-//	printf("V : lol %X %x\n", 42, 42);
-      ft_printf("lol %c %i %d %ld %X %lu %x %p\n", 'a', "salut", 19, li, lu, p, 42, 42);
-      printf("lol %c %i %d %ld %X %lu %x %p\n", 'a', "salut", 19, li, lu, p, 42, 42);
+	test = ss;
+	ft_printf("ft: lol %S\n", test);
+	printf("V : lol %ls\n", "t");
+//      ft_printf("lol %c %i %d %ld %X %lu %p %x\n", 'a', "salut", 19, li, lu, p, 42, 42);
+//      printf("lol %c %i %d %ld %X %lu %p %x\n", 'a', "salut", 19, li, lu, p, 42, 42);
 	return (0);
 }

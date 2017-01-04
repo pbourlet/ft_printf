@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/15 16:42:12 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/04 17:31:57 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ char		*ft_itohx(unsigned long nb);
 char 		*ft_itoalu(unsigned long n);
 long int	ft_lenlu(unsigned long nb);
 char		*ft_itoaoc(unsigned long nb);
-char		*ft_strtoupper(char *str);
+char		*stup(char *str);
 
 #endif
