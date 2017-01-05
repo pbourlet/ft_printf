@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:26:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/04 17:46:53 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/05 14:10:40 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <stdarg.h>
 #include "ft_printf.h"
 
-char	*ft_solvelong(char *tmp, int *i, char *tab)
+char	*ft_solvelong(char *str, int *i, char *tab)
 {
 	*i = *i + 1;
-	return ((tmp = ft_strjoin(tmp, tab)));
+	return ((str = ft_strjoin(str, tab)));
 }
 
 char	*ft_solvesimple(char *str, char *s, int *i, char *tab)
@@ -34,6 +34,20 @@ char	*ft_solvesimple(char *str, char *s, int *i, char *tab)
 	return (str);
 }
 
+int	testtype(char *s, int *i)
+{
+	if (s[*i - 1] == '%' && (s[*i] == 's' || s[*i] == 'd' || s[*i] == 'c'
+	|| s[*i] == 'i' || s[*i] == 'u' || s[*i] == 'p' || s[*i] == 'o'
+	|| s[*i] == 'x' || s[*i] == 'X'))
+		return (1);
+	if (s[*i - 1] == '%' && s[*i] == 'l' && (s[*i + 1] == 's' ||
+	s[*i + 1] == 'd' || s[*i + 1] == 'c' || s[*i + 1] == 'i' ||
+	s[*i + 1] == 'u' || s[*i + 1] == 'p' || s[*i + 1] == 'o' ||
+	s[*i + 1] == 'x' || s[*i + 1] == 'X'))
+		return (2);
+	return (0);
+}
+
 char	*ft_solve(char *str, char *s, int i, char **tab)
 {
 	int	a;
@@ -41,15 +55,21 @@ char	*ft_solve(char *str, char *s, int i, char **tab)
 	a = 1;
 	while (s[i])
 	{
-		if (s[i - 1] == '%' && (s[i] == 's' || s[i] == 'd' || s[i] == 'c'
-		|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p' || s[i] == 'o' || s[i] == 'x' || s[i] == 'X'))
+		if (testtype(s, &i) == 1)
 			str = ft_solvesimple(str, s, &i, tab[a++]);
-		else if (s[i - 1] == '%' && s[i] == 'l')
+		else if (testtype(s, &i) == 2)
 			str = ft_solvelong(str, &i, tab[a++]);
-		//		else if (s[i - 1] == '%' && s[i + 1] == '$')
-		//			str = ft_ndisp(str, s, ap, &i, tab);
+//		else if (s[i - 1] == '%' && s[i + 1] == '$')
+//			str = ft_ndisp(str, s, ap, &i, tab);
 		else if (s[i] != '%')
+		{
+			if (s[i - 1] == '%' && s[i] == 'l')
+			{
+				s[i] = '%';
+				a++;
+			}
 			str = ft_strcjoin(str, s[i]);
+		}
 		i++;
 	}
 	return (str);

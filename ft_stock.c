@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/04 18:42:45 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/05 14:10:42 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**ft_stock(char *s, va_list ap)
 				c++;
 			if (testdiff(s, &i, &c) == 2)
 				tab = ft_stocksimple(tab, s, ap, i + c, &a);
-			else if (testdiff == 3)
+			else if (testdiff(s, &i, &c) == 3)
 				tab = ft_stocklong(tab, s, ap, i + c, &a);
 			a++;
 		}
