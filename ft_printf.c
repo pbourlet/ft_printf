@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:26:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/05 14:10:40 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/05 20:00:37 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_solvesimple(char *str, char *s, int *i, char *tab)
 		str = ft_strjoin(str, "0x");
 		str = ft_strjoin(str, tab);
 	}
-	else if (s[*i] == 'c')
+	else if (s[*i] == 'c' || (s[*i] == 'l' && s[*i + 1] == 'c'))
 		str = ft_strcjoin(str, tab[0]);
 	else
 		str = ft_strjoin(str, tab);
@@ -40,8 +40,14 @@ int	testtype(char *s, int *i)
 	|| s[*i] == 'i' || s[*i] == 'u' || s[*i] == 'p' || s[*i] == 'o'
 	|| s[*i] == 'x' || s[*i] == 'X'))
 		return (1);
+	if (s[*i - 1] == '%' && s[*i] == 'l' && (s[*i + 1] == 'c'
+	|| s[*i + 1] == 'p'))
+	{
+		*i = *i + 1;
+		return (1);
+	}
 	if (s[*i - 1] == '%' && s[*i] == 'l' && (s[*i + 1] == 's' ||
-	s[*i + 1] == 'd' || s[*i + 1] == 'c' || s[*i + 1] == 'i' ||
+	s[*i + 1] == 'd' || s[*i + 1] == 'i' ||
 	s[*i + 1] == 'u' || s[*i + 1] == 'p' || s[*i + 1] == 'o' ||
 	s[*i + 1] == 'x' || s[*i + 1] == 'X'))
 		return (2);
