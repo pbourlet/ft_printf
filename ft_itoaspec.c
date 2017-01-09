@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:57:38 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/04 17:32:25 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/07 16:46:50 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	*ft_itohx(unsigned long nb)
 	str = ft_strrev(str);
 	return (str);
 }
+
 char	*ft_itoaoc(unsigned long nb)
 {
 	char	*str;

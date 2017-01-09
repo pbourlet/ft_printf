@@ -6,7 +6,7 @@
 #*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/14 16:37:03 by pbourlet          #+#    #+#             *#
-#*   Updated: 2016/12/15 16:44:19 by pbourlet         ###   ########.fr       *#
+#*   Updated: 2017/01/09 17:47:15 by pbourlet         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -14,6 +14,7 @@ NAME = libftprintf.a
 
 SRCL = $(addprefix libft/, ft_isprint.c \
 	  ft_memmove.c \
+	  ft_atoibase.c \
 	  ft_putstr_fd.c \
 	  ft_strdup.c \
 	  ft_strmap.c \
@@ -82,6 +83,9 @@ SRC = ft_lenlu.c \
 	  ft_printf.c \
 	  ft_stock.c \
 	  ft_strtoupper.c \
+	  ft_solve.c \
+	  ft_itoabase.c \
+	  ft_solvespec.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -89,8 +93,10 @@ OBJL = $(SRCL:.c=.o)
 
 all: $(NAME)
 
+%.o: %.c
+	gcc -Wall -Wextra -Werror -o $@ -c $<
+
 $(NAME): $(OBJ) $(OBJL)
-	gcc -c -Wall -Wextra -Werror $(SRC)
 	ar rc $(NAME) $(OBJ) $(OBJL)
 	ranlib $(NAME)
 

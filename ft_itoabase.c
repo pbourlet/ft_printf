@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_itoabase.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 14:42:27 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/09 14:43:50 by pbourlet         ###   ########.fr       */
+/*   Created: 2017/01/07 16:49:00 by pbourlet          #+#    #+#             */
+/*   Updated: 2017/01/09 15:53:20 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_printf(const char *format, ...)
+char	*ft_itoabase(long nb, int base)
 {
-	va_list		ap;
-	char		*s;
-	char		**stock;
-	char		*str;
-	int			i;
+	char	*str;
+	int		i;
 
 	i = 0;
-	va_start(ap, format);
-	s = ft_strdup(format);
-	str = ft_strnew(0);
-	if ((stock = ft_stock(s, ap)) == NULL)
-		return (0);
-	str = ft_solve(str, s, i, stock);
-	ft_putstr(str);
-	free(stock);
-	free(s);
-	va_end(ap);
-	return (ft_strlen(str));
+	if (!(str = ft_strnew(11)))
+		return (NULL);
+	if (nb == 0)
+		return (ft_strcpy(str, "0"));
+	while (nb != 0)
+	{
+		if (nb % base <= base - 1)
+			str[i] = (nb % base) + '0';
+		if (nb % base >= 10)
+			str[i] = 'a' + ((nb % base) % 10);
+		nb = nb / base;
+		i++;
+	}
+	str[i] = '\0';
+	str = ft_strrev(str);
+	return (str);
 }

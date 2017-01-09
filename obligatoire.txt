@@ -1,4 +1,4 @@
-SDOUC
+SC
 %%
 flags #0-+ et espace
 taille minimum du champ

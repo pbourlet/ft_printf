@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 22:07:15 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/13 17:24:48 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/09 17:47:43 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 
 int					ft_atoi(const char *str);
+int					ft_atoibase(const char *str, int base);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
