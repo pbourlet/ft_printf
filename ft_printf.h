@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/09 18:12:38 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:47:44 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char 		*ft_itoalu(unsigned long n);
 long int	ft_lenlu(unsigned long nb);
 char		*ft_itoaoc(unsigned long nb);
 char		*stup(char *str);
-char		*ft_solve(char *str, char *s, int i, char **tab);
+int		ft_solve(int *cpt, char *s, int i, char **tab);
 char		*ft_itoabase(long nb, int base);
 int			ft_solvespec(char *s, int *i, char *tab);
 

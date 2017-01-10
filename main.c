@@ -12,8 +12,8 @@ int	main(void)
 	wchar_t *ss2;
 
 	wchar_t a = L'文';
-//	ft_printf("ft: lol %C\n", L'文');
-	printf("ret: %d:", printf("%C", L'文'));
+	ft_printf("%C \n", 1850);
+	printf("%C \n", 1850);
 //	ft_printf("lol %c %i %d %X %lu %p %x %lc %lp %lx %lX\n", 'a', "salut", 19, li, lu, p, 42, 42, 30, p, ss, ss);
 //	printf("lol %c %i %d %X %lu %p %x %lc %lp %lx %lX\n", 'a', "salut", 19, li, lu, p, 42, 42, 30, p, ss, ss);
 	return (0);

@@ -6,13 +6,13 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:49:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/09 18:12:27 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:52:13 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_resul(char *res)
+int		ft_resul(char *res, int lenb)
 {
 	int	un;
 	int	deux;
@@ -25,19 +25,19 @@ int		ft_resul(char *res)
 		ft_memmove(res, res + 8, 8);
 		ft_putchar(un);
 	}
-	if (res)
+	if (res && lenb > 7)
 	{
 		deux = ft_atoibase(ft_strsub(res, 0, 8), 2);
 		ft_memmove(res, res + 8, 8);
 		ft_putchar(deux);
 	}
-	if (res)
+	if (res && lenb > 11)
 	{
 		trois = ft_atoibase(ft_strsub(res, 0, 8), 2);
 		ft_memmove(res, res + 8, 8);
 		ft_putchar(trois);
 	}
-	if (res)
+	if (res && lenb > 16)
 	{
 		quatre = ft_atoibase(ft_strsub(res, 0, 8), 2);
 		ft_memmove(res, res + 8, 8);
@@ -80,7 +80,7 @@ int		ft_solvespec(char *s, int *i, char *tab)
 
 	res = NULL;
 	lenb = ft_strlen(tab);
-	if (s[*i] == 'C')
+	if (s[*i] == 'C' || s[*i] == 'c')
 	{
 		if (lenb <= 7)
 			res = ft_trad(tab0, tab, lenb);
@@ -91,7 +91,6 @@ int		ft_solvespec(char *s, int *i, char *tab)
 		else if (lenb <= 21)
 			res = ft_trad(tab3, tab, lenb);
 	}
-	ft_putendl(res);
-	ft_resul(res);
+	ft_resul(res, lenb);
 	return (1);
 }
