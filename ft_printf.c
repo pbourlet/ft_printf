@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:27 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/10 14:56:45 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/10 19:19:41 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int ft_printf(const char *format, ...)
 	int			i;
 
 	i = 0;
+	cpt = 0;
 	va_start(ap, format);
 	s = ft_strdup(format);
 	if ((stock = ft_stock(s, ap)) == NULL)

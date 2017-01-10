@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:49:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/10 15:52:13 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/10 19:20:30 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,25 @@
 
 int		ft_resul(char *res, int lenb)
 {
-	int	un;
-	int	deux;
-	int	trois;
-	int quatre;
-
 	if (res)
 	{
-		un = ft_atoibase(ft_strsub(res, 0, 8), 2);
+		ft_putchar(ft_atoibase(ft_strsub(res, 0, 8), 2));
 		ft_memmove(res, res + 8, 8);
-		ft_putchar(un);
 	}
 	if (res && lenb > 7)
 	{
-		deux = ft_atoibase(ft_strsub(res, 0, 8), 2);
+		ft_putchar(ft_atoibase(ft_strsub(res, 0, 8), 2));
 		ft_memmove(res, res + 8, 8);
-		ft_putchar(deux);
 	}
 	if (res && lenb > 11)
 	{
-		trois = ft_atoibase(ft_strsub(res, 0, 8), 2);
+		ft_putchar(ft_atoibase(ft_strsub(res, 0, 8), 2));
 		ft_memmove(res, res + 8, 8);
-		ft_putchar(trois);
 	}
 	if (res && lenb > 16)
 	{
-		quatre = ft_atoibase(ft_strsub(res, 0, 8), 2);
+		ft_putchar(ft_atoibase(ft_strsub(res, 0, 8), 2));
 		ft_memmove(res, res + 8, 8);
-		ft_putchar(quatre);
 	}
 	return (1);
 }
@@ -69,7 +60,7 @@ char	*ft_trad(char *tab, char *bin, int lenb)
 	return (tab);
 }
 
-int		ft_solvespec(char *s, int *i, char *tab)
+int		ft_solvespec(int *cpt, char *s, int *i, char *tab)
 {
 	char	tab0[9] = "0xxxxxxx";
 	char	tab1[17] = "110xxxxx10xxxxxx";
@@ -92,5 +83,7 @@ int		ft_solvespec(char *s, int *i, char *tab)
 			res = ft_trad(tab3, tab, lenb);
 	}
 	ft_resul(res, lenb);
+	*cpt = *cpt + 1 + (lenb > 7 ? 1 : 0) + (lenb > 11 ? 1 : 0) +
+	(lenb > 16 ? 1 : 0);
 	return (1);
 }

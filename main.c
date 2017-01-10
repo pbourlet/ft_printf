@@ -10,11 +10,15 @@ int	main(void)
 	int lu = -42;
 	char ss[]="salut";
 	wchar_t *ss2;
-
 	wchar_t a = L'文';
-	ft_printf("%C \n", 1850);
-	printf("%C \n", 1850);
-//	ft_printf("lol %c %i %d %X %lu %p %x %lc %lp %lx %lX\n", 'a', "salut", 19, li, lu, p, 42, 42, 30, p, ss, ss);
-//	printf("lol %c %i %d %X %lu %p %x %lc %lp %lx %lX\n", 'a', "salut", 19, li, lu, p, 42, 42, 30, p, ss, ss);
+	int	ftres;
+	int	vres;
+
+//	ftres = ft_printf("%i", 42);
+//	vres = printf("%i", 42);
+	ftres = ft_printf("lol %C %i %d %X %lu %p %x %lc %lp %lx %lX\n", 1850, "salut", 19, li, lu, p, 42, 42, 30, p, ss, ss);
+	    vres = printf("lol %C %i %d %X %lu %p %x %lc %lp %lx %lX\n", 1850, "salut", 19, li, lu, p, 42, 42, 30, p, ss, ss);
+	ft_printf("ftres: %d\n", ftres);
+	printf("vres: %d\n", vres);
 	return (0);
 }

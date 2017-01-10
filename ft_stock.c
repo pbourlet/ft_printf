@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/09 18:19:31 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/10 19:23:05 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ char	**ft_stocklong(char **tab, char *s, va_list ap, int i, int *a)
 		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
 	return (tab);
 }
+/*
+char	**ft_stockspec(char **tab, char *s, va_list ap, int i, int *a)
+{
+	if (s[i] == 'S')
+		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, wchar_t *), 2));
+	return (tab);
+}*/
 
 int	testdiff(char *s, int *i, int *c)
 {
@@ -77,6 +84,8 @@ int	testdiff(char *s, int *i, int *c)
 		return (2);
 	if (s[*i + *c] == 'l')
 		return (3);
+	if (s[*i + *c] == 'S')
+		return (4);
 	return (0);
 }
 
@@ -89,21 +98,22 @@ char	**ft_stock(char *s, va_list ap)
 
 	i = -1;
 	c = 0;
-	a = 1;
+	a = 0;
 	if (!(tab = malloc(sizeof(va_list) * 100)))
 		return (NULL);
 	while (s[++i])
 	{
-		tab[a] = ft_strnew(0);
 		if (!(c = 0) && s[i] == '%')
 		{
+			tab[++a] = ft_strnew(0);
 			if (testdiff(s, &i, &c) == 1)
 				c++;
 			if (testdiff(s, &i, &c) == 2)
 				tab = ft_stocksimple(tab, s, ap, i + c, &a);
 			else if (testdiff(s, &i, &c) == 3)
 				tab = ft_stocklong(tab, s, ap, i + c, &a);
-			a++;
+//			else if (testdiff(s, &i, &c) == 4)
+//				tab = ft_stockspec(tab, s, ap, i + c, &a);
 		}
 	}
 	return (tab);
