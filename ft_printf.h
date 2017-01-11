@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/10 18:55:06 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/11 21:14:27 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ char		**ft_stock(char *s, va_list ap);
 char		*ft_itoalong(long int n);
 char		*ft_itoalu(unsigned long n);
 char		*ft_itohx(unsigned long nb);
+char		*ft_itosh(unsigned short int nb, int base);
 char 		*ft_itoalu(unsigned long n);
 long int	ft_lenlu(unsigned long nb);
 char		*ft_itoaoc(unsigned long nb);
 char		*stup(char *str);
 int		ft_solve(int *cpt, char *s, int i, char **tab);
 char		*ft_itoabase(long nb, int base);
-int		ft_solvespec(int *cpt, char *s, int *i, char *tab);
+int		ft_solvespec(int *cpt, char *s, int *i, char **tab, int *a);
+int		ft_testsimp(char *s, int *i);
+char		**ft_stockh(char **tab, char *s, va_list ap, int i, int *a);
+int		ft_stocktestlong(char *s, int *i);
 
 #endif

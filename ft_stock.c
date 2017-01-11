@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/10 19:23:05 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/11 21:14:08 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	**ft_stocklong(char **tab, char *s, va_list ap, int i, int *a)
 		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, unsigned long)));
 	else if (s[i] == 'o' || s[i] == 'O')
 		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
+//	else
+//		*a = *a - 1;
 	return (tab);
 }
 /*
@@ -65,27 +67,27 @@ char	**ft_stockspec(char **tab, char *s, va_list ap, int i, int *a)
 	return (tab);
 }*/
 
-int	testdiff(char *s, int *i, int *c)
+int	testdiff(char *s, int i)
 {
-	if (!(s[*i + *c] == 's' || s[*i + *c] == 'd' || s[*i + *c] == 'c'
-	|| s[*i + *c] == 'l' || s[*i + *c] == 'i' || s[*i + *c] == 'u'
-	|| s[*i + *c] == 'p' || s[*i + *c] == 'o' || s[*i + *c] == 'x'
-	|| s[*i + *c] == 'X' || s[*i + *c] == 'D' || s[*i + *c] == 'O'
-	|| s[*i + *c] == 'U' || s[*i + *c] == 'C'))
+	if (!(s[i] == 's' || s[i] == 'd' || s[i] == 'c'	|| s[i] == 'l'
+	|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p' || s[i] == 'o'
+	|| s[i] == 'x' || s[i] == 'X' || s[i] == 'D' || s[i] == 'O'
+	|| s[i] == 'U' || s[i] == 'C' || s[i] == 'h'))
 		return (1);
-	if (s[*i + *c] == 's' || s[*i + *c] == 'd' || s[*i + *c] == 'c'
-	|| s[*i + *c] == 'i' || s[*i + *c] == 'u' || s[*i + *c] == 'p'
-	|| s[*i + *c] == 'o' || s[*i + *c] == 'x' || s[*i + *c] == 'X'
-	|| s[*i + *c] == 'D' || s[*i + *c] == 'O' || s[*i + *c] == 'U'
-	|| s[*i + *c] == 'C')
+	if (s[i] == 's' || s[i] == 'd' || s[i] == 'c' || s[i] == 'i'
+	|| s[i] == 'u' || s[i] == 'p' || s[i] == 'o' || s[i] == 'x'
+	|| s[i] == 'X' || s[i] == 'D' || s[i] == 'O' || s[i] == 'U'
+	|| s[i] == 'C')
 		return (2);
-	if (s[*i + *c] == 'l' && (s[*i + *c + 1] == 'c'
-	|| s[*i + *c + 1] == 'p' || s[*i + *c + 1] == 'C'))
+	if (s[i] == 'l' && (s[i + 1] == 'c' || s[i + 1] == 'p'
+	|| s[i + 1] == 'C'))
 		return (2);
-	if (s[*i + *c] == 'l')
-		return (3);
-	if (s[*i + *c] == 'S')
+	if (s[i] == 'l')
+		return (ft_stocktestlong(s, &i));
+	if (s[i] == 'S')
 		return (4);
+	if (s[i] == 'h')
+		return (5);
 	return (0);
 }
 
@@ -106,12 +108,14 @@ char	**ft_stock(char *s, va_list ap)
 		if (!(c = 0) && s[i] == '%')
 		{
 			tab[++a] = ft_strnew(0);
-			if (testdiff(s, &i, &c) == 1)
+			if (testdiff(s, (i + c)) == 1)
 				c++;
-			if (testdiff(s, &i, &c) == 2)
+			if (testdiff(s, (i + c)) == 2)
 				tab = ft_stocksimple(tab, s, ap, i + c, &a);
-			else if (testdiff(s, &i, &c) == 3)
+			else if (testdiff(s, (i + c)) == 3)
 				tab = ft_stocklong(tab, s, ap, i + c, &a);
+			else if (testdiff(s, (i + c)) == 5)
+				tab = ft_stockh(tab, s, ap, i + c, &a);
 //			else if (testdiff(s, &i, &c) == 4)
 //				tab = ft_stockspec(tab, s, ap, i + c, &a);
 		}

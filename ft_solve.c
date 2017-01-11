@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/10 19:23:01 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/11 21:23:17 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,38 @@
 #include <stdarg.h>
 #include "ft_printf.h"
 
-int	ft_solvelong(int *cpt, int *i, char *tab)
+int	ft_solvefin(int *cpt, char *s, int *i, char **tab, int *a)
 {
-	*i = *i + 1;
-	*cpt = *cpt + ft_strlen(tab);
-	ft_putstr(tab);
-	return (1);
-}
-
-int	ft_solvesimple(int *cpt, char *s, int *i, char *tab)
-{
+	*i = *i + ((s[*i] == 'l' || s[*i] == 'h') ? 1 : 0);
+	if (tab[*a][0] == '\0')
+		*a = *a + 1;
 	if (s[*i] ==  'p')
 	{
 		ft_putstr("0x");
-		ft_putstr(tab);
 		*cpt = *cpt + 2;
 	}
-	else if (s[*i] == 'c')
-		ft_putchar(tab[0]);
-	else
-		ft_putstr(tab);
-	*cpt = *cpt + ft_strlen(tab);
+	ft_putstr(tab[*a]);
+	*cpt = *cpt + ft_strlen(tab[*a]);
+	*a = *a + 1;
 	return (1);
 }
 
-int	testtype(char *s, int *i)
+int	ft_testfin(int *cpt, char *s, int *i)
 {
-	if (s[*i - 1] == '%' && (s[*i] == 's' || s[*i] == 'd' || s[*i] == 'c'
-	|| s[*i] == 'i' || s[*i] == 'u' || s[*i] == 'p' || s[*i] == 'o'
-	|| s[*i] == 'x' || s[*i] == 'X' || s[*i] == 'D' || s[*i] == 'O'
-	|| s[*i] == 'U' || (s[*i] == 'l' && (s[*i + 1] == 'p'))))
+	if (s[*i - 1] == '%' && (s[*i] == 'l' || s[*i] == 'h'))
 	{
-		*i = *i + (s[*i] == 'l' ? 1 : 0);
+		if (!s[*i + 1])
+		{
+			*cpt = -1;
+			return (0);
+		}
+		ft_putchar(s[*i - 1]);
+		*cpt = *cpt + 1;
+		*i = *i + 1;
 		return (1);
 	}
-	if (s[*i - 1] == '%' && s[*i] == 'l' && (s[*i + 1] == 's' ||
-	s[*i + 1] == 'd' || s[*i + 1] == 'i' ||	s[*i + 1] == 'u' ||
-	s[*i + 1] == 'o' || s[*i + 1] == 'x' || s[*i + 1] == 'X' ||
-	s[*i + 1] == 'D' || s[*i + 1] == 'O' || s[*i + 1] == 'U'))
-		return (2);
-	if (s[*i - 1] == '%' && (s[*i] == 'C' || (s[*i] == 'l' &&
-	(s[*i + 1] == 'c' || s[*i + 1] == 'C'))))
-	{
-		*i = *i + (s[*i] == 'l' ? 1 : 0);
-		return (3);
-	}
-	if (s[*i + 1] == '%' && s[*i] == 'S')
-		return (4);
+	if (s[*i] != '%')
+		return (1);
 	return (0);
 }
 
@@ -72,14 +57,16 @@ int	ft_solve(int *cpt, char *s, int i, char **tab)
 	a = 1;
 	while (s[i])
 	{
-		t = testtype(s, &i);
+		t = ft_testsimp(s, &i);
 		if (t == 1)
-			ft_solvesimple(cpt, s, &i, tab[a++]);
-		else if (t == 2)
-			ft_solvelong(cpt, &i, tab[a++]);
+			ft_solvefin(cpt, s, &i, tab, &a);
 		else if (t == 3)
-			ft_solvespec(cpt, s, &i, tab[a++]);
-		else if (s[i] != '%')
+			ft_solvespec(cpt, s, &i, tab, &a);
+//		else if (t == 4)
+//			ft_solveS(cpt, s, &i, tab[a++]);
+//		else if (t == 5)
+//			ft_solvelong(cpt, s, &i, tab[a++]);
+		else if (ft_testfin(cpt, s, &i) == 1)
 		{
 			ft_putchar(s[i]);
 			*cpt = *cpt + 1;

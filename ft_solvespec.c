@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:49:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/10 19:20:30 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/11 19:03:31 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_resul(char *res, int lenb)
 	return (1);
 }
 
-char	*ft_trad(char *tab, char *bin, int lenb)
+char	*ft_trad(char *tab, char **bin, int *a, int lenb)
 {
 	int lent;
 	int c;
@@ -47,7 +47,7 @@ char	*ft_trad(char *tab, char *bin, int lenb)
 	while (lent-- && lenb)
 	{
 		if (tab[lent] == 'x')
-			tab[lent] = bin[--lenb];
+			tab[lent] = bin[*a][--lenb];
 	}
 	if (ft_strchr(tab, 'x') != NULL)
 	{
@@ -60,7 +60,7 @@ char	*ft_trad(char *tab, char *bin, int lenb)
 	return (tab);
 }
 
-int		ft_solvespec(int *cpt, char *s, int *i, char *tab)
+int		ft_solvespec(int *cpt, char *s, int *i, char **tab, int *a)
 {
 	char	tab0[9] = "0xxxxxxx";
 	char	tab1[17] = "110xxxxx10xxxxxx";
@@ -70,20 +70,21 @@ int		ft_solvespec(int *cpt, char *s, int *i, char *tab)
 	int		lenb;
 
 	res = NULL;
-	lenb = ft_strlen(tab);
+	lenb = ft_strlen(tab[*a]);
 	if (s[*i] == 'C' || s[*i] == 'c')
 	{
 		if (lenb <= 7)
-			res = ft_trad(tab0, tab, lenb);
+			res = ft_trad(tab0, tab, a, lenb);
 		else if (lenb <= 11)
-			res = ft_trad(tab1, tab, lenb);
+			res = ft_trad(tab1, tab, a, lenb);
 		else if (lenb <= 16)
-			res = ft_trad(tab2, tab, lenb);
+			res = ft_trad(tab2, tab, a, lenb);
 		else if (lenb <= 21)
-			res = ft_trad(tab3, tab, lenb);
+			res = ft_trad(tab3, tab, a, lenb);
 	}
 	ft_resul(res, lenb);
 	*cpt = *cpt + 1 + (lenb > 7 ? 1 : 0) + (lenb > 11 ? 1 : 0) +
 	(lenb > 16 ? 1 : 0);
+	*a = *a + 1;
 	return (1);
 }

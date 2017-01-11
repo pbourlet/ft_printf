@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:57:38 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/07 16:46:50 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/11 19:51:08 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,30 @@ char	*ft_itoalong(long int n)
 	}
 	if (n < 0)
 		str[i++] = '-';
+	str[i] = '\0';
+	str = ft_strrev(str);
+	return (str);
+}
+
+char	*ft_itosh(unsigned short int nb, int base)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	if (!(str = ft_strnew(11)))
+		return (NULL);
+	if (nb == 0)
+		return (ft_strcpy(str, "0"));
+	while (nb != 0)
+	{
+		if (nb % base <= base - 1)
+			str[i] = (nb % base) + '0';
+		if (nb % base >= 10)
+			str[i] = 'a' + ((nb % base) % 10);
+		nb = nb / base;
+		i++;
+	}
 	str[i] = '\0';
 	str = ft_strrev(str);
 	return (str);
