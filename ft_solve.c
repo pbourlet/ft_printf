@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/11 21:23:17 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/13 12:57:56 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	ft_solvefin(int *cpt, char *s, int *i, char **tab, int *a)
 {
-	*i = *i + ((s[*i] == 'l' || s[*i] == 'h') ? 1 : 0);
+	*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j') ? 1 : 0);
 	if (tab[*a][0] == '\0')
 		*a = *a + 1;
 	if (s[*i] ==  'p')
@@ -32,7 +32,7 @@ int	ft_solvefin(int *cpt, char *s, int *i, char **tab, int *a)
 
 int	ft_testfin(int *cpt, char *s, int *i)
 {
-	if (s[*i - 1] == '%' && (s[*i] == 'l' || s[*i] == 'h'))
+	if (s[*i - 1] == '%' && (s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j'))
 	{
 		if (!s[*i + 1])
 		{

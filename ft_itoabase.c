@@ -6,16 +6,16 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 16:49:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/09 15:53:20 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/13 11:21:16 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoabase(long nb, int base)
+char	*ft_itoabase(intmax_t nb, int base)
 {
 	char	*str;
-	int		i;
+	intmax_t	i;
 
 	i = 0;
 	if (!(str = ft_strnew(11)))

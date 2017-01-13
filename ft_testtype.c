@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:59:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/12 19:04:27 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/13 12:59:35 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_stocktestlong(char *s, int *i)
 	*i = *i + 1;
 	if (s[*i] == 's' || s[*i] == 'd' || s[*i] == 'i' || s[*i] == 'u' ||
 	s[*i] == 'o' || s[*i] == 'x' || s[*i] == 'X' || s[*i] == 'D' ||
-	s[*i] == 'O' || s[*i] == 'U' || s[*i] == 'p' || s[*i] == 'c')
+	s[*i] == 'O' || s[*i] == 'U' || s[*i] == 'p' || s[*i] == 'c' ||
+	s[*i] == 'C')
 		return (3);
 	return (0);
 }
@@ -35,14 +36,17 @@ int	ft_stocktestlong(char *s, int *i)
 int	ft_testlong(char *s, int *i)
 {
 	int	c;
+	int	d;
 
 	c = *i;
-	if (s[c] == 'l' || s[c] == 'h')
+	d = c;
+	if (s[c] == 'l' || s[c] == 'h' || s[c] == 'j')
 		c = c + 1;
+	if ((s[d] == 'j' || s[d] == 'l') && (s[c] == 'c' || s[c] == 'C'))
+		return (0);
 	if (s[c] == 's' || s[c] == 'd' || s[c] == 'i' || s[c] == 'u' ||
 	s[c] == 'o' || s[c] == 'x' || s[c] == 'X' || s[c] == 'D' ||
-	s[c] == 'O' ||	s[c] == 'U' || s[c] == 'p' || (s[c - 1] != 'l' &&
-	s[c] == 'c'))
+	s[c] == 'O' ||	s[c] == 'U' || s[c] == 'p' || s[c] == 'c')
 		return (1);
 	return (0);
 }
@@ -53,10 +57,11 @@ int	ft_testsimp(char *s, int *i)
 	{
 		if (ft_testlong(s, i) == 1)
 			return (1);
-	if (s[*i] == 'C' || (s[*i] == 'l' && (s[*i + 1] == 'c' ||
-	s[*i + 1] == 'C')))
+	if (s[*i] == 'C' || ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j') &&
+	(s[*i + 1] == 'c' || s[*i + 1] == 'C')))
 	{
-		*i = *i + (s[*i] == 'l' ? 1 : 0);
+		*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j')
+		? 1 : 0);
 		return (3);
 	}
 	if (s[*i] == 'S')

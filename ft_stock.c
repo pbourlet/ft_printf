@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/11 21:14:08 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/13 12:57:39 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	testdiff(char *s, int i)
 	if (!(s[i] == 's' || s[i] == 'd' || s[i] == 'c'	|| s[i] == 'l'
 	|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p' || s[i] == 'o'
 	|| s[i] == 'x' || s[i] == 'X' || s[i] == 'D' || s[i] == 'O'
-	|| s[i] == 'U' || s[i] == 'C' || s[i] == 'h'))
+	|| s[i] == 'U' || s[i] == 'C' || s[i] == 'h' || s[i] == 'j'))
 		return (1);
 	if (s[i] == 's' || s[i] == 'd' || s[i] == 'c' || s[i] == 'i'
 	|| s[i] == 'u' || s[i] == 'p' || s[i] == 'o' || s[i] == 'x'
@@ -88,6 +88,8 @@ int	testdiff(char *s, int i)
 		return (4);
 	if (s[i] == 'h')
 		return (5);
+	if (s[i] == 'j')
+		return (ft_stocktestlong(s, &i) + 3);
 	return (0);
 }
 
@@ -116,8 +118,8 @@ char	**ft_stock(char *s, va_list ap)
 				tab = ft_stocklong(tab, s, ap, i + c, &a);
 			else if (testdiff(s, (i + c)) == 5)
 				tab = ft_stockh(tab, s, ap, i + c, &a);
-//			else if (testdiff(s, &i, &c) == 4)
-//				tab = ft_stockspec(tab, s, ap, i + c, &a);
+			else if (testdiff(s, (i + c)) == 6)
+				tab = ft_stockj(tab, s, ap, i + c, &a);
 		}
 	}
 	return (tab);
