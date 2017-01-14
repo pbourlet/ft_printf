@@ -3,4 +3,4 @@ S
 flags #0-+ et espace
 taille minimum du champ
 précision
-hh ll j z
+hh ll z

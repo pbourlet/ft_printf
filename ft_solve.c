@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/13 12:57:56 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/14 16:14:06 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,16 @@
 
 int	ft_solvefin(int *cpt, char *s, int *i, char **tab, int *a)
 {
-	*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j') ? 1 : 0);
+	*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' ||
+	s[*i] == 'z') ? 1 : 0);
 	if (tab[*a][0] == '\0')
 		*a = *a + 1;
+	if (s[*i] == 's' && (s[*i - 1] == 'z' || s[*i - 1] == 'l' ||
+	s[*i - 1] == 'h'))
+	{
+		*cpt = -1;
+		return (0);
+	}
 	if (s[*i] ==  'p')
 	{
 		ft_putstr("0x");
@@ -32,7 +39,8 @@ int	ft_solvefin(int *cpt, char *s, int *i, char **tab, int *a)
 
 int	ft_testfin(int *cpt, char *s, int *i)
 {
-	if (s[*i - 1] == '%' && (s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j'))
+	if (s[*i - 1] == '%' && (s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j'
+	|| s[*i] == 'z'))
 	{
 		if (!s[*i + 1])
 		{
@@ -44,6 +52,8 @@ int	ft_testfin(int *cpt, char *s, int *i)
 		*i = *i + 1;
 		return (1);
 	}
+	if (!ft_testall(s, i))
+		return (1);
 	if (s[*i] != '%')
 		return (1);
 	return (0);
@@ -53,21 +63,25 @@ int	ft_solve(int *cpt, char *s, int i, char **tab)
 {
 	int	a;
 	int	t;
+	int	f;
 
 	a = 1;
+	f = 1;
 	while (s[i])
 	{
 		t = ft_testsimp(s, &i);
 		if (t == 1)
-			ft_solvefin(cpt, s, &i, tab, &a);
+			f = ft_solvefin(cpt, s, &i, tab, &a);
 		else if (t == 3)
-			ft_solvespec(cpt, s, &i, tab, &a);
+			f = ft_solvespec(cpt, s, &i, tab, &a);
 //		else if (t == 4)
 //			ft_solveS(cpt, s, &i, tab[a++]);
 //		else if (t == 5)
 //			ft_solvelong(cpt, s, &i, tab[a++]);
 		else if (ft_testfin(cpt, s, &i) == 1)
 		{
+			if (f == 0)
+				return (1);
 			ft_putchar(s[i]);
 			*cpt = *cpt + 1;
 		}

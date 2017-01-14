@@ -6,28 +6,30 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:59:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/13 12:59:35 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/14 16:13:31 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-int	ft_testh(char *s, int *i)
+
+int	ft_testall(char *s, int *i)
 {
-	if (s[*i + 1] == 's' || s[*i + 1] == 'd' || s[*i + 1] == 'i' ||
-	s[*i + 1] == 'u' || s[*i + 1] == 'o' || s[*i + 1] == 'x' ||
-	s[*i + 1] == 'X' || s[*i + 1] == 'D' ||	s[*i + 1] == 'O' ||
-	s[*i + 1] == 'U')
-		return (5);
+	if (s[*i] == '%' && (s[*i + 1] == 's' || s[*i + 1] == 'd' ||
+	s[*i + 1] == 'i' || s[*i + 1] == 'u' || s[*i + 1] == 'o' ||
+	s[*i + 1] == 'x' || s[*i + 1] == 'X' || s[*i + 1] == 'D' ||
+	s[*i + 1] == 'O' || s[*i + 1] == 'U' || s[*i + 1] == 'l' ||
+	s[*i + 1] == 'h' || s[*i + 1] == 'j' || s[*i + 1] == 'c' ||
+	s[*i + 1] == 'C' || s[*i + 1] == 'p' || s[*i + 1] == 'z'))
+		return (1);
 	return (0);
-}*/
+}
 
 int	ft_stocktestlong(char *s, int *i)
 {
 	*i = *i + 1;
 	if (s[*i] == 's' || s[*i] == 'd' || s[*i] == 'i' || s[*i] == 'u' ||
-	s[*i] == 'o' || s[*i] == 'x' || s[*i] == 'X' || s[*i] == 'D' ||
-	s[*i] == 'O' || s[*i] == 'U' || s[*i] == 'p' || s[*i] == 'c' ||
+	s[*i] == 'U' || s[*i] == 'x' || s[*i] == 'X' || s[*i] == 'D' ||
+	s[*i] == 'O' || s[*i] == 'O' || s[*i] == 'p' || s[*i] == 'c' ||
 	s[*i] == 'C')
 		return (3);
 	return (0);
@@ -40,9 +42,11 @@ int	ft_testlong(char *s, int *i)
 
 	c = *i;
 	d = c;
-	if (s[c] == 'l' || s[c] == 'h' || s[c] == 'j')
+	if (s[c] == 'l' || s[c] == 'h' || s[c] == 'j' || s[c] == 'z')
 		c = c + 1;
-	if ((s[d] == 'j' || s[d] == 'l') && (s[c] == 'c' || s[c] == 'C'))
+	if (((s[d] == 'j' || s[d] == 'l' || s[d] == 'z') &&
+	(s[c] == 'c' || s[c] == 'C')) || (s[d + 1] == 'U' && (s[d] == 'z'
+	|| s[d] == 'h')))
 		return (0);
 	if (s[c] == 's' || s[c] == 'd' || s[c] == 'i' || s[c] == 'u' ||
 	s[c] == 'o' || s[c] == 'x' || s[c] == 'X' || s[c] == 'D' ||
@@ -57,11 +61,11 @@ int	ft_testsimp(char *s, int *i)
 	{
 		if (ft_testlong(s, i) == 1)
 			return (1);
-	if (s[*i] == 'C' || ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j') &&
-	(s[*i + 1] == 'c' || s[*i + 1] == 'C')))
+	if (s[*i] == 'C' || ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' ||
+	s[*i] == 'z') && (s[*i + 1] == 'c' || s[*i + 1] == 'C')))
 	{
-		*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j')
-		? 1 : 0);
+		*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' ||
+		s[*i] == 'z') ? 1 : 0);
 		return (3);
 	}
 	if (s[*i] == 'S')
