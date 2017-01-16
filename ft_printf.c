@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:27 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/14 15:40:52 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/16 20:21:32 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int ft_printf(const char *format, ...)
 	s = ft_strdup(format);
 	if ((stock = ft_stock(s, ap)) == NULL)
 		return (-1);
+//	ft_putstr("stock[1]:");
+//	ft_putendl(stock[1]);
+//	ft_putstr("stock[2]:");
+//	ft_putendl(stock[2]);
 	ft_solve(&cpt, s, i, stock);
 	free(stock);
 	free(s);

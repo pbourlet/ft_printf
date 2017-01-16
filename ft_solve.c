@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/14 16:14:06 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/16 18:29:20 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 int	ft_solvefin(int *cpt, char *s, int *i, char **tab, int *a)
 {
 	*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' ||
-	s[*i] == 'z') ? 1 : 0);
+	s[*i] == 'z') ? 1 : 0) + ((s[*i + 1] == 'l' || s[*i + 1] == 'h')
+	? 1 : 0);
 	if (tab[*a][0] == '\0')
 		*a = *a + 1;
-	if (s[*i] == 's' && (s[*i - 1] == 'z' || s[*i - 1] == 'l' ||
+	if (((s[*i] == 's' || s[*i] == 'S') && (s[*i - 1] == 'z' ||
+	s[*i - 1] == 'j' || s[*i - 1] == 'l')) || (s[*i] == 'S' &&
 	s[*i - 1] == 'h'))
 	{
 		*cpt = -1;
@@ -49,7 +51,7 @@ int	ft_testfin(int *cpt, char *s, int *i)
 		}
 		ft_putchar(s[*i - 1]);
 		*cpt = *cpt + 1;
-		*i = *i + 1;
+		*i = *i + 1 + ((s[*i] == s[*i + 1]) ? 1 : 0);
 		return (1);
 	}
 	if (!ft_testall(s, i))

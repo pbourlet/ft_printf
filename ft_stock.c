@@ -6,13 +6,13 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/14 15:16:30 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/16 18:20:31 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	**ft_stocksimple(char **tab, char *s, va_list ap, int i, int *a)
+char	**ft_stocksimp(char **tab, char *s, va_list ap, int i, int *a)
 {
 	if (s[i] == 's')
 		tab[*a] = ft_strdup(va_arg(ap, char *));
@@ -45,8 +45,10 @@ char	**ft_stocksimple(char **tab, char *s, va_list ap, int i, int *a)
 char	**ft_stocklong(char **tab, char *s, va_list ap, int i, int *a)
 {
 	i++;
+	if (s[i] == 'l')
+		return (ft_stockll(tab, s, ap, i, a));
 	if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D')
-		tab[*a] = ft_strjoin(tab[*a], ft_itoalong(va_arg(ap, long int)));
+		tab[*a] = ft_strdup(ft_itoalong(va_arg(ap, long)));
 	else if (s[i] == 'X')
 		tab[*a] = ft_strdup(stup(ft_itohx(va_arg(ap, unsigned long))));
 	else if (s[i] == 'x')
@@ -55,8 +57,6 @@ char	**ft_stocklong(char **tab, char *s, va_list ap, int i, int *a)
 		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, unsigned long)));
 	else if (s[i] == 'o' || s[i] == 'O')
 		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
-//	else
-//		*a = *a - 1;
 	return (tab);
 }
 /*
@@ -83,16 +83,11 @@ int	testdiff(char *s, int i)
 	if (s[i] == 'l' && (s[i + 1] == 'c' || s[i + 1] == 'p'
 	|| s[i + 1] == 'C'))
 		return (2);
-	if (s[i] == 'l')
-		return (ft_stocktestlong(s, &i));
+	if (s[i] == 'l' || s[i] == 'h' || s[i] == 'j' || s[i] == 'z')
+		return (3 + ((s[i] == 'h') ? 2 : 0) + ((s[i] == 'j') ? 3 : 0)
+			+ ((s[i] == 'z') ? 4 : 0));
 	if (s[i] == 'S')
 		return (4);
-	if (s[i] == 'h')
-		return (5);
-	if (s[i] == 'j')
-		return (ft_stocktestlong(s, &i) + 3);
-	if (s[i] == 'z')
-		return (ft_stocktestlong(s, &i) + 4);
 	return (0);
 }
 
@@ -116,7 +111,7 @@ char	**ft_stock(char *s, va_list ap)
 			if (testdiff(s, (i + c)) == 1)
 				c++;
 			if (testdiff(s, (i + c)) == 2)
-				tab = ft_stocksimple(tab, s, ap, i + c, &a);
+				tab = ft_stocksimp(tab, s, ap, i + c, &a);
 			else if (testdiff(s, (i + c)) == 3)
 				tab = ft_stocklong(tab, s, ap, i + c, &a);
 			else if (testdiff(s, (i + c)) == 5)

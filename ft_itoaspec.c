@@ -6,18 +6,18 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:57:38 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/11 19:51:08 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/16 13:49:02 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoalu(unsigned long n)
+char	*ft_itoalu(uintmax_t n)
 {
-	char			*str;
-	unsigned long	nb;
-	unsigned long	i;
-	unsigned long	len;
+	char		*str;
+	uintmax_t	nb;
+	uintmax_t	i;
+	uintmax_t	len;
 
 	i = 0;
 	nb = n;
@@ -38,12 +38,12 @@ char	*ft_itoalu(unsigned long n)
 }
 
 
-char	*ft_itoalong(long int n)
+char	*ft_itoalong(intmax_t n)
 {
 	char		*str;
-	long		nb;
-	long int	i;
-	long int	len;
+	intmax_t	nb;
+	intmax_t	i;
+	intmax_t	len;
 
 	i = 0;
 	nb = n;
@@ -91,10 +91,10 @@ char	*ft_itosh(unsigned short int nb, int base)
 	return (str);
 }
 
-char	*ft_itohx(unsigned long nb)
+char	*ft_itohx(uintmax_t nb)
 {
-	char	*str;
-	int		i;
+	char		*str;
+	intmax_t	i;
 
 	i = 0;
 	if (!(str = ft_strnew(11)))
@@ -115,10 +115,10 @@ char	*ft_itohx(unsigned long nb)
 	return (str);
 }
 
-char	*ft_itoaoc(unsigned long nb)
+char	*ft_itoaoc(uintmax_t nb)
 {
-	char	*str;
-	int		i;
+	char		*str;
+	intmax_t	i;
 
 	i = 0;
 	if (!(str = ft_strnew(11)))
