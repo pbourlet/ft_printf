@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:49:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/13 12:58:52 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/17 04:21:43 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,17 @@ int		ft_solvespec(int *cpt, char *s, int *i, char **tab, int *a)
 	*cpt = *cpt + 1 + (lenb > 7 ? 1 : 0) + (lenb > 11 ? 1 : 0) +
 	(lenb > 16 ? 1 : 0);
 	*a = *a + 1;
+	return (1);
+}
+
+int	ft_solveS(int *cpt, char *s, int *i, char **tab, int *a)
+{
+	int	t = 0;
+
+	*i = *i + (s[*i] == 'l' ? 1 : 0);
+	ft_putchar('#');
+		ft_solvespec(cpt, s, i, tab, a);
+		t++;
+		*a = *a + 1;
 	return (1);
 }

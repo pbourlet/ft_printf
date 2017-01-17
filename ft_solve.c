@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/16 18:29:20 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/17 03:18:45 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,8 @@ int	ft_solve(int *cpt, char *s, int i, char **tab)
 			f = ft_solvefin(cpt, s, &i, tab, &a);
 		else if (t == 3)
 			f = ft_solvespec(cpt, s, &i, tab, &a);
-//		else if (t == 4)
-//			ft_solveS(cpt, s, &i, tab[a++]);
-//		else if (t == 5)
-//			ft_solvelong(cpt, s, &i, tab[a++]);
+		else if (t == 4)
+			ft_solveS(cpt, s, &i, tab, &a);
 		else if (ft_testfin(cpt, s, &i) == 1)
 		{
 			if (f == 0)

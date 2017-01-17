@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/16 18:20:31 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/17 00:14:17 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int	testdiff(char *s, int i)
 	|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p' || s[i] == 'o'
 	|| s[i] == 'x' || s[i] == 'X' || s[i] == 'D' || s[i] == 'O'
 	|| s[i] == 'U' || s[i] == 'C' || s[i] == 'h' || s[i] == 'j'
-	|| s[i] == 'z'))
+	|| s[i] == 'z' || s[i] == 'S'))
 		return (1);
+	if (s[i] == 'S' || (s[i] == 'l' && s[i + 1] == 's'))
+		return (4);
 	if (s[i] == 's' || s[i] == 'd' || s[i] == 'c' || s[i] == 'i'
 	|| s[i] == 'u' || s[i] == 'p' || s[i] == 'o' || s[i] == 'x'
 	|| s[i] == 'X' || s[i] == 'D' || s[i] == 'O' || s[i] == 'U'
@@ -86,8 +88,6 @@ int	testdiff(char *s, int i)
 	if (s[i] == 'l' || s[i] == 'h' || s[i] == 'j' || s[i] == 'z')
 		return (3 + ((s[i] == 'h') ? 2 : 0) + ((s[i] == 'j') ? 3 : 0)
 			+ ((s[i] == 'z') ? 4 : 0));
-	if (s[i] == 'S')
-		return (4);
 	return (0);
 }
 
@@ -114,6 +114,8 @@ char	**ft_stock(char *s, va_list ap)
 				tab = ft_stocksimp(tab, s, ap, i + c, &a);
 			else if (testdiff(s, (i + c)) == 3)
 				tab = ft_stocklong(tab, s, ap, i + c, &a);
+			else if (testdiff(s, (i + c)) == 4)
+				tab = ft_stockS(tab, s, ap, i + c, &a);
 			else if (testdiff(s, (i + c)) == 5)
 				tab = ft_stockh(tab, s, ap, i + c, &a);
 			else if (testdiff(s, (i + c)) == 6)

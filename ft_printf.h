@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/16 20:25:11 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/17 03:17:55 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char		*stup(char *str);
 int		ft_solve(int *cpt, char *s, int i, char **tab);
 char		*ft_itoabase(long nb, int base);
 int		ft_solvespec(int *cpt, char *s, int *i, char **tab, int *a);
+int		ft_solveS(int *cpt, char *s, int *i, char **tab, int *a);
 int		ft_testsimp(char *s, int *i);
 char		**ft_stocksimp(char **tab, char *s, va_list ap, int i, int *a);
 char		**ft_stockh(char **tab, char *s, va_list ap, int i, int *a);
@@ -38,6 +39,7 @@ char		**ft_stockj(char **tab, char *s, va_list ap, int i, int *a);
 char		**ft_stockz(char **tab, char *s, va_list ap, int i, int *a);
 char		**ft_stockll(char **tab, char *s, va_list ap, int i, int *a);
 char		**ft_stockhh(char **tab, char *s, va_list ap, int i, int *a);
+char		**ft_stockS(char **tab, char *s, va_list ap, int i, int *a);
 int		ft_stocktestlong(char *s, int *i);
 int		ft_testall(char *s, int *i);
 
