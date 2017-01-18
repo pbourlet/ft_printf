@@ -6,66 +6,64 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/17 00:14:17 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/18 20:26:32 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	**ft_stocksimp(char **tab, char *s, va_list ap, int i, int *a)
+char	*ft_stocksimp(char *s, va_list ap, int i)
 {
-	if (s[i] == 's')
-		tab[*a] = ft_strdup(va_arg(ap, char *));
+	char *tab;
+
+	if ((tab = ft_strnew(0)) && s[i] == 's')
+		tab = ft_strdup(va_arg(ap, char *));
 	else if (s[i] == 'd' || s[i] == 'i')
-		tab[*a] = ft_strdup(ft_itoa(va_arg(ap, int)));
-	else if (s[i] == 'D')
-		tab[*a] = ft_strdup(ft_itoalong(va_arg(ap, long)));
+		tab = ft_strdup(ft_itoa(va_arg(ap, int)));
 	else if (s[i] == 'c')
-		tab[*a] = ft_strcjoin(tab[*a], va_arg(ap, int));
-	else if (s[i] == 'C' || (s[i] == 'l' && (s[i + 1] == 'c'
-	|| s[i + 1] == 'C')))
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
+		tab = ft_strcjoin(tab, va_arg(ap, int));
+	else if (s[i] == 'C')
+		tab = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
 	else if (s[i] == 'u')
-		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, unsigned)));
+		tab = ft_strdup(ft_itoalu(va_arg(ap, unsigned)));
 	else if (s[i] == 'U')
-		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, unsigned long)));
-	else if (s[i] == 'p' || (s[i] == 'l' && s[i + 1] == 'p'))
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
+		tab = ft_strdup(ft_itoalu(va_arg(ap, unsigned long)));
+	else if (s[i] == 'p')
+		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
 	else if (s[i] == 'x')
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned)));
 	else if (s[i] == 'o')
-		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned)));
+		tab = ft_strdup(ft_itoaoc(va_arg(ap, unsigned)));
 	else if (s[i] == 'O')
-		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
+		tab = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
 	else if (s[i] == 'X')
-		tab[*a] = ft_strdup(stup(ft_itohx(va_arg(ap, unsigned))));
+		tab = ft_strdup(stup(ft_itohx(va_arg(ap, unsigned))));
 	return (tab);
 }
 
-char	**ft_stocklong(char **tab, char *s, va_list ap, int i, int *a)
+char	*ft_stocklong(char *s, va_list ap, int i)
 {
+	char *tab;
+
 	i++;
-	if (s[i] == 'l')
-		return (ft_stockll(tab, s, ap, i, a));
-	if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D')
-		tab[*a] = ft_strdup(ft_itoalong(va_arg(ap, long)));
+	if ((tab = ft_strnew(0)) && s[i] == 'l')
+		return (ft_stockll(s, ap, i));
+	if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D' || s[i - 1] == 'D')
+		tab = ft_strdup(ft_itoalong(va_arg(ap, long)));
 	else if (s[i] == 'X')
-		tab[*a] = ft_strdup(stup(ft_itohx(va_arg(ap, unsigned long))));
+		tab = ft_strdup(stup(ft_itohx(va_arg(ap, unsigned long))));
 	else if (s[i] == 'x')
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
+	else if (s[i] == 'p')
+		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
+	else if (s[i] == 'C' || s[i] == 'c')
+		tab = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
 	else if (s[i] == 'u' || s[i] == 'U')
-		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, unsigned long)));
+		tab = ft_strdup(ft_itoalu(va_arg(ap, unsigned long)));
 	else if (s[i] == 'o' || s[i] == 'O')
-		tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
+		tab = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
 	return (tab);
 }
-/*
-char	**ft_stockspec(char **tab, char *s, va_list ap, int i, int *a)
-{
-	if (s[i] == 'S')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, wchar_t *), 2));
-	return (tab);
-}*/
 
 int	testdiff(char *s, int i)
 {
@@ -75,31 +73,29 @@ int	testdiff(char *s, int i)
 	|| s[i] == 'U' || s[i] == 'C' || s[i] == 'h' || s[i] == 'j'
 	|| s[i] == 'z' || s[i] == 'S'))
 		return (1);
-	if (s[i] == 'S' || (s[i] == 'l' && s[i + 1] == 's'))
+	if ((ft_testall(s, &i) == 2) && (s[i + 1] == 'S' || s[i + 2] == 'S'))
 		return (4);
 	if (s[i] == 's' || s[i] == 'd' || s[i] == 'c' || s[i] == 'i'
 	|| s[i] == 'u' || s[i] == 'p' || s[i] == 'o' || s[i] == 'x'
-	|| s[i] == 'X' || s[i] == 'D' || s[i] == 'O' || s[i] == 'U'
+	|| s[i] == 'X' || s[i] == 'O' || s[i] == 'U'
 	|| s[i] == 'C')
 		return (2);
-	if (s[i] == 'l' && (s[i + 1] == 'c' || s[i + 1] == 'p'
-	|| s[i + 1] == 'C'))
-		return (2);
-	if (s[i] == 'l' || s[i] == 'h' || s[i] == 'j' || s[i] == 'z')
+	if (s[i] == 'D' || s[i] == 'l' || s[i] == 'h' || s[i] == 'j'
+	|| s[i] == 'z')
 		return (3 + ((s[i] == 'h') ? 2 : 0) + ((s[i] == 'j') ? 3 : 0)
 			+ ((s[i] == 'z') ? 4 : 0));
 	return (0);
 }
 
-char	**ft_stock(char *s, va_list ap)
+char	**ft_stock(int *spt, char *s, va_list ap)
 {
 	char	**tab;
+	int		sspt;
 	int		i;
 	int		c;
 	int		a;
 
 	i = -1;
-	c = 0;
 	a = 0;
 	if (!(tab = malloc(sizeof(va_list) * 100)))
 		return (NULL);
@@ -111,17 +107,21 @@ char	**ft_stock(char *s, va_list ap)
 			if (testdiff(s, (i + c)) == 1)
 				c++;
 			if (testdiff(s, (i + c)) == 2)
-				tab = ft_stocksimp(tab, s, ap, i + c, &a);
+				tab[a] = ft_stocksimp(s, ap, i + c);
 			else if (testdiff(s, (i + c)) == 3)
-				tab = ft_stocklong(tab, s, ap, i + c, &a);
+				tab[a] = ft_stocklong(s, ap, i + c);
 			else if (testdiff(s, (i + c)) == 4)
-				tab = ft_stockS(tab, s, ap, i + c, &a);
+			{
+				sspt = a;
+				tab = ft_stockS(ap, tab, &a);
+				*spt = a - sspt;
+			}
 			else if (testdiff(s, (i + c)) == 5)
-				tab = ft_stockh(tab, s, ap, i + c, &a);
+				tab[a] = ft_stockh(s, ap, i + c);
 			else if (testdiff(s, (i + c)) == 6)
-				tab = ft_stockj(tab, s, ap, i + c, &a);
+				tab[a] = ft_stockj(s, ap, i + c);
 			else if (testdiff(s, (i + c)) == 7)
-				tab = ft_stockz(tab, s, ap, i + c, &a);
+				tab[a] = ft_stockz(s, ap, i + c);
 		}
 	}
 	return (tab);

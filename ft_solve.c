@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/17 03:18:45 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/18 20:06:19 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,18 @@
 #include <stdarg.h>
 #include "ft_printf.h"
 
-int	ft_solvefin(int *cpt, char *s, int *i, char **tab, int *a)
+int	ft_solvefin(int *cpt, char *s, int *i, char *tab)
 {
 	*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' ||
 	s[*i] == 'z') ? 1 : 0) + ((s[*i + 1] == 'l' || s[*i + 1] == 'h')
 	? 1 : 0);
-	if (tab[*a][0] == '\0')
-		*a = *a + 1;
-	if (((s[*i] == 's' || s[*i] == 'S') && (s[*i - 1] == 'z' ||
-	s[*i - 1] == 'j' || s[*i - 1] == 'l')) || (s[*i] == 'S' &&
-	s[*i - 1] == 'h'))
-	{
-		*cpt = -1;
-		return (0);
-	}
 	if (s[*i] ==  'p')
 	{
 		ft_putstr("0x");
 		*cpt = *cpt + 2;
 	}
-	ft_putstr(tab[*a]);
-	*cpt = *cpt + ft_strlen(tab[*a]);
-	*a = *a + 1;
+	ft_putstr(tab);
+	*cpt = *cpt + ft_strlen(tab);
 	return (1);
 }
 
@@ -61,7 +51,7 @@ int	ft_testfin(int *cpt, char *s, int *i)
 	return (0);
 }
 
-int	ft_solve(int *cpt, char *s, int i, char **tab)
+int	ft_solve(int *spt, int *cpt, char *s, int i, char **tab)
 {
 	int	a;
 	int	t;
@@ -73,11 +63,11 @@ int	ft_solve(int *cpt, char *s, int i, char **tab)
 	{
 		t = ft_testsimp(s, &i);
 		if (t == 1)
-			f = ft_solvefin(cpt, s, &i, tab, &a);
+			f = ft_solvefin(cpt, s, &i, tab[a++]);
 		else if (t == 3)
-			f = ft_solvespec(cpt, s, &i, tab, &a);
+			f = ft_solvespec(cpt, tab[a++]);
 		else if (t == 4)
-			ft_solveS(cpt, s, &i, tab, &a);
+			ft_solveS(spt, cpt, tab, &a);
 		else if (ft_testfin(cpt, s, &i) == 1)
 		{
 			if (f == 0)

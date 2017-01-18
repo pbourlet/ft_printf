@@ -6,127 +6,124 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:48:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/16 20:20:27 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/18 16:39:09 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	**ft_stockh(char **tab, char *s, va_list ap, int i, int *a)
+char	*ft_stockh(char *s, va_list ap, int i)
 {
+	char *tab;
+
 	i++;
-	if (s[i] == 'h')
-		return (ft_stockhh(tab, s, ap, i, a));
+	if ((tab = ft_strnew(0)) && s[i] == 'h')
+		return (ft_stockhh(s, ap, i));
 	if (s[i] == 'i' || s[i] == 'd')
-		tab[*a] = ft_strdup(ft_itoa((short)va_arg(ap, int)));
+		tab = ft_strdup(ft_itoa((short)va_arg(ap, int)));
 	else if (s[i] == 's')
-		tab[*a] = ft_strdup(va_arg(ap, char *));
+		tab = ft_strdup(va_arg(ap, char *));
 	else if (s[i] == 'c')
-		tab[*a] = ft_strcjoin(tab[*a], va_arg(ap, int));
+		tab = ft_strcjoin(tab, va_arg(ap, int));
 	else if (s[i] == 'C')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
+		tab = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
 	else if (s[i] == 'X')
-		tab[*a] = ft_strdup(stup(ft_itosh(va_arg(ap, unsigned), 16)));
+		tab = ft_strdup(stup(ft_itosh(va_arg(ap, unsigned), 16)));
 	else if (s[i] == 'x')
-		tab[*a] = ft_strdup(ft_itosh(va_arg(ap, unsigned), 16));
+		tab = ft_strdup(ft_itosh(va_arg(ap, unsigned), 16));
 	else if (s[i] == 'p')
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
 	else if (s[i] == 'u' || s[i] == 'U')
-		tab[*a] = ft_strdup(ft_itosh(va_arg(ap, unsigned), 10));
+		tab = ft_strdup(ft_itosh(va_arg(ap, unsigned), 10));
 	else if (s[i] == 'o' || s[i] == 'O')
-		tab[*a] = ft_strdup(ft_itosh(va_arg(ap, unsigned), 8));
+		tab = ft_strdup(ft_itosh(va_arg(ap, unsigned), 8));
 	return (tab);
 }
 
-char	**ft_stockhh(char **tab, char *s, va_list ap, int i, int *a)
+char	*ft_stockhh(char *s, va_list ap, int i)
 {
+	char *tab;
+
 	i++;
-	if (s[i] == 'i' || s[i] == 'd')
-		tab[*a] = ft_strdup(ft_itoabase((char)va_arg(ap, int), 10));
+	if ((tab = ft_strnew(0)) && (s[i] == 'i' || s[i] == 'd'))
+		tab = ft_strdup(ft_itoabase((char)va_arg(ap, int), 10));
 	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C' || s[i] == 'p')
-		tab = ft_stocksimp(tab, s, ap, i, a);
-	else if (s[i] == 'x' || s[i] == 'X')
-		tab[*a] = ft_strdup(ft_itosh((unsigned char)
-							va_arg(ap, int), 16));
+		tab = ft_stocksimp(s, ap, i);
+	else if (s[i] == 'x')
+		tab = ft_strdup(ft_itosh((unsigned char) va_arg(ap, int), 16));
 	else if (s[i] == 'X')
-		tab[*a] = ft_strdup(stup(ft_itosh((unsigned char)
-							va_arg(ap, int), 16)));
+		tab = ft_strdup(stup(ft_itosh((unsigned char) va_arg(ap, int), 16)));
 	else if (s[i] == 'u')
-		tab[*a] = ft_strdup(ft_itoabase((unsigned char)
-							va_arg(ap, int), 10));
+		tab = ft_strdup(ft_itoabase((unsigned char) va_arg(ap, int), 10));
+	else if (s[i] == 'U')
+		tab = ft_strdup(ft_itoabase(va_arg(ap, uintmax_t), 10));
 	else if (s[i] == 'o' || s[i] == 'O')
-		tab[*a] = ft_strdup(ft_itosh((unsigned char)
-							va_arg(ap, int), 8));
+		tab = ft_strdup(ft_itosh((unsigned char) va_arg(ap, int), 8));
 	return (tab);
 }
 
-char	**ft_stockj(char **tab, char *s, va_list ap, int i, int *a)
+char	*ft_stockj(char *s, va_list ap, int i)
 {
+	char *tab;
+
 	i++;
-	if (s[i] == 'i' || s[i] == 'd')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, intmax_t), 10));
-	else if (s[i] == 's')
-		tab[*a] = ft_strdup(va_arg(ap, char *));
-	else if (s[i] == 'c' || s[i] == 'C')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
+	if ((tab = ft_strnew(0)) && (s[i] == 'i' || s[i] == 'd'))
+		tab = ft_strdup(ft_itoabase(va_arg(ap, intmax_t), 10));
+	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')
+		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'X')
-		tab[*a] = ft_strdup(stup(ft_itohx(va_arg(ap, uintmax_t))));
+		tab = ft_strdup(stup(ft_itohx(va_arg(ap, uintmax_t))));
 	else if (s[i] == 'x')
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, uintmax_t)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, uintmax_t)));
 	else if (s[i] == 'p')
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, uintmax_t)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, uintmax_t)));
 	else if (s[i] == 'u' || s[i] == 'U')
-		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, uintmax_t)));
+		tab = ft_strdup(ft_itoalu(va_arg(ap, uintmax_t)));
 	else if (s[i] == 'o' || s[i] == 'O')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, uintmax_t), 8));
+		tab = ft_strdup(ft_itoabase(va_arg(ap, uintmax_t), 8));
 	return (tab);
 }
 
-char	**ft_stockz(char **tab, char *s, va_list ap, int i, int *a)
+char	*ft_stockz(char *s, va_list ap, int i)
 {
+	char *tab;
+
 	i++;
-	if (s[i] == 'i' || s[i] == 'd')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, ssize_t), 10));
-	else if (s[i] == 's')
-		tab[*a] = ft_strdup(va_arg(ap, char *));
-	else if (s[i] == 'c' || s[i] == 'C')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
+	if ((tab = ft_strnew(0)) && (s[i] == 'i' || s[i] == 'd'))
+		tab = ft_strdup(ft_itoabase(va_arg(ap, ssize_t), 10));
+	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')
+		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'X')
-		tab[*a] = ft_strdup(stup(ft_itohx(va_arg(ap, size_t))));
+		tab = ft_strdup(stup(ft_itohx(va_arg(ap, size_t))));
 	else if (s[i] == 'x')
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, size_t)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, size_t)));
 	else if (s[i] == 'p')
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, size_t)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, size_t)));
 	else if (s[i] == 'u' || s[i] == 'U')
-		tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, size_t)));
+		tab = ft_strdup(ft_itoalu(va_arg(ap, size_t)));
 	else if (s[i] == 'o' || s[i] == 'O')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, size_t), 8));
+		tab = ft_strdup(ft_itoabase(va_arg(ap, size_t), 8));
 	return (tab);
 }
 
-char    **ft_stockll(char **tab, char *s, va_list ap, int i, int *a)
+char    *ft_stockll(char *s, va_list ap, int i)
 {
-        i++;
-        if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D')
-	{
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, long long), 10));
-		ft_putnbr((tab[*a][0]));
-        }
+	char *tab;
+
+	i++;
+	if ((tab = ft_strnew(0)) && (s[i] == 'i' || s[i] == 'd' || s[i] == 'D'))
+		tab = ft_strdup(ft_itoabase(va_arg(ap, long long), 10));
+	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')
+		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'p')
-		tab[*a] = ft_strdup(ft_itohx(va_arg(ap, long long)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, long long)));
 	else if (s[i] == 'X')
-		tab[*a] = ft_strdup(stup(ft_itohx(va_arg(ap, unsigned
-							long long))));
-	else if (s[i] == 'c' || s[i] == 'C')
-		tab[*a] = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
-        else if (s[i] == 'x')
-                tab[*a] = ft_strdup(ft_itohx(va_arg(ap, unsigned
-							long long)));
-        else if (s[i] == 'u' || s[i] == 'U')
-                tab[*a] = ft_strdup(ft_itoalu(va_arg(ap, unsigned
-							long long)));
-        else if (s[i] == 'o' || s[i] == 'O')
-                tab[*a] = ft_strdup(ft_itoaoc(va_arg(ap, unsigned
-							long long)));
-        return (tab);
+		tab = ft_strdup(stup(ft_itohx(va_arg(ap, unsigned long long))));
+	else if (s[i] == 'x')
+		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned long long)));
+	else if (s[i] == 'u' || s[i] == 'U')
+		tab = ft_strdup(ft_itoalu(va_arg(ap, unsigned long long)));
+	else if (s[i] == 'o' || s[i] == 'O')
+		tab = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long long)));
+	return (tab);
 }

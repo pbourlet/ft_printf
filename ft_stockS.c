@@ -6,21 +6,19 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:50:34 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/17 04:21:45 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/18 19:44:22 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "ft_printf.h"
 
-char	**ft_stockS(char **tab, char *s, va_list ap, int i, int *a)
+char	**ft_stockS(va_list ap, char ** tab, int *a)
 {
-	int	y;
-	char	*tmp;
+	wchar_t	*tmp;
+	int		y;
 
 	y = 0;
-	if (s[i] == 'S' || (s[i] == 'l' && s[i + 1] == 's'))
-	{
-	tmp = ft_strdup(va_arg(ap, char *));
+	tmp = ft_wstrdup(va_arg(ap, wchar_t *));
 	while (tmp[y] != '\0')
 	{
 		tab[*a] = ft_strdup(ft_itoabase((unsigned)tmp[y], 2));
@@ -28,6 +26,5 @@ char	**ft_stockS(char **tab, char *s, va_list ap, int i, int *a)
 		y++;
 	}
 	free(tmp);
-	}
 	return(tab);
 }

@@ -6,7 +6,7 @@
 #*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/14 16:37:03 by pbourlet          #+#    #+#             *#
-#*   Updated: 2017/01/17 00:00:49 by pbourlet         ###   ########.fr       *#
+#*   Updated: 2017/01/18 18:13:11 by pbourlet         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -89,6 +89,7 @@ SRC = ft_lenlu.c \
 	  ft_testtype.c \
 	  ft_stockspec.c \
 	  ft_stockS.c \
+	  ft_wstrdup.c \
 
 OBJ = $(SRC:.c=.o)
 

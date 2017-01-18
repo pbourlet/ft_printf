@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/17 03:17:55 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/18 19:41:48 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 # include <wchar.h>
 # include <inttypes.h>
 
-int		ft_printf(const char *format, ...);
-char		**ft_stock(char *s, va_list ap);
+int			ft_printf(const char *format, ...);
+wchar_t		*ft_wstrdup(wchar_t *s);
+size_t		ft_wstrlen(wchar_t *s);
 char		*ft_itoalong(long int n);
 char		*ft_itoalu(uintmax_t n);
 char		*ft_itohx(uintmax_t nb);
@@ -28,18 +29,19 @@ char		*ft_itosh(unsigned short int nb, int base);
 char		*ft_itoaoc(uintmax_t nb);
 long int	ft_lenlu(unsigned long nb);
 char		*stup(char *str);
-int		ft_solve(int *cpt, char *s, int i, char **tab);
+int			ft_solve(int *spt, int *cpt, char *s, int i, char **tab);
 char		*ft_itoabase(long nb, int base);
-int		ft_solvespec(int *cpt, char *s, int *i, char **tab, int *a);
-int		ft_solveS(int *cpt, char *s, int *i, char **tab, int *a);
-int		ft_testsimp(char *s, int *i);
-char		**ft_stocksimp(char **tab, char *s, va_list ap, int i, int *a);
-char		**ft_stockh(char **tab, char *s, va_list ap, int i, int *a);
-char		**ft_stockj(char **tab, char *s, va_list ap, int i, int *a);
-char		**ft_stockz(char **tab, char *s, va_list ap, int i, int *a);
-char		**ft_stockll(char **tab, char *s, va_list ap, int i, int *a);
-char		**ft_stockhh(char **tab, char *s, va_list ap, int i, int *a);
-char		**ft_stockS(char **tab, char *s, va_list ap, int i, int *a);
+int			ft_solvespec(int *cpt, char *tab);
+int			ft_solveS(int *spt, int *cpt, char **tab, int  *a);
+int			ft_testsimp(char *s, int *i);
+char		**ft_stock(int * spt, char *s, va_list ap);
+char		*ft_stocksimp(char *s, va_list ap, int i);
+char		*ft_stockh(char *s, va_list ap, int i);
+char		*ft_stockj(char *s, va_list ap, int i);
+char		*ft_stockz(char *s, va_list ap, int i);
+char		*ft_stockll(char *s, va_list ap, int i);
+char		*ft_stockhh(char *s, va_list ap, int i);
+char		**ft_stockS(va_list ap, char **tab, int *a);
 int		ft_stocktestlong(char *s, int *i);
 int		ft_testall(char *s, int *i);
 
