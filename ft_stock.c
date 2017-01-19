@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/18 20:26:32 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:54:56 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	testdiff(char *s, int i)
 	|| s[i] == 'U' || s[i] == 'C' || s[i] == 'h' || s[i] == 'j'
 	|| s[i] == 'z' || s[i] == 'S'))
 		return (1);
-	if ((ft_testall(s, &i) == 2) && (s[i + 1] == 'S' || s[i + 2] == 'S'))
+	if (s[i] == 'S' || ((ft_testall(s, &i) == 2) && (s[i + 1] == 'S'
+	|| s[i + 2] == 'S' || (s[i] == 'l' && s[i + 1] == 's'))))
 		return (4);
 	if (s[i] == 's' || s[i] == 'd' || s[i] == 'c' || s[i] == 'i'
 	|| s[i] == 'u' || s[i] == 'p' || s[i] == 'o' || s[i] == 'x'
