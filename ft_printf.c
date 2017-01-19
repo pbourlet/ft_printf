@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:27 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/18 20:12:47 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/19 18:16:43 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int ft_printf(const char *format, ...)
 	char		**stock;
 	int		cpt;
 	int		spt;
-	int			i;
 
-	i = 0;
 	cpt = 0;
 	spt = 0;
 	va_start(ap, format);
@@ -34,8 +32,34 @@ int ft_printf(const char *format, ...)
 	ft_putendl(stock[2]);
 	ft_putstr("stock[3]:");
 	ft_putendl(stock[3]);
-	ft_solve(&spt, &cpt, s, i, stock);
+/*	ft_putstr("stock[4]:");
+	ft_putendl(stock[4]);
+	ft_putstr("stock[5]:");
+	ft_putendl(stock[5]);
+	ft_putstr("stock[6]:");
+	ft_putendl(stock[6]);
+	ft_putstr("stock[7]:");
+	ft_putendl(stock[7]);
+	ft_putstr("stock[8]:");
+	ft_putendl(stock[8]);
+	ft_putstr("stock[9]:");
+	ft_putendl(stock[9]);
+	ft_putstr("stock[10]:");
+	ft_putendl(stock[10]);
+*/	ft_solve(&spt, &cpt, s, stock);
 	free(stock);
+/*	ft_putstr("\nstock[1]':");
+	ft_putendl(stock[1]);
+	ft_putstr("stock[2]':");
+	ft_putendl(stock[2]);
+	ft_putstr("stock[3]':");
+	ft_putendl(stock[3]);
+	ft_putstr("stock[4]':");
+	ft_putendl(stock[4]);
+	ft_putstr("stock[5]':");
+	ft_putendl(stock[5]);
+	ft_putstr("stock[6]':");
+*/	ft_putendl(stock[6]);
 	free(s);
 	va_end(ap);
 	return (cpt);

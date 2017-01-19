@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_solvespec.c                                     :+:      :+:    :+:   */
+/*   ft_solveC.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 16:49:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/18 19:45:01 by pbourlet         ###   ########.fr       */
+/*   Created: 2017/01/19 16:27:46 by pbourlet          #+#    #+#             */
+/*   Updated: 2017/01/19 20:07:52 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 
 int		ft_resul(char *res, int lenb)
 {
-	ft_putchar(ft_atoibase(ft_strsub(res, 0, 8), 2));
+	char *tronc[4];
+
+	tronc[0] = ft_strsub(res, 0, 8);
+	tronc[1] = ft_strsub(res, 8, 8);
+	tronc[2] = ft_strsub(res, 16, 8);
+	tronc[3] = ft_strsub(res, 24, 8);
+	ft_putchar(ft_atoibase(tronc[0], 2));
 	if (lenb > 7)
-		ft_putchar(ft_atoibase(ft_strsub(res, 8, 8), 2));
+		ft_putchar(ft_atoibase(tronc[1], 2));
 	if (lenb > 11)
-		ft_putchar(ft_atoibase(ft_strsub(res, 16, 8), 2));
+		ft_putchar(ft_atoibase(tronc[2], 2));
 	if (lenb > 16)
-		ft_putchar(ft_atoibase(ft_strsub(res, 24, 8), 2));
+		ft_putchar(ft_atoibase(tronc[3], 2));
+	ft_strclr(tronc[0]);
+	ft_strclr(tronc[1]);
+	ft_strclr(tronc[2]);
+	ft_strclr(tronc[3]);
+	ft_strdel(tronc);
 	return (1);
 }
 
@@ -47,7 +58,7 @@ char	*ft_trad(char *tab, char *bin, int lenb)
 	return (tab);
 }
 
-int		ft_solvespec(int *cpt, char *tab)
+int		ft_solveC(int *cpt, char *tab, int *t)
 {
 	char	tab0[9] = "0xxxxxxx";
 	char	tab1[17] = "110xxxxx10xxxxxx";
@@ -69,15 +80,18 @@ int		ft_solvespec(int *cpt, char *tab)
 	ft_resul(res, lenb);
 	*cpt = *cpt + 1 + (lenb > 7 ? 1 : 0) + (lenb > 11 ? 1 : 0)
 		+ (lenb > 16 ? 1 : 0);
+	t[4]++;
+	ft_strclr(tab);
+	free(tab);
 	return (1);
 }
 
-int	ft_solveS(int *spt, int *cpt, char **tab, int *a)
+int	ft_solveS(int *spt, int *cpt, char **tab, int *t)
 {
 	while (*spt)
 	{
-		ft_solvespec(cpt, tab[*a]);
-		*a = *a + 1;
+		ft_solveC(cpt, tab[t[0]], t);
+		t[0]++;
 		*spt = *spt - 1;
 	}
 	return (1);

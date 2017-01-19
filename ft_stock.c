@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/19 14:54:56 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:06:06 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ char	*ft_stocklong(char *s, va_list ap, int i)
 
 int	testdiff(char *s, int i)
 {
-	if (!(s[i] == 's' || s[i] == 'd' || s[i] == 'c'	|| s[i] == 'l'
-	|| s[i] == 'i' || s[i] == 'u' || s[i] == 'p' || s[i] == 'o'
-	|| s[i] == 'x' || s[i] == 'X' || s[i] == 'D' || s[i] == 'O'
-	|| s[i] == 'U' || s[i] == 'C' || s[i] == 'h' || s[i] == 'j'
-	|| s[i] == 'z' || s[i] == 'S'))
+	if (!(s[i] == 's' || s[i] == 'S' || s[i] == 'c'	|| s[i] == 'C'
+	|| s[i] == 'i' || s[i] == 'd' || s[i] == 'D' || s[i] == 'u'
+	|| s[i] == 'U' || s[i] == 'p' || s[i] == 'o' || s[i] == 'O'
+	|| s[i] == 'x' || s[i] == 'X' || s[i] == 'l' || s[i] == 'h'
+	|| s[i] == 'z' || s[i] == 'j'))
 		return (1);
 	if (s[i] == 'S' || ((ft_testall(s, &i) == 2) && (s[i + 1] == 'S'
 	|| s[i + 2] == 'S' || (s[i] == 'l' && s[i + 1] == 's'))))
@@ -88,10 +88,25 @@ int	testdiff(char *s, int i)
 	return (0);
 }
 
+char	*ft_teststock(char *s, int i, va_list ap)
+{
+	if (testdiff(s, i) == 2)
+		return (ft_stocksimp(s, ap, i));
+	else if (testdiff(s, i) == 3)
+		return (ft_stocklong(s, ap, i));
+	else if (testdiff(s, i) == 5)
+		return (ft_stockh(s, ap, i));
+	else if (testdiff(s, i) == 6)
+		return (ft_stockj(s, ap, i));
+	else if (testdiff(s, i) == 7)
+		return (ft_stockz(s, ap, i));
+	else
+		return (NULL);
+}
+
 char	**ft_stock(int *spt, char *s, va_list ap)
 {
 	char	**tab;
-	int		sspt;
 	int		i;
 	int		c;
 	int		a;
@@ -105,24 +120,12 @@ char	**ft_stock(int *spt, char *s, va_list ap)
 		if (!(c = 0) && s[i] == '%')
 		{
 			tab[++a] = ft_strnew(0);
-			if (testdiff(s, (i + c)) == 1)
+			while (testdiff(s, (i + c)) == 1)
 				c++;
-			if (testdiff(s, (i + c)) == 2)
-				tab[a] = ft_stocksimp(s, ap, i + c);
-			else if (testdiff(s, (i + c)) == 3)
-				tab[a] = ft_stocklong(s, ap, i + c);
-			else if (testdiff(s, (i + c)) == 4)
-			{
-				sspt = a;
-				tab = ft_stockS(ap, tab, &a);
-				*spt = a - sspt;
-			}
-			else if (testdiff(s, (i + c)) == 5)
-				tab[a] = ft_stockh(s, ap, i + c);
-			else if (testdiff(s, (i + c)) == 6)
-				tab[a] = ft_stockj(s, ap, i + c);
-			else if (testdiff(s, (i + c)) == 7)
-				tab[a] = ft_stockz(s, ap, i + c);
+			if (testdiff(s, (i + c)) == 4)
+				tab = ft_stockS(spt, ap, tab, &a);
+			else if ((tab[a] = ft_teststock(s, i + c, ap)) == NULL)
+				free(tab[a--]);
 		}
 	}
 	return (tab);

@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:59:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/19 14:54:49 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/19 21:11:11 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 int	ft_testall(char *s, int *i)
 {
-	if (s[*i] == '%' && (s[*i + 1] == 's' || s[*i + 1] == 'd'
-	|| s[*i + 1] == 'i' || s[*i + 1] == 'u' || s[*i + 1] == 'o'
-	|| s[*i + 1] == 'x' || s[*i + 1] == 'X' || s[*i + 1] == 'D'
-	|| s[*i + 1] == 'O' || s[*i + 1] == 'U' || s[*i + 1] == 'l'
-	|| s[*i + 1] == 'h' || s[*i + 1] == 'j' || s[*i + 1] == 'c'
-	|| s[*i + 1] == 'C' || s[*i + 1] == 'p' || s[*i + 1] == 'z'
-	|| s[*i + 1] == 'S'))
+	if (s[*i] == 's' || s[*i] == 'S' || s[*i] == 'c' || s[*i] == 'C'
+	|| s[*i] == 'i' || s[*i] == 'd' || s[*i] == 'D' || s[*i] == 'u'
+	|| s[*i] == 'U' || s[*i] == 'p' || s[*i] == 'o' || s[*i] == 'O'
+	|| s[*i] == 'x' || s[*i] == 'X' || s[*i] == 'l' || s[*i] == 'h'
+	|| s[*i] == 'z' || s[*i] == 'j')
 		return (1);
 	if (s[*i] == 'l' || s[*i + 1] == 'l'|| s[*i] == 'h' || s[*i + 1] == 'h'
 	|| s[*i] == 'j'	|| s[*i] == 'z')
@@ -28,53 +26,25 @@ int	ft_testall(char *s, int *i)
 	return (0);
 }
 
-int	ft_testlong(char *s, int *i)
+int	ft_testsimp(char *s, int *i, int *t)
 {
 	int	c;
-	int	d;
 
 	c = *i;
-	d = c;
-	if (s[c] == 'l' || s[c] == 'h' || s[c] == 'j' || s[c] == 'z')
-		c = c + 1;
-	if (s[c] == 'l' || s[c] == 'h')
-		c = c + 1;
-	if ((s[c - 2] == '%' && s[c - 1] == 'l' && (s[c] == 'c' || s[c] == 's'
-					|| s[c] == 'S')) || (s[d - 1] == '%' && s[d] == 'l' && s[d + 1] == 'l'
-					&& s[c] == 'S'))
-		return (0);
-	if (s[c] == 's' || s[c] == 'd' || s[c] == 'i' || s[c] == 'u'
-			|| s[c] == 'o' || s[c] == 'x' || s[c] == 'X' || s[c] == 'D'
-			|| s[c] == 'O' || s[c] == 'U' || s[c] == 'p' || s[c] == 'c')
+	while (!(ft_testall(s, &c) == 1))
+	    c++;
+	*t = c;
+	if (s[*t] == 'l' || s[*t] == 'h' || s[*t] == 'j' || s[*t] == 'z')
+		*t = *t + 1;
+	if (s[*t] == 'l' || s[*t] == 'h')
+		*t = *t + 1;
+	if (s[*t] == 'C' || (s[c + 1] != 'l' && s[c] == 'l' && s[*t] == 'c'))
+		return (2);
+	ft_putchar('#');
+	ft_putstr("s[t[1]]:");
+	ft_putchar(s[*t]);
+	ft_putchar('\n');
+	if (ft_testall(s, t) == 1)
 		return (1);
-	return (0);
-}
-
-int	ft_testsimp(char *s, int *i)
-{
-	if (s[*i - 1] == '%')
-	{
-		if (ft_testlong(s, i) == 1)
-			return (1);
-		if (s[*i] == 'C' || ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j'
-						|| s[*i] == 'z') && (s[*i + 1] == 'c' || s[*i + 1] == 'C'))
-				|| ((s[*i + 1] == 'l' || s[*i + 1] == 'h') && (s[*i + 2] == 'c'
-						|| s[*i + 2] == 'C')))
-		{
-			*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j'
-						|| s[*i] == 'z') ? 1 : 0) + ((s[*i + 1] == 'l'
-							|| s[*i + 1] == 'h') ? 1 : 0);
-			return (3);
-		}
-		if (s[*i] == 'S' || ((ft_testall(s, i) == 2) && (s[*i + 1] == 'S'
-		|| s[*i + 2] == 'S' || (s[*i] == 'l' && s[*i + 1] == 's'))))
-		{
-			*i = *i + (s[*i] == 'l' ? 1 : 0) + (s[*i + 1] == 'l' ? 1 : 0)
-				+ (s[*i] == 'z' ? 1 : 0) + (s[*i] == 'j' ? 1 : 0)
-				+ (s[*i] == 'h' ? 1 : 0) + (s[*i + 1] == 'h' ? 1 : 0);
-			return (4);
-		}
-		ft_putchar('#');
-	}
 	return (0);
 }

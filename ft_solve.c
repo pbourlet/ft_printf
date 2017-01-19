@@ -6,76 +6,87 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/18 20:06:19 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/19 21:10:34 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdarg.h>
 #include "ft_printf.h"
 
-int	ft_solvefin(int *cpt, char *s, int *i, char *tab)
+int	ft_solvefin(int *cpt, char *s, int *t, char *tab)
 {
-	*i = *i + ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' ||
-	s[*i] == 'z') ? 1 : 0) + ((s[*i + 1] == 'l' || s[*i + 1] == 'h')
-	? 1 : 0);
-	if (s[*i] ==  'p')
+	int e;
+
+	e = 0;
+	if (s[t[4] + 1] == ' ' && ft_atoi(tab) > 0 && (s[t[1]] == 'i'
+	|| s[t[1]] == 'd' || s[t[1]] == 'D') && (e = 1))
+		ft_putchar(' ');
+	if (s[t[1]] == 'p')
 	{
 		ft_putstr("0x");
 		*cpt = *cpt + 2;
 	}
 	ft_putstr(tab);
-	*cpt = *cpt + ft_strlen(tab);
+	*cpt = *cpt + ft_strlen(tab) + (e == 1 ? 1 : 0);
+	while (s[t[4] + 1] == ' ')
+		t[4]++;
+	t[4] = t[4] + 1 + (s[t[1] - 1] == 'l' ? 1 : 0)
+	+ (s[t[1] - 2] == 'l' ? 1 : 0) + (s[t[1] - 1] == 'h' ? 1 : 0)
+	+ (s[t[1] - 2] == 'h' ? 1 : 0) + (s[t[1] - 1] == 'j' ? 1 : 0)
+	+ (s[t[1] - 1] == 'z' ? 1 : 0)  + (e == 1 ? 1 : 0);
+	ft_strclr(tab);
+	free(tab);
 	return (1);
 }
 
-int	ft_testfin(int *cpt, char *s, int *i)
+int		ft_testfin(char *s, int *t, int *cpt)
 {
-	if (s[*i - 1] == '%' && (s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j'
-	|| s[*i] == 'z'))
+//	if (t[3] == 2)
+//		return (1);
+	if (t[2] == 0 || ft_testall(s, &t[1]) == 1)
 	{
-		if (!s[*i + 1])
+		if (t[3] == 0)
+			return (-1);
+		if ((s[t[1] - 1] == 'l' && ft_testall(s, &t[4])))
+			return (1);
+		if (!(s[t[4]] == '%' && ft_testall(s, &t[1])))
 		{
-			*cpt = -1;
-			return (0);
+			ft_putchar(s[t[4]]);
+			*cpt = *cpt + 1;
+			return (1);
 		}
-		ft_putchar(s[*i - 1]);
-		*cpt = *cpt + 1;
-		*i = *i + 1 + ((s[*i] == s[*i + 1]) ? 1 : 0);
-		return (1);
-	}
-	if (!ft_testall(s, i))
-		return (1);
-	if (s[*i] != '%')
-		return (1);
-	return (0);
-}
-
-int	ft_solve(int *spt, int *cpt, char *s, int i, char **tab)
-{
-	int	a;
-	int	t;
-	int	f;
-
-	a = 1;
-	f = 1;
-	while (s[i])
-	{
-		t = ft_testsimp(s, &i);
-		if (t == 1)
-			f = ft_solvefin(cpt, s, &i, tab[a++]);
-		else if (t == 3)
-			f = ft_solvespec(cpt, tab[a++]);
-		else if (t == 4)
-			ft_solveS(spt, cpt, tab, &a);
-		else if (ft_testfin(cpt, s, &i) == 1)
+		if (s[t[4]] != '%')
 		{
-			if (f == 0)
-				return (1);
-			ft_putchar(s[i]);
+			ft_putchar(s[t[4]]);
 			*cpt = *cpt + 1;
 		}
-		i++;
+	}
+	return (1);
+}
+
+int	ft_solve(int *spt, int *cpt, char *s, char **tab)
+{
+	int	t[5];
+
+	t[0] = 1;
+	t[3] = 1;
+	t[1] = 0;
+	t[2] = 0;
+	t[4] = 0;
+	while (s[t[4]])
+	{
+		if (s[t[4]] == '%')
+		{
+			t[2] = ft_testsimp(s, &t[4], &t[1]);
+			if (t[2] == 1)
+				t[3] = ft_solvefin(cpt, s, t, tab[t[0]++]);
+			else if (t[2] == 2)
+				t[3] = ft_solveC(cpt, tab[t[0]++], t);
+			else if (t[2] == 3)
+				ft_solveS(spt, cpt, tab, t);
+		}
+		else if (ft_testfin(s, t, cpt) == -1)
+			return (1);
+		t[4]++;
 	}
 	return (1);
 }
