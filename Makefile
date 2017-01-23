@@ -6,7 +6,7 @@
 #*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/14 16:37:03 by pbourlet          #+#    #+#             *#
-#*   Updated: 2017/01/19 15:32:13 by pbourlet         ###   ########.fr       *#
+#*   Updated: 2017/01/23 19:01:00 by pbourlet         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -86,6 +86,7 @@ SRC = ft_lenlu.c \
 	  ft_solve.c \
 	  ft_itoabase.c \
 	  ft_solveC.c \
+	  ft_solveS.c \
 	  ft_testtype.c \
 	  ft_stockspec.c \
 	  ft_stockS.c \

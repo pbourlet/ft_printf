@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 16:27:46 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/19 20:07:52 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/23 20:14:17 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_trad(char *tab, char *bin, int lenb)
 	return (tab);
 }
 
-int		ft_solveC(int *cpt, char *tab, int *t)
+int		ft_solveC(int *cpt, char *tab)
 {
 	char	tab0[9] = "0xxxxxxx";
 	char	tab1[17] = "110xxxxx10xxxxxx";
@@ -80,19 +80,22 @@ int		ft_solveC(int *cpt, char *tab, int *t)
 	ft_resul(res, lenb);
 	*cpt = *cpt + 1 + (lenb > 7 ? 1 : 0) + (lenb > 11 ? 1 : 0)
 		+ (lenb > 16 ? 1 : 0);
-	t[4]++;
 	ft_strclr(tab);
 	free(tab);
 	return (1);
 }
 
-int	ft_solveS(int *spt, int *cpt, char **tab, int *t)
+int		ft_Cfinal(int *cpt, char *tab, int *t, char *s)
 {
-	while (*spt)
-	{
-		ft_solveC(cpt, tab[t[0]], t);
-		t[0]++;
-		*spt = *spt - 1;
-	}
+	int e;
+
+	e = t[4] + 1;
+	ft_solveC(cpt, tab);
+	while (s[t[4] + 1] == ' ')
+		t[4]++;
+	t[4] = t[4] + 1 + (s[t[1] - 1] == 'l' ? 1 : 0)
+		+ (s[t[1] - 2] == 'l' ? 1 : 0) + (s[t[1] - 1] == 'h' ? 1 : 0)
+		+ (s[t[1] - 2] == 'h' ? 1 : 0) + (s[t[1] - 1] == 'j' ? 1 : 0)
+		+ (s[t[1] - 1] == 'z' ? 1 : 0)  + (s[e] == ' ' ? 1 : 0);
 	return (1);
 }

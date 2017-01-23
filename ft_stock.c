@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/19 17:06:06 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/23 19:38:40 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,9 @@ char	**ft_stock(int *spt, char *s, va_list ap)
 	{
 		if (!(c = 0) && s[i] == '%')
 		{
+			i++;
 			tab[++a] = ft_strnew(0);
-			while (testdiff(s, (i + c)) == 1)
+			while (s[i + c] == ' ')
 				c++;
 			if (testdiff(s, (i + c)) == 4)
 				tab = ft_stockS(spt, ap, tab, &a);
