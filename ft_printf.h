@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/23 20:14:32 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/25 02:33:21 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <wchar.h>
 # include <inttypes.h>
 
-int			ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 wchar_t		*ft_wstrdup(wchar_t *s);
 size_t		ft_wstrlen(wchar_t *s);
 char		*ft_itoalong(long int n);
@@ -29,7 +29,7 @@ char		*ft_itosh(unsigned short int nb, int base);
 char		*ft_itoaoc(uintmax_t nb);
 long int	ft_lenlu(unsigned long nb);
 char		*stup(char *str);
-int			ft_solve(int *spt, int *cpt, char *s, char **tab);
+int		ft_solve(int *d, char *s, char **tab);
 char		*ft_itoabase(long nb, int base);
 int			ft_atoilbase(char *str, int base);
 int			ft_solvespec(int *spt, int *cpt, char *s, int *t, char **tab);
@@ -39,7 +39,7 @@ int			ft_solveS(int *spt, int *cpt, char **tab, int  *t, char *s);
 int			ft_testsimp(char *s, int *i, int *t);
 int			ft_testall(char *s, int *i);
 int			ft_testfinal(int *test, char *s, int *t);
-char		**ft_stock(int * spt, char *s, va_list ap);
+char		**ft_stock(int *d, char *s, va_list ap);
 char		*ft_stocksimp(char *s, va_list ap, int i);
 char		*ft_stockh(char *s, va_list ap, int i);
 char		*ft_stockj(char *s, va_list ap, int i);
