@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/25 02:33:17 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/25 16:16:12 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,34 @@
 int	ft_testdigit(int *d, char *s, int *t, char *tab)
 {
 	int	lent;
-	
-	lent = ft_strlen(tab) + d[3];
-	s[1] = s[1];
-	while (t[6] - 1 > lent && d[2] == 1)
+
+	lent = ft_strlen(tab) + d[3] + ((d[4] == 21 || d[4] == 22) ? 1 : 0);
+	while (t[6] - ((d[4] == 11 || d[4] == 12) ? 2 : 0)
+	- (d[2] == 1 ? 1 : 0) > lent && d[2] != -1)
 	{
-		ft_putchar(' ');
+		if (d[4] == 12 || d[4] == 22)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
 		t[6]--;
 		d[0]++;
 	}
-	(d[2] == 1 ? ft_putchar('+') : 0);
+	(d[2] == 1 && (s[t[1]] == 'i' || s[t[1]] == 'd' || s[t[1]] == 'D') ? ft_putchar('+') : 0);
+	((d[4] == 11 || d[4] == 12) ? ft_putstr("0x") : 0);
+	((d[4] == 21 || d[4] == 22)? ft_putchar('0') : 0);
 	ft_putstr(tab);
 	while (t[6] > lent && d[2] == -1)
 	{
-		ft_putchar(' ');
+		if (d[4] == 12 || d[4] == 22)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
 		t[6]--;
 		d[0]++;
 	}
-	d[0] = d[0] + ft_strlen(tab);
+	d[0] = d[0] + ft_strlen(tab) + ((d[4] == 11 || d[4] == 12) ? 2 : 0)
+	+ ((d[4] == 21 || d[4] == 22) ? 1 : 0)
+	+ (d[2] == 1 && d[4] < 11 && d[4] != 2 ? 1 : 0);
 	return (1);
 }
 
@@ -90,7 +100,7 @@ int		ft_testfin(char *s, int *t, int *cpt)
 
 int	ft_solve(int *d, char *s, char **tab)
 {
-	int	t[6];
+	int	t[7];
 
 	t[0] = 1;
 	t[3] = 1;

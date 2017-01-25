@@ -1,7 +1,9 @@
-flags #0
+flags #
 taille minimum du champ
 précision
 
 cpt = d[0];
 spt = d[1];
 sign = d[2];
+space = d[3];
+# = d[4];
