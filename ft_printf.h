@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/25 14:05:04 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/26 20:23:38 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ int			ft_solveS(int *spt, int *cpt, char **tab, int  *t, char *s);
 int			ft_testsimp(char *s, int *i, int *t);
 int			ft_testall(char *s, int *i);
 int			ft_testfinal(int *test, char *s, int *t);
-char		**ft_stock(int *d, char *s, va_list ap);
-char		*ft_stocksimp(char *s, va_list ap, int i, int *d);
-char		*ft_stockh(char *s, va_list ap, int i, int *d);
-char		*ft_stockj(char *s, va_list ap, int i, int *d);
-char		*ft_stockz(char *s, va_list ap, int i, int *d);
-char		*ft_stockll(char *s, va_list ap, int i, int *d);
-char		*ft_stockhh(char *s, va_list ap, int i, int *d);
+int			ft_testflags(int *t, int *d, char *s, char *tab, int ordre);
+int			ft_flagstock(int *d, char *s, int i);
+char		**ft_stock(int *d,char *s, va_list ap);
+char		*ft_stocksimp(char *s, va_list ap, int i);
+char		*ft_stockh(char *s, va_list ap, int i);
+char		*ft_stockj(char *s, va_list ap, int i);
+char		*ft_stockz(char *s, va_list ap, int i);
+char		*ft_stockll(char *s, va_list ap, int i);
+char		*ft_stockhh(char *s, va_list ap, int i);
 char		**ft_stockS(int *spt, va_list ap, char **tab, int *a);
 
 #endif

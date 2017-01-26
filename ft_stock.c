@@ -6,15 +6,15 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/25 16:16:10 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/26 22:00:51 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_stocklong(char *s, va_list ap, int i, int *d);
+char	*ft_stocklong(char *s, va_list ap, int i);
 
-char	*ft_stocksimp(char *s, va_list ap, int i, int *d)
+char	*ft_stocksimp(char *s, va_list ap, int i)
 {
 	char *tab;
 
@@ -29,25 +29,23 @@ char	*ft_stocksimp(char *s, va_list ap, int i, int *d)
 	else if (s[i] == 'u')
 		tab = ft_strdup(ft_itoalu(va_arg(ap, unsigned)));
 	else if (s[i] == 'U' || s[i] == 'p' || s[i] == 'O')
-		tab = ft_stocklong(s, ap, i - 1, d);
+		tab = ft_stocklong(s, ap, i - 1);
 	else if (s[i] == 'x')
 		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned)));
 	else if (s[i] == 'o')
 		tab = ft_strdup(ft_itoaoc(va_arg(ap, unsigned)));
 	else if (s[i] == 'X')
 		tab = ft_strdup(stup(ft_itohx(va_arg(ap, unsigned))));
-	if (d[4] && ( s[i] == 'X' || s[i] == 'x' || s[i] == 'o' || s[i] == 'O'))
-		d[4] += 10 + ((s[i] == 'o' || s[i] == 'O') ? 10 : 0);
 	return (tab);
 }
 
-char	*ft_stocklong(char *s, va_list ap, int i, int *d)
+char	*ft_stocklong(char *s, va_list ap, int i)
 {
 	char *tab;
 
 	i++;
 	if ((tab = ft_strnew(0)) && s[i] == 'l')
-		return (ft_stockll(s, ap, i, d));
+		return (ft_stockll(s, ap, i));
 	if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D' || s[i - 1] == 'D')
 		tab = ft_strdup(ft_itoalong(va_arg(ap, long)));
 	else if (s[i] == 'X')
@@ -55,15 +53,13 @@ char	*ft_stocklong(char *s, va_list ap, int i, int *d)
 	else if (s[i] == 'x')
 		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
 	else if (s[i] == 'p')
-		tab = ft_strjoin("0x", ft_itohx(va_arg(ap, unsigned long)));
+		tab = ft_strdup(ft_itohx(va_arg(ap, unsigned long)));
 	else if (s[i] == 'C' || s[i] == 'c')
 		tab = ft_strdup(ft_itoabase(va_arg(ap, unsigned int), 2));
 	else if (s[i] == 'u' || s[i] == 'U')
 		tab = ft_strdup(ft_itoalu(va_arg(ap, unsigned long)));
 	else if (s[i] == 'o' || s[i] == 'O')
 		tab = ft_strdup(ft_itoaoc(va_arg(ap, unsigned long)));
-	if (d[4] && (s[i] == 'X' || s[i] == 'x' || s[i] == 'o' || s[i] == 'O'))
-		d[4] += 10 + ((s[i] == 'o' || s[i] == 'O') ? 10 : 0);
 	return (tab);
 }
 
@@ -90,32 +86,18 @@ int	testdiff(char *s, int i)
 	return (0);
 }
 
-char	*ft_teststock(int *d, char *s, int i, va_list ap)
+char	*ft_teststock(char *s, int i, va_list ap)
 {
-	int	t;
-
-	t = 0;
-	d[2] = 0;
-	while (s[t] && (s[t - 1] != '+' || s[t - 1] != '-' || s[t - 1] == '#' || s[t-1] == '0'))
-	{
-		if (s[t] == '+')
-			d[2] = 1;
-		if (s[t] == '-')
-			d[2] = -1;
-		if (s[t] == '#')
-			d[4] = 1 + (s[t + 1] == '0' ? 1 : 0);
-		t++;
-	}
 	if (testdiff(s, i) == 2)
-		return (ft_stocksimp(s, ap, i, d));
+		return (ft_stocksimp(s, ap, i));
 	else if (testdiff(s, i) == 3)
-		return (ft_stocklong(s, ap, i, d));
+		return (ft_stocklong(s, ap, i));
 	else if (testdiff(s, i) == 5)
-		return (ft_stockh(s, ap, i, d));
+		return (ft_stockh(s, ap, i));
 	else if (testdiff(s, i) == 6)
-		return (ft_stockj(s, ap, i, d));
+		return (ft_stockj(s, ap, i));
 	else if (testdiff(s, i) == 7)
-		return (ft_stockz(s, ap, i, d));
+		return (ft_stockz(s, ap, i));
 	else
 		return (NULL);
 }
@@ -143,7 +125,7 @@ char	**ft_stock(int *d, char *s, va_list ap)
 				c++;
 			if (testdiff(s, c) == 4)
 				tab = ft_stockS(&d[1], ap, tab, &a);
-			else if ((tab[a] = ft_teststock(d, s, c, ap)) == NULL)
+			else if ((tab[a] = ft_teststock(s, c, ap)) == NULL)
 				free(tab[a--]);
 		}
 	}

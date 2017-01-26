@@ -1,9 +1,9 @@
-flags #
-taille minimum du champ
 précision
 
 cpt = d[0];
 spt = d[1];
-sign = d[2];
++ = d[2];
+- = d[5];
 space = d[3];
 # = d[4];
+0 = d[6];

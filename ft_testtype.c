@@ -6,25 +6,15 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:59:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/25 15:08:41 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/26 21:57:09 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-int		ft_testfinal(int t[1]est, char *s, int t[1])
-{
-	if (t[1]est == 0 && ((((s[t[4] - 2] == ' ' || s[t[4] - 2] == '%')
-	&& s[t[4] - 1] == 'l') || s[t[4] - 1] == 'h' || s[t[4] - 1] == 'j'
-	|| s[t[4] - 1] == 'z'	|| s[t[1] - 1] == '%')
-	&& ft_testall(s, &t[1]) == 1) && s[t[1]] == s[t[4]] && (t[1]est = 1))
-		return (1);
-	return (0);
-}
-*/
+
 int	ft_testall(char *s, int *i)
 {
-	if ((s[*i] == 'l' || s[*i + 1] == 'l'|| s[*i] == 'h' || s[*i + 1] == 'h'
+	if ((s[*i] == 'l' || s[*i + 1] == 'l' || s[*i] == 'h' || s[*i + 1] == 'h'
 	|| s[*i] == 'j'	|| s[*i] == 'z') && !(s[*i] == 's' || s[*i] == 'S'
 	|| s[*i] == 'c' || s[*i] == 'C' || s[*i] == 'i' || s[*i] == 'd'
 	|| s[*i] == 'D' || s[*i] == 'u' || s[*i] == 'U' || s[*i] == 'p'
@@ -41,30 +31,31 @@ int	ft_testall(char *s, int *i)
 
 int	ft_testsimp(char *s, int *i, int *t)
 {
-	int	c;
-
-	c = *i;
-	c++;
+	t[5] = 0;
+	*i = *i + 1;
 	t[6] = 0;
-	while (s[c] == ' ' || s[c] == '+' || s[c] == '-' || s[c] == '#'
-	|| s[c] == '0')
-	    c++;
-	t[1] = c;
-	while (s[t[1]] >= '0' && s[t[1]] <= '9')
+	while (!ft_testall(s, i))
 	{
-		t[6] *= 10;
-		t[6] += (s[t[1]] - '0');
-		t[1] = t[1] + 1;
+		while (s[*i] == ' ' || s[*i] == '+' || s[*i] == '-'	|| s[*i] == '#'
+		|| s[*i] == '0')
+			t[1]++;
+		while (s[*i] >= '0' && s[*i] <= '9' && t[5] != 1)
+		{
+			t[6] *= 10;
+			t[6] += (s[*i] - '0');
+			*i = *i + 1;
+		}
+		t[5] = 1;
 	}
-	if (s[t[1]] == 'l' || s[t[1]] == 'h' || s[t[1]] == 'j' || s[*t] == 'z')
-		t[1] = t[1] + 1;
-	if (s[t[1]] == 'l' || s[t[1]] == 'h')
-		t[1] = t[1] + 1;
-	if (s[t[1]] == 'C' || (s[c + 1] != 'l' && s[c] == 'l' && s[t[1]] == 'c'))
+	if (s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' || s[*i] == 'z')
+		*i = *i + 1;
+	if (s[*i] == 'l' || s[*i] == 'h')
+		*i = *i + 1;
+	if (s[*i] == 'C' || (s[*i - 2] != 'l' && s[*i - 1] == 'l' && s[*i] == 'c'))
 		return (2);
-	if (s[t[1]] == 'S' || (s[c + 1] != 'l' && s[c] == 'l' && s[t[1]] == 's'))
+	if (s[*i] == 'S' || (s[*i + 1] != 'l' && s[*i] == 'l' && s[*i] == 's'))
 		return (3);
-	if (ft_testall(s, &t[1]) == 1)
+	if (ft_testall(s, i) == 1)
 		return (1);
 	return (0);
 }

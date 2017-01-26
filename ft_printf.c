@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:27 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/25 15:17:51 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/26 22:01:30 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_printf(const char *format, ...)
 	va_list		ap;
 	char		*s;
 	char		**stock;
-	int		d[5];
+	int		d[7];
 
 	d[0] = 0;
 	d[1] = 0;
