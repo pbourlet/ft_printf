@@ -6,13 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/26 22:00:51 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/31 23:49:58 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char	*ft_stocklong(char *s, va_list ap, int i);
 
 char	*ft_stocksimp(char *s, va_list ap, int i)
 {
@@ -44,6 +42,8 @@ char	*ft_stocklong(char *s, va_list ap, int i)
 	char *tab;
 
 	i++;
+	while (s[i] == ' ')
+		i++;
 	if ((tab = ft_strnew(0)) && s[i] == 'l')
 		return (ft_stockll(s, ap, i));
 	if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D' || s[i - 1] == 'D')
@@ -63,9 +63,12 @@ char	*ft_stocklong(char *s, va_list ap, int i)
 	return (tab);
 }
 
-int	testdiff(char *s, int i)
+int		testdiff(char *s, int i)
 {
-	if (!(s[i] == 's' || s[i] == 'S' || s[i] == 'c'	|| s[i] == 'C'
+	int res;
+
+	res = 0;
+	if (!(s[i] == 's' || s[i] == 'S' || s[i] == 'c' || s[i] == 'C'
 	|| s[i] == 'i' || s[i] == 'd' || s[i] == 'D' || s[i] == 'u'
 	|| s[i] == 'U' || s[i] == 'p' || s[i] == 'o' || s[i] == 'O'
 	|| s[i] == 'x' || s[i] == 'X' || s[i] == 'l' || s[i] == 'h'
@@ -81,8 +84,11 @@ int	testdiff(char *s, int i)
 		return (2);
 	if (s[i] == 'D' || s[i] == 'l' || s[i] == 'h' || s[i] == 'j'
 	|| s[i] == 'z')
-		return (3 + ((s[i] == 'h') ? 2 : 0) + ((s[i] == 'j') ? 3 : 0)
-			+ ((s[i] == 'z') ? 4 : 0));
+	{
+		res = (3 + ((s[i] == 'h') ? 2 : 0) + ((s[i] == 'j') ? 3 : 0)
+		+ ((s[i] == 'z') ? 4 : 0));
+		return (res);
+	}
 	return (0);
 }
 
@@ -105,28 +111,27 @@ char	*ft_teststock(char *s, int i, va_list ap)
 char	**ft_stock(int *d, char *s, va_list ap)
 {
 	char	**tab;
-	int		i;
-	int		c;
-	int		a;
+	int		i[3];
 
-	i = -1;
-	a = 0;
+	i[0] = -1;
+	i[2] = 0;
 	if (!(tab = malloc(sizeof(va_list) * 100)))
 		return (NULL);
-	while (s[++i])
+	while (s[++i[0]])
 	{
-		if (!(c = 0) && s[i] == '%')
+		if (!(i[1] = 0) && s[i[0]] == '%')
 		{
-			i++;
-			tab[++a] = ft_strnew(0);
-			c = i + c;
-			while (s[c] == ' ' || s[c] == '+' || s[c] == '-'
-			|| (s[c] >= '0' && s[c] <= '9') || s[c] == '#')
-				c++;
-			if (testdiff(s, c) == 4)
-				tab = ft_stockS(&d[1], ap, tab, &a);
-			else if ((tab[a] = ft_teststock(s, c, ap)) == NULL)
-				free(tab[a--]);
+			i[0]++;
+			tab[++i[2]] = ft_strnew(0);
+			i[1] = i[0] + i[1];
+			while (s[i[1]] == ' ' || s[i[1]] == '+' || s[i[1]] == '-'
+			|| (s[i[1]] >= '0' && s[i[1]] <= '9') || s[i[1]] == '#'
+			|| s[i[1]] == '.')
+				i[1]++;
+			if (testdiff(s, i[1]) == 4)
+				tab = ft_stockss(&d[1], ap, tab, &i[2]);
+			else if ((tab[i[2]] = ft_teststock(s, i[1], ap)) == NULL)
+				free(tab[i[2]--]);
 		}
 	}
 	return (tab);

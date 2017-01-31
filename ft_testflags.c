@@ -6,13 +6,13 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:19:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/26 21:43:16 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/31 22:47:52 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_testflags(int *t, int *d, char *s, char *tab, int ordre)
+int		ft_testflags1(int *t, int *d, char *s, char *tab)
 {
 	int res;
 
@@ -20,31 +20,39 @@ int		ft_testflags(int *t, int *d, char *s, char *tab, int ordre)
 	? d[4] = 11 : 0);
 	(d[4] == 1 && (s[t[1]] == 'o' || s[t[1]] == 'O') ? d[4] = 21 : 0);
 	res = (d[4] == 2 && (s[t[1]] == 'o' || s[t[1]] == 'O') ? 1 : 0);
-	if (ordre == 1)
-	{
-		res += t[6] - (d[4] == 11 ? 2 : 0) - (d[4] == 21 ? 1 : 0)
-		- (d[2] == 1 && (s[t[1]] == 'i'	|| s[t[1]] == 'd' || s[t[1]] == 'D')
-		&& tab[0] != '-' ? 1 : 0) + (tab[0] == '-' ? 1 : 0);
-//		ft_putstr("res:");
-//		ft_putnbr(res);
-//		ft_putchar('\n');
-	}
-	if (ordre == 2)
-	{
-		(d[2] == 1 && (s[t[1]] == 'i' || s[t[1]] == 'd'
-		|| s[t[1]] == 'D') && tab[0] != '-' ? ft_putchar('+') : 0);
+	res += t[6] - (d[4] == 11 ? 2 : 0) - (d[4] == 21 ? 1 : 0)
+	- (d[2] == 1 && (s[t[1]] == 'i' || s[t[1]] == 'd' || s[t[1]] == 'D')
+	? 1 : 0) + (t[2] != 3 && tab[0] == '-' ? 1 : 0)
+	- (d[2] == 2 && !d[3] ? 1 : 0);
+	return (res);
+}
+
+void	ft_testflags2(int *t, int *d, char *s, char *tab)
+{
+	(d[2] == 1 && (s[t[1]] == 'i' || s[t[1]] == 'd'
+	|| s[t[1]] == 'D') && tab[0] != '-' ? ft_putchar('+') : 0);
+	if (t[7])
+		(d[2] == 2 && t[5] >= (int)ft_strlen(tab) ? ft_putchar('-') : 0);
+	else
 		(d[2] == 2 ? ft_putchar('-') : 0);
-		(d[4] == 11 || d[4] == 21 || s[t[1]] == 'p' ? ft_putchar('0') : 0);
-		((d[4] == 11 && s[t[1]] == 'x') || s[t[1]] == 'p'
-		? ft_putchar('x') : 0);
-		(d[4] == 11 && s[t[1]] == 'X' ? ft_putchar('X') : 0);
-	}
-	if (ordre == 3)
-	{
-		res = (d[4] == 11 || s[t[1]] == 'p' ? 2 : 0) + (d[4] == 21 ? 1 : 0)
-		+ (d[2] == 1 && (s[t[1]] == 'i'	|| s[t[1]] == 'd' || s[t[1]] == 'D')
-		&& tab[0] != '-' ? 1 : 0);
-	}
+	(d[4] == 11 || d[4] == 21 || s[t[1]] == 'p' ? ft_putchar('0') : 0);
+	((d[4] == 11 && s[t[1]] == 'x') || s[t[1]] == 'p'
+	? ft_putchar('x') : 0);
+	(d[4] == 11 && s[t[1]] == 'X' ? ft_putchar('X') : 0);
+}
+
+int		ft_testflags3(int *t, int *d, char *s, char *tab)
+{
+	int res;
+
+	(d[4] == 1 && (s[t[1]] == 'x' || s[t[1]] == 'X' || s[t[1]] == 'p')
+	? d[4] = 11 : 0);
+	(d[4] == 1 && (s[t[1]] == 'o' || s[t[1]] == 'O') ? d[4] = 21 : 0);
+	res = (d[4] == 2 && (s[t[1]] == 'o' || s[t[1]] == 'O') ? 1 : 0);
+	res = (d[4] == 11 || s[t[1]] == 'p' ? 2 : 0) + (d[4] == 21 ? 1 : 0)
+	+ (d[2] == 1 && (s[t[1]] == 'i' || s[t[1]] == 'd' || s[t[1]] == 'D')
+	? 1 : 0) + (d[2] == 2 && !t[7] ? 1 : 0)
+	+ (d[2] == 2 && t[5] >= (int)ft_strlen(tab) ? 1 : 0);
 	return (res);
 }
 
@@ -59,9 +67,9 @@ int		ft_flagstock(int *d, char *s, int i)
 	d[3] = 0;
 	d[6] = 0;
 	while (s[t] && (s[t - 1] != '+' || s[t - 1] != '-'
-	|| s[t - 1] == '#' || s[t-1] == '0') && s[t] != '%')
+	|| s[t - 1] == '#' || s[t - 1] == '0') && s[t] != '%')
 	{
-		if (s[t - 1] == '%' && s[t] == ' ')
+		if (s[t] == ' ')
 			d[3] = 1;
 		if (s[t] == '+')
 			d[2] = 1;
@@ -69,8 +77,7 @@ int		ft_flagstock(int *d, char *s, int i)
 			d[5] = -1;
 		if (s[t] == '#' && d[4] != 2)
 			d[4] = 1;
-		if (s[t] == '0' && !(s[t - 1] >= '0' && s[t - 1] <= '9')
-		&& !(s[t - 1] >= '0' && s[t - 1] <= '9'))
+		if (s[t] == '0' && !(s[t - 1] >= '0' && s[t - 1] <= '9'))
 			d[6] = 1;
 		t++;
 	}

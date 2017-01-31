@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:42:42 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/09 18:07:03 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/31 22:38:27 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,4 @@ int		ft_atoibase(const char *str, int base)
 		return (-num);
 	else
 		return (num);
-
 }

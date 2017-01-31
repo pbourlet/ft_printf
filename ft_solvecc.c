@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_solveC.c                                        :+:      :+:    :+:   */
+/*   ft_solvecc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/19 16:27:46 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/23 20:14:17 by pbourlet         ###   ########.fr       */
+/*   Created: 2017/01/31 23:08:50 by pbourlet          #+#    #+#             */
+/*   Updated: 2017/01/31 23:37:05 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,44 +58,47 @@ char	*ft_trad(char *tab, char *bin, int lenb)
 	return (tab);
 }
 
-int		ft_solveC(int *cpt, char *tab)
+char	**ft_init(char **tab)
 {
-	char	tab0[9] = "0xxxxxxx";
-	char	tab1[17] = "110xxxxx10xxxxxx";
-	char	tab2[25] = "1110xxxx10xxxxxx10xxxxxx";
-	char	tab3[33] = "11110xxx10xxxxxx10xxxxxx10xxxxxx";
-	char	*res;
-	int		lenb;
+	tab[0] = ft_strdup("0xxxxxxx");
+	tab[1] = ft_strdup("110xxxxx10xxxxxx");
+	tab[2] = ft_strdup("1110xxxx10xxxxxx10xxxxxx");
+	tab[3] = ft_strdup("11110xxx10xxxxxx10xxxxxx10xxxxxx");
+	return (tab);
+}
 
+int		ft_solvecc(int *cpt, char *tab, int lenb)
+{
+	char *tabi[5];
+	char *res;
+
+	ft_init(tabi);
 	res = NULL;
 	lenb = ft_strlen(tab);
 	if (lenb <= 7)
-		res = ft_trad(tab0, tab, lenb);
+		res = ft_trad(tabi[0], tab, lenb);
 	else if (lenb <= 11)
-		res = ft_trad(tab1, tab, lenb);
+		res = ft_trad(tabi[1], tab, lenb);
 	else if (lenb <= 16)
-		res = ft_trad(tab2, tab, lenb);
+		res = ft_trad(tabi[2], tab, lenb);
 	else if (lenb <= 21)
-		res = ft_trad(tab3, tab, lenb);
+		res = ft_trad(tabi[3], tab, lenb);
 	ft_resul(res, lenb);
 	*cpt = *cpt + 1 + (lenb > 7 ? 1 : 0) + (lenb > 11 ? 1 : 0)
 		+ (lenb > 16 ? 1 : 0);
 	ft_strclr(tab);
 	free(tab);
+	ft_strdel(tabi);
 	return (1);
 }
 
-int		ft_Cfinal(int *cpt, char *tab, int *t, char *s)
+int		ft_ccfinal(int *cpt, char *tab, int *t, char *s)
 {
-	int e;
-
-	e = t[4] + 1;
-	ft_solveC(cpt, tab);
+	ft_solvecc(cpt, tab, 0);
 	while (s[t[4] + 1] == ' ')
 		t[4]++;
-	t[4] = t[4] + 1 + (s[t[1] - 1] == 'l' ? 1 : 0)
-		+ (s[t[1] - 2] == 'l' ? 1 : 0) + (s[t[1] - 1] == 'h' ? 1 : 0)
-		+ (s[t[1] - 2] == 'h' ? 1 : 0) + (s[t[1] - 1] == 'j' ? 1 : 0)
-		+ (s[t[1] - 1] == 'z' ? 1 : 0)  + (s[e] == ' ' ? 1 : 0);
+	t[4] = t[4] + (s[t[1] - 1] == 'l' ? 1 : 0) + (s[t[1] - 2] == 'l' ? 1 : 0)
+	+ (s[t[1] - 1] == 'h' ? 1 : 0) + (s[t[1] - 2] == 'h' ? 1 : 0)
+	+ (s[t[1] - 1] == 'j' ? 1 : 0) + (s[t[1] - 1] == 'z' ? 1 : 0) + 1;
 	return (1);
 }

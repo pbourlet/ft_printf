@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:56:43 by pbourlet          #+#    #+#             */
-/*   Updated: 2016/12/14 12:56:48 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/31 23:23:43 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long int	ft_lenlu(unsigned long nb)
 {
-	long int 	digit;
+	long int digit;
 
 	digit = 0;
 	if (!nb)

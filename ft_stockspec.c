@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:48:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/26 22:01:17 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/01/31 22:35:39 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_stockh(char *s, va_list ap, int i)
 	char *tab;
 
 	i++;
+	while (s[i] == ' ')
+		i++;
 	if ((tab = ft_strnew(0)) && s[i] == 'h')
 		return (ft_stockhh(s, ap, i));
 	if (s[i] == 'i' || s[i] == 'd')
@@ -39,20 +41,22 @@ char	*ft_stockhh(char *s, va_list ap, int i)
 	char *tab;
 
 	i++;
+	while (s[i] == ' ')
+		i++;
 	if ((tab = ft_strnew(0)) && (s[i] == 'i' || s[i] == 'd'))
 		tab = ft_strdup(ft_itoabase((char)va_arg(ap, int), 10));
 	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C' || s[i] == 'p')
 		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'x')
-		tab = ft_strdup(ft_itosh((unsigned char) va_arg(ap, int), 16));
+		tab = ft_strdup(ft_itosh((unsigned char)va_arg(ap, int), 16));
 	else if (s[i] == 'X')
-		tab = ft_strdup(stup(ft_itosh((unsigned char) va_arg(ap, int), 16)));
+		tab = ft_strdup(stup(ft_itosh((unsigned char)va_arg(ap, int), 16)));
 	else if (s[i] == 'u')
-		tab = ft_strdup(ft_itoabase((unsigned char) va_arg(ap, int), 10));
+		tab = ft_strdup(ft_itoabase((unsigned char)va_arg(ap, int), 10));
 	else if (s[i] == 'U')
 		tab = ft_strdup(ft_itoabase(va_arg(ap, uintmax_t), 10));
 	else if (s[i] == 'o' || s[i] == 'O')
-		tab = ft_strdup(ft_itosh((unsigned char) va_arg(ap, int), 8));
+		tab = ft_strdup(ft_itosh((unsigned char)va_arg(ap, int), 8));
 	return (tab);
 }
 
@@ -61,6 +65,8 @@ char	*ft_stockj(char *s, va_list ap, int i)
 	char *tab;
 
 	i++;
+	while (s[i] == ' ')
+		i++;
 	if ((tab = ft_strnew(0)) && (s[i] == 'i' || s[i] == 'd'))
 		tab = ft_strdup(ft_itoabase(va_arg(ap, intmax_t), 10));
 	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')
@@ -83,6 +89,8 @@ char	*ft_stockz(char *s, va_list ap, int i)
 	char *tab;
 
 	i++;
+	while (s[i] == ' ')
+		i++;
 	if ((tab = ft_strnew(0)) && (s[i] == 'i' || s[i] == 'd'))
 		tab = ft_strdup(ft_itoabase(va_arg(ap, ssize_t), 10));
 	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')
@@ -100,11 +108,13 @@ char	*ft_stockz(char *s, va_list ap, int i)
 	return (tab);
 }
 
-char    *ft_stockll(char *s, va_list ap, int i)
+char	*ft_stockll(char *s, va_list ap, int i)
 {
 	char *tab;
 
 	i++;
+	while (s[i] == ' ')
+		i++;
 	if ((tab = ft_strnew(0)) && (s[i] == 'i' || s[i] == 'd' || s[i] == 'D'))
 		tab = ft_strdup(ft_itoabase(va_arg(ap, long long), 10));
 	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')

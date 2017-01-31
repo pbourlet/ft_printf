@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_stockss.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 14:42:27 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/31 23:41:25 by pbourlet         ###   ########.fr       */
+/*   Created: 2017/01/31 23:01:12 by pbourlet          #+#    #+#             */
+/*   Updated: 2017/01/31 23:01:23 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+char	**ft_stockss(int *spt, va_list ap, char **tab, int *a)
 {
-	va_list		ap;
-	char		*s;
-	char		**stock;
-	int			d[8];
+	wchar_t	*tmp;
+	int		y;
 
-	d[0] = 0;
-	d[1] = 0;
-	d[4] = 0;
-	va_start(ap, format);
-	s = ft_strdup(format);
-	if ((stock = ft_stock(d, s, ap)) == NULL)
-		return (-1);
-	ft_solve(d, s, stock);
-	free(stock);
-	free(s);
-	va_end(ap);
-	return (d[0]);
+	y = 0;
+	tmp = ft_wstrdup(va_arg(ap, wchar_t *));
+	while (tmp[y] != '\0')
+	{
+		tab[*a] = ft_strdup(ft_itoabase((unsigned)tmp[y], 2));
+		*a = *a + 1;
+		y++;
+		*spt = *spt + 1;
+	}
+	*a = *a - 1;
+	free(tmp);
+	return (tab);
 }
