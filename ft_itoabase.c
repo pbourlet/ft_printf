@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 16:49:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/31 23:45:48 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/06 16:39:58 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ char	*ft_pos(char *str, intmax_t *i, int base, intmax_t nb)
 	return (str);
 }
 
+int		ft_nblenmax(intmax_t nb)
+{
+	intmax_t digit;
+
+	digit = 0;
+	if (!nb)
+		return (1);
+	if (nb < 0)
+		digit++;
+	while (nb != 0)
+	{
+		digit++;
+		nb = nb / 10;
+	}
+	return (digit);
+}
+
 char	*ft_itoabase(intmax_t nb, int base)
 {
 	char		*str;
@@ -35,7 +52,7 @@ char	*ft_itoabase(intmax_t nb, int base)
 
 	i = 0;
 	nt = nb;
-	if (!(str = ft_strnew(11)))
+	if (!(str = ft_strnew(ft_nblenmax(nb))))
 		return (NULL);
 	if (nb == 0)
 		return (ft_strcpy(str, "0"));

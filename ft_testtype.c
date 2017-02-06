@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:59:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/03 16:35:15 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/06 18:38:51 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		ft_litoa(int *i, char *s)
 
 int		ft_testpass(char *s, int i)
 {
-	if (s[i] == ' ' || s[i] == '+' || s[i] == '#' || s[i] == '.'
+	if (s[i] == ' ' || s[i] == '+' || s[i] == '-' || s[i] == '#' || s[i] == '.'
 	|| (s[i] >= '0' && s[i] <= '9'))
 		return (1);
 	return (0);
@@ -79,7 +79,7 @@ int		ft_testsimp(char *s, int *i, int *t)
 	while (ft_testall(s, i) != 1 && s[*i] != '%' && s[*i])
 	{
 		ft_testwflg(s, i, t);
-		if (!ft_testall(s, i) && !ft_testpass(s, *i))
+		if (!ft_testall(s, i) && !ft_testpass(s, *i) && s[*i] != '%')
 			return (0);
 		if (s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' || s[*i] == 'z')
 			*i = *i + 1;

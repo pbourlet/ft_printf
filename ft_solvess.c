@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:17:33 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/31 23:34:19 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/07 00:00:36 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_lent(int spt, int a, char **tab)
 	{
 		lenb = ft_strlen(tab[a]);
 		lent += (lenb <= 21 ? 5 : 0) - (lenb <= 16 ? 1 : 0)
-		- (lenb <= 11 ? 1 : 0) - (lenb <= '7' ? 1 : 0);
+			- (lenb <= 11 ? 1 : 0) - (lenb <= '7' ? 1 : 0);
 		spt--;
 		a++;
 	}
@@ -55,7 +55,7 @@ int		ft_testdigitss(int *d, char *s, int *t, char **tab)
 		t[6]--;
 		d[0]++;
 	}
-	(!t[7] ? ft_ssfinal(&d[0], tab, t) : 0);
+	(!t[7] ? ft_ssfinal(d, tab, t) : 0);
 	while (ft_testflags1(t, d, s, NULL) > lent && d[5] == -1)
 	{
 		ft_putchar(' ');
@@ -65,10 +65,16 @@ int		ft_testdigitss(int *d, char *s, int *t, char **tab)
 	return (1);
 }
 
-int		ft_solvess(int *d, char **tab, int *t, char *s)
+int		ft_solvess(int *d, char **tab, int *t, char *s, t_int *l)
 {
-	ft_testdigitss(d, s, t, tab);
-	while (s[t[4]] == ' ' || ft_testall(s, &t[4]) != 1)
-		t[4]++;
+	if (l->bb <= l->ii)
+	{
+		d[1] = l->test[l->bb];
+		if (ft_strcmp(tab[t[0]], "(null)") == 0)
+			ft_solvefin(d, s, t, tab[t[0]]);
+		else
+			ft_testdigitss(d, s, t, tab);
+		l->bb += 1;
+	}
 	return (1);
 }

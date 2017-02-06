@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/03 16:25:18 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/06 23:50:57 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_solvefin(int *d, char *s, int *t, char *tab)
 	|| s[t[1]] == 'D' || s[t[1]] == 'p') && tab[0] != '-')
 	{
 		ft_putchar(' ');
-		d[0]++;
+		d[0] += 1;
 	}
 	ft_testdigit(d, s, t, tab);
 	if (t[2] == 1)
@@ -60,7 +60,7 @@ int		ft_testfin(char *s, int *i, int *t, int *cpt)
 	return (1);
 }
 
-int		ft_solve(int *d, char *s, char **tab)
+int		ft_solve(int *d, char *s, char **tab, t_int *l)
 {
 	int	t[10];
 
@@ -78,7 +78,7 @@ int		ft_solve(int *d, char *s, char **tab)
 			if (t[2] == 1 || t[2] == 2)
 				ft_solvefin(d, s, t, tab[t[0]++]);
 			else if (t[2] == 3)
-				t[3] = ft_solvess(d, tab, t, s);
+				t[3] = ft_solvess(d, tab, t, s, l);
 			else
 				ft_testfin(s, &t[1], t, &d[0]);
 			t[4] = t[1] - (t[2] == 0 ? 1 : 0);
