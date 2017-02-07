@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/06 23:50:57 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/07 23:51:18 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ int		ft_solvefin(int *d, char *s, int *t, char *tab)
 		ft_putchar(' ');
 		d[0] += 1;
 	}
+	if (!tab[0])
+		return (d[0]++);
 	ft_testdigit(d, s, t, tab);
-	if (t[2] == 1)
-	{
-		ft_strclr(tab);
-		free(tab);
-	}
+	ft_strclr(tab);
+	free(tab);
 	return (1);
 }
 
@@ -60,7 +59,7 @@ int		ft_testfin(char *s, int *i, int *t, int *cpt)
 	return (1);
 }
 
-int		ft_solve(int *d, char *s, char **tab, t_int *l)
+int		ft_solve(int *d, char *s, char **tab)
 {
 	int	t[10];
 
@@ -71,14 +70,12 @@ int		ft_solve(int *d, char *s, char **tab, t_int *l)
 	t[5] = 0;
 	while (s[++t[4]])
 	{
-		if (s[t[4]] == '%')
+		if (s[t[4]] == '%' && s[t[4] + 1])
 		{
 			ft_flagstock(d, s, t[4] + 1);
 			t[2] = ft_testsimp(s, &t[1], t);
-			if (t[2] == 1 || t[2] == 2)
+			if (t[2] == 1 || t[2] == 2 || t[2] == 3)
 				ft_solvefin(d, s, t, tab[t[0]++]);
-			else if (t[2] == 3)
-				t[3] = ft_solvess(d, tab, t, s, l);
 			else
 				ft_testfin(s, &t[1], t, &d[0]);
 			t[4] = t[1] - (t[2] == 0 ? 1 : 0);

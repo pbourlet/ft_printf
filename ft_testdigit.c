@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 21:56:34 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/06 21:52:48 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/07 23:32:55 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_prec(int *d, char *s, int *t, char *tab)
 		t[5]--;
 		d[0]++;
 	}
-	(t[2] == 2 ? ft_ccfinal(&d[0], tab, t, s) : ft_putstr(tab));
+	ft_putstr(tab);
 	while (ft_testflags1(t, d, s, tab) > t[8] && d[5] == -1)
 	{
 		ft_putchar(' ');
@@ -67,18 +67,12 @@ int		ft_testdigit(int *d, char *s, int *t, char *tab)
 	t[9] = ft_strlen(tab) - (d[6] && tab[0] == '-' ? 1 : 0);
 	if (t[7] && s[t[1]] == 's')
 		return (ft_sols(t, d, tab, t[9]));
-	if (t[2] == 2)
-	{
-		t[8] = (t[9] <= 21 ? 5 : 0) - (t[9] <= 16 ? 1 : 0)
-		- (t[9] <= 11 ? 1 : 0) - (t[9] <= '7' ? 1 : 0);
-	}
 	else
 		t[8] = t[9] + (d[3] && d[2] && tab[0] != '-' ? 0 : d[3])
 		+ (t[5] > t[9] ? t[5] - t[9] : 0)
 		- (t[5] > t[9] && tab[0] == '-' ? 1 : 0);
 	ft_champ(d, s, t, tab);
 	ft_prec(d, s, t, tab);
-	if (t[2] != 2)
-		d[0] += t[9] + ft_testflags3(t, d, s, tab);
+	d[0] += t[9] + ft_testflags3(t, d, s, tab);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:59:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/06 18:38:51 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/07 22:01:45 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,28 @@ int		ft_litoa(int *i, char *s)
 	return (res);
 }
 
-int		ft_testpass(char *s, int i)
+int		ft_testpass(char *s, int i, int ordre)
 {
-	if (s[i] == ' ' || s[i] == '+' || s[i] == '-' || s[i] == '#' || s[i] == '.'
-	|| (s[i] >= '0' && s[i] <= '9'))
+	if (ordre == 1 && (s[i] == ' ' || s[i] == '+' || s[i] == '-' || s[i] == '#'
+	|| s[i] == '.' || (s[i] >= '0' && s[i] <= '9')))
 		return (1);
+	if (ordre == 2)
+	{
+		if ((s[i] == 'C' || (s[i - 2] != 'l' && s[i - 1] == 'l'
+						&& s[i] == 'c')) && s[i])
+			return (2);
+		if ((s[i] == 'S' || (s[i - 2] != 'l' && s[i - 1] == 'l'
+						&& s[i] == 's')) && s[i])
+			return (3);
+		if ((ft_testall(s, &i) == 1 || s[i] == '%') && s[i])
+			return (1);
+	}
 	return (0);
 }
 
 void	ft_testwflg(char *s, int *i, int *t)
 {
-	while (ft_testpass(s, *i) && s[*i] && s[*i] != '%' && !ft_testall(s, i))
+	while (ft_testpass(s, *i, 1) && s[*i] && s[*i] != '%' && !ft_testall(s, i))
 	{
 		while (s[*i] == ' ' || s[*i] == '+' || s[*i] == '-' || s[*i] == '#'
 			|| s[*i] == '.')
@@ -65,10 +76,12 @@ void	ft_testwflg(char *s, int *i, int *t)
 		}
 		else if (s[*i] >= '0' && s[*i] <= '9' && s[*i - 1 != '.'])
 			t[6] = ft_litoa(i, s);
-		if (s[*i] == '%' || (!ft_testall(s, i) && !ft_testpass(s, *i)))
+		if (s[*i] == '%' || (!ft_testall(s, i) && !ft_testpass(s, *i, 1)))
 			return ;
 		*i = *i + (!ft_testall(s, i) ? 1 : 0);
 	}
+	while (s[*i] == ' ' && s[*i])
+		*i += 1;
 }
 
 int		ft_testsimp(char *s, int *i, int *t)
@@ -79,18 +92,13 @@ int		ft_testsimp(char *s, int *i, int *t)
 	while (ft_testall(s, i) != 1 && s[*i] != '%' && s[*i])
 	{
 		ft_testwflg(s, i, t);
-		if (!ft_testall(s, i) && !ft_testpass(s, *i) && s[*i] != '%')
+		if (!ft_testall(s, i) && !ft_testpass(s, *i, 1) && s[*i] != '%')
 			return (0);
-		if (s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' || s[*i] == 'z')
+		if ((s[*i] == 'l' || s[*i] == 'h' || s[*i] == 'j' || s[*i] == 'z')
+		&& s[*i])
 			*i = *i + 1;
-		if (s[*i] == 'l' || s[*i] == 'h')
+		if ((s[*i] == 'l' || s[*i] == 'h') && s[*i])
 			*i = *i + 1;
 	}
-	if (s[*i] == 'C' || (s[*i - 2] != 'l' && s[*i - 1] == 'l' && s[*i] == 'c'))
-		return (2);
-	if (s[*i] == 'S' || (s[*i - 2] != 'l' && s[*i - 1] == 'l' && s[*i] == 's'))
-		return (3);
-	if (ft_testall(s, i) == 1 || s[*i] == '%')
-		return (1);
-	return (0);
+	return (ft_testpass(s, *i, 2));
 }

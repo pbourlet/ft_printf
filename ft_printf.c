@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:27 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/07 00:07:53 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/07 23:45:42 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,16 @@ int		ft_printf(const char *format, ...)
 	char		*s;
 	char		**stock;
 	int			d[10];
-	t_int		l;
 
 	d[0] = 0;
 	d[4] = 0;
 	d[9] = 0;
 	d[1] = 0;
-	l.ii = 0;
-	l.bb = 0;
 	va_start(ap, format);
 	s = ft_strdup(format);
-	if ((stock = ft_stock(d, s, ap, &l)) == NULL)
+	if ((stock = ft_stock(d, s, ap)) == NULL)
 		return ((d[9] == 1 ? 0 : -1));
-	ft_solve(d, s, stock, &l);
+	ft_solve(d, s, stock);
 	free(s);
 	free(stock);
 	va_end(ap);

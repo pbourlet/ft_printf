@@ -6,7 +6,7 @@
 #*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/14 16:37:03 by pbourlet          #+#    #+#             *#
-#*   Updated: 2017/01/31 23:28:59 by pbourlet         ###   ########.fr       *#
+#*   Updated: 2017/02/07 17:23:09 by pbourlet         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -85,8 +85,6 @@ SRC = ft_lenlu.c \
 	  ft_strtoupper.c \
 	  ft_solve.c \
 	  ft_itoabase.c \
-	  ft_solvecc.c \
-	  ft_solvess.c \
 	  ft_testtype.c \
 	  ft_stockspec.c \
 	  ft_stockss.c \
@@ -94,6 +92,7 @@ SRC = ft_lenlu.c \
 	  ft_testflags.c \
 	  ft_putnstr.c \
 	  ft_testdigit.c \
+	  ft_bintoa.c \
 
 OBJ = $(SRC:.c=.o)
 

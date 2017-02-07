@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 16:49:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/06 16:39:58 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/07 19:01:55 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*ft_itoabase(intmax_t nb, int base)
 
 	i = 0;
 	nt = nb;
+	if (nb == LONG_MIN)
+		return ((str = ft_strdup("-9223372036854775808")));
 	if (!(str = ft_strnew(ft_nblenmax(nb))))
 		return (NULL);
 	if (nb == 0)
