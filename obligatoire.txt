@@ -1,4 +1,4 @@
-précision = t[7] || t[5];
+précision = t[7]=BOOL || t[5]=nombre;
 champ = t[6];
 cpt = d[0];
 spt = d[1];

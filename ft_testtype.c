@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:59:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/07 22:01:45 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/08 18:35:48 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_testall(char *s, int *i)
 {
-	if ((s[*i] == 'l' || s[*i + 1] == 'l' || s[*i] == 'h' || s[*i + 1] == 'h'
+	if ((s[*i] == 'l' || s[*i] == 'h' || s[*i + 1] == 'h'
 		|| s[*i] == 'j' || s[*i] == 'z') && !(s[*i] == 's' || s[*i] == 'S'
 		|| s[*i] == 'c' || s[*i] == 'C' || s[*i] == 'i' || s[*i] == 'd'
 		|| s[*i] == 'D' || s[*i] == 'u' || s[*i] == 'U' || s[*i] == 'p'
@@ -69,16 +69,14 @@ void	ft_testwflg(char *s, int *i, int *t)
 		while (s[*i] == ' ' || s[*i] == '+' || s[*i] == '-' || s[*i] == '#'
 			|| s[*i] == '.')
 			*i = *i + 1;
+		(s[*i - 1] == '.' ? t[7] = 1 : 0);
 		if (s[*i] >= '0' && s[*i] <= '9' && s[*i - 1] == '.')
-		{
-			t[7] = 1;
 			t[5] = ft_litoa(i, s);
-		}
 		else if (s[*i] >= '0' && s[*i] <= '9' && s[*i - 1 != '.'])
 			t[6] = ft_litoa(i, s);
 		if (s[*i] == '%' || (!ft_testall(s, i) && !ft_testpass(s, *i, 1)))
 			return ;
-		*i = *i + (!ft_testall(s, i) ? 1 : 0);
+		*i = *i + (!ft_testall(s, i) && !ft_testpass(s, *i, 1) ? 1 : 0);
 	}
 	while (s[*i] == ' ' && s[*i])
 		*i += 1;

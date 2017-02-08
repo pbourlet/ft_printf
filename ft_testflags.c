@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:19:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/07 17:45:37 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/08 19:35:41 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	ft_testflags2(int *t, int *d, char *s, char *tab)
 		(d[2] == 2 && t[5] >= (int)ft_strlen(tab) ? ft_putchar('-') : 0);
 	else
 		(d[2] == 2 ? ft_putchar('-') : 0);
-	(d[4] == 11 || d[4] == 21 || s[t[1]] == 'p' ? ft_putchar('0') : 0);
-	((d[4] == 11 && s[t[1]] == 'x') || s[t[1]] == 'p'
+	((d[4] && *tab && *tab != '0') || s[t[1]] == 'p' ? ft_putchar('0') : 0);
+	((d[4] && s[t[1]] == 'x' && *tab && *tab != '0') || s[t[1]] == 'p'
 	? ft_putchar('x') : 0);
-	(d[4] == 11 && s[t[1]] == 'X' ? ft_putchar('X') : 0);
+	(d[4] && s[t[1]] == 'X' && *tab && *tab != '0' ? ft_putchar('X') : 0);
 }
 
 int		ft_testflags3(int *t, int *d, char *s, char *tab)
@@ -49,9 +49,9 @@ int		ft_testflags3(int *t, int *d, char *s, char *tab)
 	? d[4] = 11 : 0);
 	(d[4] == 1 && (s[t[1]] == 'o' || s[t[1]] == 'O') ? d[4] = 21 : 0);
 	res = (d[4] == 2 && (s[t[1]] == 'o' || s[t[1]] == 'O') ? 1 : 0);
-	res = (d[4] == 11 || s[t[1]] == 'p' ? 2 : 0) + (d[4] == 21 ? 1 : 0)
-	+ (d[2] == 1 && (s[t[1]] == 'i' || s[t[1]] == 'd' || s[t[1]] == 'D')
-	? 1 : 0) + (d[2] == 2 && !t[7] ? 1 : 0)
+	res = ((d[4] == 11 && *tab && *tab != '0') || s[t[1]] == 'p' ? 2 : 0)
+	+ (d[4] == 21 && !t[7] && *tab != '0' ? 1 : 0) + (d[2] == 1 && (s[t[1]] == 'i' || s[t[1]] == 'd'
+	|| s[t[1]] == 'D') ? 1 : 0) + (d[2] == 2 && !t[7] ? 1 : 0)
 	+ (d[2] == 2 && t[5] >= (int)ft_strlen(tab) ? 1 : 0);
 	return (res);
 }
