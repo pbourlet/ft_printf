@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:48:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 16:39:19 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/09 22:33:42 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ char	*ft_stockh(char *s, va_list ap, int i)
 	char *tab;
 
 	tab = NULL;
-	while (s[i] == ' ')
-		i++;
-	if (s[i] == 'h')
-		return (ft_stockhh(s, ap, i + 1));
+	while (ft_testpass(s, i))
+		i += 1;
+	if (s[i] == 'h' && (i += 1))
+		return (ft_stockhh(s, ap, i));
 	if (s[i] == 'D')
 		return (ft_stockll(s, ap, i));
 	if (s[i] == 'i' || s[i] == 'd')
 		tab = ft_itoa((short)va_arg(ap, int));
-	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C' || s[i] == 'p')
+	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C'
+	|| s[i] == 'p' || s[i] == '%')
 		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'X')
 		tab = stup(ft_itosh(va_arg(ap, unsigned), 16));
@@ -45,13 +46,14 @@ char	*ft_stockhh(char *s, va_list ap, int i)
 	char *tab;
 
 	tab = NULL;
-	while (s[i] == ' ')
-		i++;
+	while (ft_testpass(s, i))
+		i += 1;
 	if (s[i] == 'D')
 		return (ft_stockll(s, ap, i));
 	if (s[i] == 'i' || s[i] == 'd')
 		tab = ft_itoabase((char)va_arg(ap, int), 10);
-	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C' || s[i] == 'p')
+	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C'
+	|| s[i] == 'p' || s[i] == '%')
 		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'x')
 		tab = ft_itosh((unsigned char)va_arg(ap, int), 16);
@@ -71,11 +73,11 @@ char	*ft_stockj(char *s, va_list ap, int i)
 	char *tab;
 
 	tab = NULL;
-	while (s[i] == ' ')
-		i++;
+	while (ft_testpass(s, i))
+		i += 1;
 	if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D')
 		tab = ft_itoabase(va_arg(ap, intmax_t), 10);
-	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')
+	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C' || s[i] == '%')
 		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'X')
 		tab = stup(ft_itohx(va_arg(ap, uintmax_t)));
@@ -95,13 +97,13 @@ char	*ft_stockz(char *s, va_list ap, int i)
 	char *tab;
 
 	tab = NULL;
-	while (s[i] == ' ')
+	while (ft_testpass(s, i))
 		i++;
 	if (s[i] == 'D')
 		return (ft_stockll(s, ap, i));
 	if (s[i] == 'i' || s[i] == 'd')
 		tab = ft_itoabase(va_arg(ap, ssize_t), 10);
-	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')
+	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C' || s[i] == '%')
 		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'X')
 		tab = stup(ft_itohx(va_arg(ap, size_t)));
@@ -121,11 +123,11 @@ char	*ft_stockll(char *s, va_list ap, int i)
 	char *tab;
 
 	tab = NULL;
-	while (s[i] == ' ')
-		i++;
+	while (ft_testpass(s, i))
+		i += 1;
 	if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D')
 		tab = ft_itoabase(va_arg(ap, intmax_t), 10);
-	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C')
+	else if (s[i] == 's' || s[i] == 'c' || s[i] == 'C' || s[i] == '%')
 		tab = ft_stocksimp(s, ap, i);
 	else if (s[i] == 'p')
 		tab = ft_itohx(va_arg(ap, long long));

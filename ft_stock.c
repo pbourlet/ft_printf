@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 17:11:33 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/09 22:12:29 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ char	*ft_stocklong(char *s, va_list ap, int i)
 	char *tab;
 
 	tab = ft_strnew(0);
-	while (s[i] == ' ')
-		i++;
+	while (ft_testpass(s, i))
+		i += 1;
+	if (s[i] == '%')
+		tab = ft_strdup("%");
 	if (s[i] == 'l')
 		return (ft_stockll(s, ap, i + 1));
 	if (s[i] == 'i' || s[i] == 'd' || s[i] == 'D' || s[i - 1] == 'D')
@@ -66,47 +68,50 @@ char	*ft_stocklong(char *s, va_list ap, int i)
 	return (tab);
 }
 
-int		testdiff(char *s, int i)
+int		ft_stockall(char *s, int *i)
 {
-	int res;
+	int lm;
 
-	res = 0;
-	if (!(s[i] == 's' || s[i] == 'S' || s[i] == 'c' || s[i] == 'C'
-	|| s[i] == 'i' || s[i] == 'd' || s[i] == 'D' || s[i] == 'u'
-	|| s[i] == 'U' || s[i] == 'p' || s[i] == 'o' || s[i] == 'O'
-	|| s[i] == 'x' || s[i] == 'X' || s[i] == 'l' || s[i] == 'h'
-	|| s[i] == 'z' || s[i] == 'j' || s[i] == '%'))
-		return (1);
-	if (s[i] == 'S' || ((ft_testall(s, &i) == 2) && (s[i + 1] == 'S'
-	|| s[i + 2] == 'S' || (s[i] == 'l' && s[i + 1] == 's'))))
-		return (4);
-	if (s[i] == 's' || s[i] == 'd' || s[i] == 'c' || s[i] == 'i'
-	|| s[i] == 'u' || s[i] == 'p' || s[i] == 'o' || s[i] == 'x'
-	|| s[i] == 'X' || s[i] == 'O' || s[i] == 'U' || s[i] == '%'
-	|| s[i] == 'C')
-		return (2);
-	if (s[i] == 'D' || s[i] == 'l' || s[i] == 'h' || s[i] == 'j'
-	|| s[i] == 'z')
+	lm = 0;
+	while (s[*i] && ft_testall(s, i) != 1 && s[*i] != '%')
 	{
-		res = (3 + ((s[i] == 'h') ? 2 : 0) + ((s[i] == 'j') ? 3 : 0)
-		+ ((s[i] == 'z') ? 4 : 0));
-		return (res);
+		if (s[*i] == 'l')
+		{
+			(lm != 1 && lm != 2 ? lm = 0 : 0);
+			lm = (lm == 0 ? 1 : 0) + (s[*i + 1] == 'l' ? 1 : lm);
+		}
+		else if (s[*i] == 'h' && lm != 1 && lm != 2)
+			lm = (lm == 0 ? 3 : 0) + (s[*i + 1] == 'h' ? 1 : lm);
+		else if (s[*i] == 'j' && lm != 1 && lm != 2)
+			lm = 5;
+		else if (s[*i] == 'z' && lm != 1 && lm != 2)
+			lm = 6;
+		*i = *i + 1;
 	}
-	return (0);
+	return (lm);
 }
 
 char	*ft_teststock(char *s, int i, va_list ap)
 {
-	if (testdiff(s, i) == 2)
-		return (ft_stocksimp(s, ap, i));
-	else if (testdiff(s, i) == 3)
-		return (ft_stocklong(s, ap, i + 1));
-	else if (testdiff(s, i) == 5)
-		return (ft_stockh(s, ap, i + 1));
-	else if (testdiff(s, i) == 6)
-		return (ft_stockj(s, ap, i + 1));
-	else if (testdiff(s, i) == 7)
-		return (ft_stockz(s, ap, i + 1));
+	int res;
+	int ii;
+
+	ii = i;
+	res = ft_stockall(s, &i);
+	if ((ft_testall(s, &ii) == 1 || s[ii] == '%') && !res)
+		return (ft_stocksimp(s, ap, ii));
+	else if (res == 1)
+		return (ft_stocklong(s, ap, i));
+	else if (res == 2)
+		return (ft_stockll(s, ap, i));
+	else if (res == 3)
+		return (ft_stockh(s, ap, i));
+	else if (res == 4)
+		return (ft_stockhh(s, ap, i));
+	else if (res == 5)
+		return (ft_stockj(s, ap, i));
+	else if (res == 6)
+		return (ft_stockz(s, ap, i));
 	else
 		return (NULL);
 }
@@ -126,11 +131,11 @@ char	**ft_stock(int *d, char *s, va_list ap)
 		{
 			tab[++d[8]] = ft_strnew(0);
 			i[1] = i[0] + 1;
-			if (!s[i[1]] && (d[9] = 1))
-				return (NULL);
-			while (ft_testpass(s, i[1], 1))
+			while (ft_testpass(s, i[1]))
 				i[1]++;
-			if (testdiff(s, i[1]) == 4)
+			if (s[i[1]] == 'S' || ((ft_testall(s, &i[1]) == 2)
+			&& (s[i[1] + 1] == 'S' || s[i[1] + 2] == 'S' || (s[i[1]] == 'l'
+			&& s[i[1] + 1] == 's'))))
 				tab[d[8]] = ft_stockss(ap, tab[d[8]]);
 			else if ((tab[d[8]] = ft_teststock(s, i[1], ap)) == NULL)
 				free(tab[d[8]--]);

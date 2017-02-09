@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 15:36:19 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/09 20:28:53 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				ft_atoilbase(char *str, int base);
 int				ft_solvefin(int *d, char *s, int *t, char *tab);
 int				ft_testsimp(char *s, int *i, int *t);
 int				ft_testall(char *s, int *i);
-int				ft_testpass(char *s, int i, int ordre);
+int				ft_testpass(char *s, int i);
 int				ft_testfinal(int *test, char *s, int *t);
 int				ft_testdigit(int *d, char *s, int *t, char *tab);
 int				ft_testflags1(int *t, int *d, char *s, char *tab);

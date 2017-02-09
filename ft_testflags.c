@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:19:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 18:09:37 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/09 20:48:02 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_flagstock(int *d, char *s, int i)
 	d[4] = 0;
 	d[3] = 0;
 	d[6] = 0;
-	while (s[i] && ft_testall(s, &i) == 0 && s[i] != '%')
+	while (s[i] && ft_testall(s, &i) != 1 && s[i] != '%')
 	{
 		if (s[i] == ' ')
 			d[3] = 1;
@@ -69,7 +69,7 @@ int		ft_flagstock(int *d, char *s, int i)
 			d[2] = 1;
 		if (s[i] == '-')
 			d[5] = -1;
-		if (s[i] == '#' && d[4] != 2)
+		if (s[i] == '#')
 			d[4] = 1;
 		if (s[i] == '0' && !(s[i - 1] >= '0' && s[i - 1] <= '9'))
 			d[6] = 1;

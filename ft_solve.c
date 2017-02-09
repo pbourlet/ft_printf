@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/08 19:31:57 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/09 18:48:43 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		ft_solve(int *d, char *s, char **tab)
 		{
 			ft_flagstock(d, s, t[4] + 1);
 			t[2] = ft_testsimp(s, &t[1], t);
-			if (t[2] == 1 || t[2] == 2 || t[2] == 3)
+			if (t[2] == 1)
 				ft_solvefin(d, s, t, tab[t[0]++]);
 			else
 				ft_testfin(s, &t[1], t, &d[0]);
