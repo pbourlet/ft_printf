@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/07 21:57:29 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/09 15:36:19 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int				ft_testpass(char *s, int i, int ordre);
 int				ft_testfinal(int *test, char *s, int *t);
 int				ft_testdigit(int *d, char *s, int *t, char *tab);
 int				ft_testflags1(int *t, int *d, char *s, char *tab);
-int				ft_testflags3(int *t, int *d, char *s, char *tab);
 int				ft_flagstock(int *d, char *s, int i);
 char			*stup(char *str);
 char			*ft_itoalong(long int n);

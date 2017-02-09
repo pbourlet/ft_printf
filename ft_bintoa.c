@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 15:23:44 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/07 23:44:41 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/09 18:09:35 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ char	*ft_trad(char *tab, char *bin, int lenb)
 	return (tab);
 }
 
-char	**ft_init(char **tab)
+char	**ft_init(char **tabi)
 {
-	tab[0] = ft_strdup("0xxxxxxx");
-	tab[1] = ft_strdup("110xxxxx10xxxxxx");
-	tab[2] = ft_strdup("1110xxxx10xxxxxx10xxxxxx");
-	tab[3] = ft_strdup("11110xxx10xxxxxx10xxxxxx10xxxxxx");
-	return (tab);
+	tabi[0] = ft_strdup("0xxxxxxx");
+	tabi[1] = ft_strdup("110xxxxx10xxxxxx");
+	tabi[2] = ft_strdup("1110xxxx10xxxxxx10xxxxxx");
+	tabi[3] = ft_strdup("11110xxx10xxxxxx10xxxxxx10xxxxxx");
+	return (tabi);
 }
 
 char	*ft_bintoa(char *tab)
@@ -85,7 +85,7 @@ char	*ft_bintoa(char *tab)
 	int		lenb;
 	int		nb;
 
-	tabi = ft_strnew(5);
+	tabi = ft_strnew(0);
 	ft_init(tabi);
 	res = NULL;
 	lenb = ft_strlen(tab);
@@ -101,7 +101,7 @@ char	*ft_bintoa(char *tab)
 		res = ft_trad(tabi[3], tab, lenb);
 	ft_strclr(tab);
 	tab = ft_resul(res, tab, lenb);
-	ft_tabclr(tabi, nb);
+	ft_tabclr(tabi, nb - 1);
 	ft_strclr(res);
 	return (tab);
 }

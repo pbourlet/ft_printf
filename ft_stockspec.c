@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:48:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/07 22:16:51 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:39:19 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ char	*ft_stockh(char *s, va_list ap, int i)
 		tab = stup(ft_itosh(va_arg(ap, unsigned), 16));
 	else if (s[i] == 'x')
 		tab = ft_itosh(va_arg(ap, unsigned), 16);
-	else if (s[i] == 'u' || s[i] == 'U')
+	else if (s[i] == 'u')
 		tab = ft_itosh(va_arg(ap, unsigned), 10);
+	else if (s[i] == 'U')
+		tab = ft_itoabase(va_arg(ap, long unsigned), 10);
 	else if (s[i] == 'o' || s[i] == 'O')
 		tab = ft_itosh(va_arg(ap, unsigned), 8);
 	return (tab);
