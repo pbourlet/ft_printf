@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 20:28:53 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/16 23:08:13 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@
 # include <limits.h>
 
 void			ft_putnstr(char *s, int n);
+void			ft_putnsstr(char *tab, int *t, int *d);
 void			ft_testflags2(int *t, int *d, char *s, char *tab);
+void			ft_wcputstr(wchar_t *s);
 size_t			ft_wstrlen(wchar_t *s);
 long int		ft_lenlu(unsigned long nb);
 int				ft_printf(const char *format, ...);
 int				ft_solve(int *d, char *s, char **tab);
 int				ft_atoilbase(char *str, int base);
+int				ft_wctoibase(wchar_t *str, int base);
 int				ft_solvefin(int *d, char *s, int *t, char *tab);
 int				ft_testsimp(char *s, int *i, int *t);
 int				ft_testall(char *s, int *i);

@@ -6,16 +6,21 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 21:56:34 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 22:33:18 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/17 01:00:16 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_sols(int *t, int *d, char *tab, int lenb)
+int		ft_sols(int *t, int *d, char *tab, char *s)
 {
-	ft_putnstr(tab, t[5]);
-	d[0] += (t[5] >= lenb ? lenb : t[5]);
+	if (s[t[1]] == 's')
+	{
+		ft_putnstr(tab, t[5]);
+		d[0] += (t[5] >= t[9] ? t[9] : t[5]);
+	}
+	if (s[t[1]] == 'S')
+		ft_putnsstr(tab, t, d);
 	return (1);
 }
 
@@ -27,17 +32,18 @@ void	ft_prec(int *d, char *s, int *t, char *tab)
 	else if (d[2] == 1 && *tab != '-' && (s[t[1]] == 'i'
 	|| s[t[1]] == 'd' || s[t[1]] == 'D') && t[7] && (d[0]++))
 		ft_putchar('+');
-	while (t[5] > t[9] && t[5] && t[2] != 2
+	while (t[5] > t[9] && t[5] && t[2] != 2 && s[t[1]] != 'S'
 	&& s[t[1]] != 's' && s[t[1]] != 'c' && s[t[1]] != 'C')
 	{
 		ft_putchar('0');
 		t[5]--;
 		d[0]++;
 	}
-	if (t[7] && s[t[1]] == 's')
-		ft_sols(t, d, tab, t[9]);
+	if (t[7] && (s[t[1]] == 's' || s[t[1]] == 'S'))
+		ft_sols(t, d, tab, s);
 	else
-		ft_putstr(tab);
+		(s[t[1]] == 'c' || s[t[1]] == 'C') && tab[1] == '\0'
+		? ft_putchar(*tab) : ft_putstr(tab);
 	while (ft_testflags1(t, d, s, tab) > t[8] - ((d[2] == 1 && *tab == '-')
 	? 1 : 0) && d[5] == -1)
 	{
@@ -61,8 +67,7 @@ void	ft_champ(int *d, char *s, int *t, char *tab)
 			((tab[0] == '+' || tab[0] == '-') ? (tab[0] = '0') : 0);
 	}
 	while (ft_testflags1(t, d, s, tab) > t[8] - ((d[2] == 1 && *tab == '-')
-	|| d[2] == 2 ? 1 : 0)
-	&& d[5] != -1)
+	|| d[2] == 2 ? 1 : 0) && d[5] != -1)
 	{
 		if (d[6] == 1 && t[7] == 0)
 			ft_putchar('0');
@@ -80,7 +85,8 @@ int		ft_testdigit(int *d, char *s, int *t, char *tab)
 		(t[7] && !t[5] && tab[0] == '0' ? tab[0] = '\0' : 0);
 	t[9] = ft_strlen(tab);
 	if (t[7] && (s[t[1]] == 's' || s[t[1]] == 'c' || s[t[1]] == 'C'))
-		t[8] = tab[0] == '\0' ? 0 : t[5];
+		t[8] = (tab[0] == '\0' ? 0 : t[5]) - (t[5] > t[9] && tab[0] != '\0'
+		? t[5] - t[9] : 0);
 	else if (tab[0] == 0 && (s[t[1]] == 'c' || s[t[1]] == 'C'))
 		t[8] = 1;
 	else
@@ -90,7 +96,7 @@ int		ft_testdigit(int *d, char *s, int *t, char *tab)
 		- (d[6] && !t[6] && *tab == '-' ? 1 : 0);
 	ft_champ(d, s, t, tab);
 	ft_prec(d, s, t, tab);
-	if (!(t[7] && s[t[1]] == 's'))
+	if (!(t[7] && (s[t[1]] == 's' || s[t[1]] == 'S')))
 		d[0] += t[9];
 	return (1);
 }

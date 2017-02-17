@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 22:12:29 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/16 21:42:02 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_stocksimp(char *s, va_list ap, int i)
 		tab = ft_bintoa(ft_itoabase(va_arg(ap, unsigned int), 2));
 	else if (s[i] == 'u')
 		tab = ft_itoalu(va_arg(ap, unsigned));
-	else if (s[i] == 'U' || s[i] == 'p' || s[i] == 'O')
+	else if (s[i] == 'U' || s[i] == 'p' || s[i] == 'O' || s[i] == 'D')
 		tab = ft_stocklong(s, ap, i);
 	else if (s[i] == 'x')
 		tab = ft_itohx(va_arg(ap, unsigned));

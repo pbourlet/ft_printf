@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testtype.c                                         :+:      :+:    :+:   */
+/*   ft_testtype.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/11 15:59:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 19:48:53 by pbourlet         ###   ########.fr       */
+/*   Created: 2017/02/16 14:58:26 by pbourlet          #+#    #+#             */
+/*   Updated: 2017/02/16 15:01:36 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,24 @@ int		ft_testpass(char *s, int i)
 
 void	ft_testwflg(char *s, int *i, int *t)
 {
+	int res;
+
+	res = 0;
 	while (ft_testpass(s, *i) && s[*i] && s[*i] != '%' && !ft_testall(s, i))
 	{
-		while (s[*i] == ' ' || s[*i] == '+' || s[*i] == '-' || s[*i] == '#'
-			|| s[*i] == '.')
+		while (s[*i] == ' ' || s[*i] == '+' || s[*i] == '-' || s[*i] == '#')
 			*i = *i + 1;
-		(s[*i - 1] == '.' ? t[7] = 1 : 0);
-		if (s[*i] >= '0' && s[*i] <= '9' && s[*i - 1] == '.')
+		(s[*i] == '.' ? t[7] = 1 : 0);
+		if (s[*i] == '.')
+		{
+			*i += 1;
 			t[5] = ft_litoa(i, s);
-		else if (s[*i] >= '0' && s[*i] <= '9' && s[*i - 1 != '.'])
-			t[6] = ft_litoa(i, s);
+		}
+		else if (s[*i] >= '0' && s[*i] <= '9' && s[*i - 1] != '.')
+		{
+			res = ft_litoa(i, s);
+			t[6] = (res != 0 ? res : t[6]);
+		}
 		if (s[*i] == '%' || (!ft_testall(s, i) && !ft_testpass(s, *i)))
 			return ;
 		*i = *i + (!ft_testall(s, i) && !ft_testpass(s, *i) ? 1 : 0);

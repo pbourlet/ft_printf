@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:48:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/09 22:33:42 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/16 18:27:30 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ char	*ft_stockhh(char *s, va_list ap, int i)
 		tab = ft_itoabase((unsigned char)va_arg(ap, int), 10);
 	else if (s[i] == 'U')
 		tab = ft_itoabase(va_arg(ap, uintmax_t), 10);
-	else if (s[i] == 'o' || s[i] == 'O')
+	else if (s[i] == 'o')
 		tab = ft_itosh((unsigned char)va_arg(ap, int), 8);
+	else if (s[i] == 'O')
+		tab = ft_itosh((unsigned)va_arg(ap, int), 8);
 	return (tab);
 }
 
@@ -88,7 +90,7 @@ char	*ft_stockj(char *s, va_list ap, int i)
 	else if (s[i] == 'u' || s[i] == 'U')
 		tab = ft_itoalu(va_arg(ap, uintmax_t));
 	else if (s[i] == 'o' || s[i] == 'O')
-		tab = ft_itoabase(va_arg(ap, uintmax_t), 8);
+		tab = ft_itoaoc(va_arg(ap, uintmax_t));
 	return (tab);
 }
 
@@ -114,7 +116,7 @@ char	*ft_stockz(char *s, va_list ap, int i)
 	else if (s[i] == 'u' || s[i] == 'U')
 		tab = ft_itoalu(va_arg(ap, size_t));
 	else if (s[i] == 'o' || s[i] == 'O')
-		tab = ft_itoabase(va_arg(ap, size_t), 8);
+		tab = ft_itoaoc(va_arg(ap, size_t));
 	return (tab);
 }
 
