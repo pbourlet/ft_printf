@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 15:23:44 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/17 00:08:22 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:24:59 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ void	ft_tabclr(char **tab, int len)
 char	*ft_resul(char *res, char *tab, int lenb)
 {
 	char	*tronc[4];
-	int		ii;
+	int		i;
 
-	ii = 0;
+	i = 0;
 	tronc[0] = ft_strsub(res, 0, 8);
 	tronc[1] = ft_strsub(res, 8, 8);
 	tronc[2] = ft_strsub(res, 16, 8);
 	tronc[3] = ft_strsub(res, 24, 8);
-	tab[ii++] = ft_atoibase(tronc[0], 2);
+	tab[i++] = ft_atoibase(tronc[0], 2);
 	if (lenb > 7)
-		tab[ii++] = ft_atoibase(tronc[1], 2);
+		tab[i++] = ft_atoibase(tronc[1], 2);
 	if (lenb > 11)
-		tab[ii++] = ft_atoibase(tronc[2], 2);
+		tab[i++] = ft_atoibase(tronc[2], 2);
 	if (lenb > 16)
-		tab[ii++] = ft_atoibase(tronc[3], 2);
+		tab[i++] = ft_atoibase(tronc[3], 2);
 	ft_tabclr(tronc, 4);
 	return (tab);
 }
@@ -69,8 +69,11 @@ char	*ft_trad(char *tab, char *bin, int lenb)
 	return (tab);
 }
 
-char	*ft_init(char *tabi, int lenb)
+char	*ft_init(int lenb)
 {
+	char	*tabi;
+
+	tabi = NULL;
 	if (lenb <= 7)
 		tabi = ft_strdup("0xxxxxxx");
 	else if (lenb <= 11)
@@ -88,10 +91,10 @@ char	*ft_bintoa(char *tab)
 	char	*res;
 	int		lenb;
 
-	tabi = ft_strnew(0);
+	tabi = NULL;
 	res = NULL;
 	lenb = ft_strlen(tab);
-	tabi = ft_init(tabi, lenb);
+	tabi = ft_init(lenb);
 	res = ft_trad(tabi, tab, lenb);
 	ft_strclr(tab);
 	tab = ft_resul(res, tab, lenb);

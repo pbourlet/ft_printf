@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/16 23:08:13 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:46:25 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void			ft_wcputstr(wchar_t *s);
 size_t			ft_wstrlen(wchar_t *s);
 long int		ft_lenlu(unsigned long nb);
 int				ft_printf(const char *format, ...);
+int				ft_wlen(char *tab, int *t);
 int				ft_solve(int *d, char *s, char **tab);
 int				ft_atoilbase(char *str, int base);
 int				ft_wctoibase(wchar_t *str, int base);

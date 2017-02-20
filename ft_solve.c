@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:42:20 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/17 01:10:46 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:06:01 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int		ft_solvefin(int *d, char *s, int *t, char *tab)
 {
 	if (d[3] == 1 && d[2] != 1 && (s[t[1]] == 'i' || s[t[1]] == 'd'
-	|| s[t[1]] == 'D' || s[t[1]] == 'p') && tab[0] != '-')
+	|| s[t[1]] == 'D') && tab[0] != '-')
 	{
 		ft_putchar(' ');
 		d[0] += 1;
 	}
 	ft_testdigit(d, s, t, tab);
 	if (((!t[7] && *tab == '\0') || (t[7] && *tab == '\0' && !t[6]))
-		&& (s[t[1]] == 'c' || s[t[1]] == 'C'))
+		&& (s[t[1]] == 'C'))
 		d[0]++;
 	ft_strclr(tab);
 	free(tab);

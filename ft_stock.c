@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/16 21:42:02 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/20 21:02:18 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ char	*ft_stocksimp(char *s, va_list ap, int i)
 {
 	char *tab;
 
-	tab = ft_strnew(0);
+	tab = NULL;
 	if (s[i] == 's')
 		tab = ft_stocksimps(tab, ap);
 	else if (s[i] == '%')
 		tab = ft_strdup("%");
 	else if (s[i] == 'd' || s[i] == 'i')
 		tab = ft_itoa(va_arg(ap, int));
-	else if (s[i] == 'c')
+	else if (s[i] == 'c' && (tab = ft_strnew(0)))
 		tab = ft_strcjoin(tab, va_arg(ap, int));
 	else if (s[i] == 'C')
 		tab = ft_bintoa(ft_itoabase(va_arg(ap, unsigned int), 2));
@@ -44,7 +44,7 @@ char	*ft_stocklong(char *s, va_list ap, int i)
 {
 	char *tab;
 
-	tab = ft_strnew(0);
+	tab = NULL;
 	while (ft_testpass(s, i))
 		i += 1;
 	if (s[i] == '%')

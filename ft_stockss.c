@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:01:12 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/17 01:20:14 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/20 19:55:28 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,42 @@ char	*ft_stocksimps(char *tab, va_list ap)
 	return (tab);
 }
 
-void	ft_freestrclr(char *tmp)
-{
-	ft_strclr(tmp);
-	free(tmp);
-}
-
-void	ft_putnsstr(char *tab, int *t, int *d)
+int		ft_wlen(char *tab, int *t)
 {
 	char	*tmp;
-	int		i;
 	int		len;
+	int		i;
 
 	i = 0;
 	len = 0;
 	tmp = NULL;
 	tmp = ft_itoabase((unsigned char)tab[i++], 2);
-	while (i <= t[5] && tab[i])
 	{
-		ft_freestrclr(tmp);
-		tmp = (ft_itoabase((unsigned char)tab[i], 2));
-		if (tmp[0] == '1' && tmp[1] == '1')
-			len = i;
-		i++;
+		while (i <= t[5] && tab[i])
+		{
+			ft_strclr(tmp);
+			free(tmp);
+			tmp = ft_itoabase((unsigned char)tab[i], 2);
+			if (tmp[0] == '1' && tmp[1] == '1')
+				len = i;
+			i++;
+		}
 	}
-	ft_freestrclr(tmp);
+	ft_strclr(tmp);
+	free(tmp);
+	return (len);
+}
+
+void	ft_putnsstr(char *tab, int *t, int *d)
+{
+	int		i;
+	int		len;
+
 	i = 0;
-	while (i < len && tab[i] && (d[0]++))
+	len = ft_wlen(tab, t);
+	while (i < len && tab[i])
+	{
 		ft_putchar(tab[i++]);
+		d[0]++;
+	}
 }
