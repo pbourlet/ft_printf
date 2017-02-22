@@ -16,12 +16,12 @@ int	main(void)
 	int	ftres;
 	int	vres;
  
-	printf("=====	printf_out	=====\n");
-	printf("\nret: %d\n=============================\n",
-	printf("%s %s %s %s", "this", "is", "a", "multi"));
+//	printf("=====	printf_out	=====\n");
+//	printf("\nret: %d\n=============================\n",
+//	printf("%s %s %s %s", "this", "is", "a", "multi"));
 	ft_printf("===== ft_printf_out	=====\n");
 	ft_printf("\nret: %d\n=============================\n",
-	ft_printf("%s %s %s %s", "this", "is", "a", "multi"));
+	ft_printf("%S", ls));
 /*	ftres = ft_printf("lol %C %i %li %d %X %lu %p %x %lc %lp %lx %lX %hc %hi\
 	 %hd %hX %hu %hp %hx %jc %ji %jd %jX %ju %jp %jx %zc %zi %zd %zX %zu %zp\
 	 %zx %llc %lli %lld %llX %llu %llp %llx %hhc %hhi %hhd %hhX %hhu %hhp %hhx\

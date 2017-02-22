@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:01:12 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/20 19:55:28 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/22 15:22:58 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 char	*ft_stockss(va_list ap, char *tab)
 {
-	wchar_t	*tmp;
+	char	*tmp;
 	wchar_t	*tmp2;
 	char	*tmp3;
 	int		y;
 
 	y = 0;
+	tab = ft_strnew(0);
 	tmp = NULL;
 	tmp3 = NULL;
 	tmp2 = va_arg(ap, wchar_t *);
 	if (tmp2 == NULL)
+		return ((tab = ft_strdup("(null)")));
+	while (tmp2[y] != '\0')
 	{
-		tab = ft_strdup("(null)");
-		return (tab);
-	}
-	tmp = ft_wstrdup(tmp2);
-	while (tmp[y] != '\0')
-	{
-		tmp3 = ft_itoabase((unsigned)tmp[y], 2);
+		tmp = tab;
+		tmp3 = ft_itoabase((unsigned)tmp2[y], 2);
 		y++;
-		tab = ft_strjoin(tab, ft_bintoa(tmp3));
+		tab = ft_strjoin(tmp, ft_bintoa(tmp3));
+		ft_strclr(tmp);
+		ft_strclr(tmp3);
+		free(tmp);
+		free(tmp3);
 	}
-	free(tmp);
-	free(tmp3);
 	return (tab);
 }
 

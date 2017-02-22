@@ -16,3 +16,9 @@ a = i[2];
 
 couleur:
 echo "\033[31;01mtoto \033[42mfoo"
+
+pour detecter leaks:
+
+fin de programme -> while(1);
+ps ax|grep a.out
+leaks "program number"
