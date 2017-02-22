@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:57:38 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/16 18:08:27 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/22 16:20:54 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,6 @@ char	*ft_itoalu(uintmax_t n)
 		nb = nb / 10;
 		i++;
 	}
-	str[i] = '\0';
-	str = ft_strrev(str);
-	return (str);
-}
-
-char	*ft_itoalong(intmax_t n)
-{
-	intmax_t	nb;
-	intmax_t	i;
-	intmax_t	len;
-	char		*str;
-
-	i = 0;
-	nb = n;
-	if (n < 0)
-		nb = -nb;
-	len = ft_nblen(nb);
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1 + (n < 0)))))
-		return (NULL);
-	if (nb == 0)
-		return (ft_strcpy(str, "0"));
-	while (nb != 0)
-	{
-		str[i] = (nb % 10) + '0';
-		nb = nb / 10;
-		i++;
-	}
-	if (n < 0)
-		str[i++] = '-';
 	str[i] = '\0';
 	str = ft_strrev(str);
 	return (str);
