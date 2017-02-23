@@ -6,7 +6,7 @@
 #*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/14 16:37:03 by pbourlet          #+#    #+#             *#
-#*   Updated: 2017/02/22 16:55:24 by pbourlet         ###   ########.fr       *#
+#*   Updated: 2017/02/23 19:46:50 by pbourlet         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -54,16 +54,28 @@ OBJL = $(SRCL:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	gcc -Wall -Wextra -Werror -o $@ -c $<
+	@gcc -Wall -Wextra -Werror -o $@ -c $< -I./includes
+	@echo "\033[34;01m\xE2\x97\x89 \c"
+	@echo "\033[37;01m$<\c"
+	@echo "\033[32;01m ✓"
+	@echo "\033[0m\c"
 
 $(NAME): $(OBJ) $(OBJL)
-	ar rc $(NAME) $(OBJ) $(OBJL)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJ) $(OBJL)
+	@ranlib $(NAME)
 
 clean:
-	rm -rf $(OBJ) $(OBJL)
+	@echo "\033[34;01m\xE2\x97\x89 \c"
+	@echo "\033[31;01mclean\c"
+	@echo "\033[32;01m ✓"
+	@echo "\033[0m\c"
+	@rm -rf $(OBJ) $(OBJL)
 
 fclean: clean
-	rm -rf $(NAME)
+	@echo "\033[34;01m\xE2\x97\x89 \c"
+	@echo "\033[31;01mfull clean\c"
+	@echo "\033[32;01m ✓"
+	@echo "\033[0m\c"
+	@rm -rf $(NAME)
 
 re: fclean all
