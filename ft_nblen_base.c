@@ -6,11 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 19:52:23 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/03/01 19:52:25 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 20:18:58 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/ft_printf.h"
 
 int		ft_nblen_base(long long n, int base)
 {
