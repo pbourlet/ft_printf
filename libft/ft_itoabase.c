@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 16:49:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 17:34:36 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 17:12:33 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,19 @@ char	*ft_pos(char *str, intmax_t *i, int base, intmax_t nb)
 	return (str);
 }
 
-int		ft_nblenmax(intmax_t nb)
+int		ft_nblenmax(intmax_t n, int base)
 {
-	intmax_t digit;
+	int			len;
+	long double pow;
 
-	digit = 0;
-	if (!nb)
-		return (1);
-	if (nb < 0)
-		digit++;
-	while (nb != 0)
-	{
-		digit++;
-		nb = nb / 10;
-	}
-	return (digit);
+	pow = 1;
+	len = 0;
+	if (n < 0)
+		len++;
+	n < 0 ? n = -n : 0;
+	while (n >= (pow *= base))
+		len++;
+	return (len + 1);
 }
 
 char	*ft_itoabase(intmax_t nb, int base)
@@ -54,7 +52,7 @@ char	*ft_itoabase(intmax_t nb, int base)
 	nt = nb;
 	if (nb == LONG_MIN)
 		return ((str = ft_strdup("-9223372036854775808")));
-	if (!(str = ft_strnew(ft_nblenmax(nb))))
+	if (!(str = ft_strnew(ft_nblenmax(nb, base))))
 		return (NULL);
 	if (nb == 0)
 		return (ft_strcpy(str, "0"));

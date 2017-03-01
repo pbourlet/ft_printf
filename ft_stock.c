@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 22:04:14 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:46:50 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ char	**ft_stock(char *s, va_list ap)
 			if (s[i[1]] == 'S' || ((ft_testall(s, &i[1]) == 2)
 			&& (s[i[1] + 1] == 'S' || s[i[1] + 2] == 'S' || (s[i[1]] == 'l'
 			&& s[i[1] + 1] == 's'))))
-				tab[i[2]] = ft_stockss(ap, tab[i[2]]);
+				tab[i[2]] = ft_stockss(ap);
 			else
 				tab = ft_stocking(s, i, ap, tab);
 			i[0] = i[1];

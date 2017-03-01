@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 21:56:34 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 20:15:55 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:47:02 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int		ft_sols(int *t, int *d, char *tab, char *s)
 	else if (t[7] && s[t[1]] == 'S')
 		ft_putnsstr(tab, t, d);
 	else
+	{
 		(s[t[1]] == 'c' || s[t[1]] == 'C') && tab[1] == '\0'
 		? ft_putchar(*tab) : ft_putstr(tab);
+	}
 	return (1);
 }
 

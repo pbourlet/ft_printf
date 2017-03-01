@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 17:21:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 18:34:31 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 17:53:54 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ char	*ft_strrev(char *str);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 
 void	ft_putchar(char c);
-void	ft_putendl(char const *s);
 void	ft_putnstr(char *s, int n);
 void	ft_putstr(char const *s);
 void	ft_strclr(char *s);
 void	*ft_strnew(size_t size);
-void	ft_putnbr(int n);
 
 #endif

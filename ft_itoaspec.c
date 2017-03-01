@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 12:57:38 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 17:36:10 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:49:32 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_itosh(unsigned short int nb, int base)
 	int		i;
 
 	i = 0;
-	if (!(str = ft_strnew(11)))
+	if (!(str = ft_strnew(ft_unblen_base(nb, base))))
 		return (NULL);
 	if (nb == 0)
 		return (ft_strcpy(str, "0"));
@@ -67,7 +67,7 @@ char	*ft_itohx(uintmax_t nb)
 	intmax_t	i;
 
 	i = 0;
-	if (!(str = ft_strnew(11)))
+	if (!(str = ft_strnew(ft_unblen_base(nb, 16))))
 		return (NULL);
 	if (nb == 0)
 		return (ft_strcpy(str, "0"));
@@ -91,7 +91,7 @@ char	*ft_itoaoc(uintmax_t nb)
 	intmax_t	i;
 
 	i = 0;
-	if (!(str = ft_strnew(11)))
+	if (!(str = ft_strnew(ft_unblen_base(nb, 8))))
 		return (NULL);
 	if (nb == 0)
 		return (ft_strcpy(str, "0"));

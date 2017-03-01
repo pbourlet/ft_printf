@@ -6,7 +6,7 @@
 #*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/14 16:37:03 by pbourlet          #+#    #+#             *#
-#*   Updated: 2017/02/28 23:51:52 by pbourlet         ###   ########.fr       *#
+#*   Updated: 2017/03/01 19:52:39 by pbourlet         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -19,8 +19,6 @@ SRCL = $(addprefix libft/, \
 	  ft_itoabase.c \
 	  ft_nblen.c \
 	  ft_putchar.c \
-	  ft_putendl.c \
-	  ft_putnbr.c \
 	  ft_putnstr.c \
 	  ft_putstr.c \
 	  ft_strchr.c \
@@ -50,7 +48,7 @@ SRC = ft_lenlu.c \
 	  ft_testdigit.c \
 	  ft_bintoa.c \
 	  ft_stocking.c \
-	  ft_nstrclr.c \
+	  ft_nblen_base.c \
 
 OBJ = $(SRC:.c=.o)
 

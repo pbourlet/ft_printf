@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:59:04 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 23:51:01 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:52:11 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 void			ft_putnstr(char *s, int n);
 void			ft_putnsstr(char *tab, int *t, int *d);
 void			ft_testflags2(int *t, int *d, char *s, char *tab);
-void			ft_nstrclr(int n, char *s);
 
 long int		ft_lenlu(unsigned long nb);
 int				ft_printf(const char *format, ...);
@@ -38,6 +37,8 @@ int				ft_testdigit(int *d, char *s, int *t, char *tab);
 int				ft_testflags1(int *t, int *d, char *s, char *tab);
 int				ft_flagstock(int *d, char *s, int i);
 int				ft_stockall(char *s, int *i);
+int				ft_nblen_base(long long n, int base);
+int				ft_unblen_base(uintmax_t n, int base);
 
 char			*stup(char *str);
 char			*ft_itoalong(long int n);
@@ -58,6 +59,6 @@ char			*ft_stockj(char *s, va_list ap, int i);
 char			*ft_stockz(char *s, va_list ap, int i);
 char			*ft_stockll(char *s, va_list ap, int i);
 char			*ft_stockhh(char *s, va_list ap, int i);
-char			*ft_stockss(va_list ap, char *tab);
+char			*ft_stockss(va_list ap);
 
 #endif

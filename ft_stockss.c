@@ -6,39 +6,39 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:01:12 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/03/01 01:24:42 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 17:50:02 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
 
-char	*ft_stockss(va_list ap, char *tab)
+char	*ft_stockss(va_list ap)
 {
-	char	*tmp;
-	wchar_t	*tmp2;
-	char	*tmp3;
-	int		y;
+	wchar_t	*tmp;
+	char	*tab[3];
 	int		i;
 
-	y = 0;
-	i = 0;
-	tab = ft_strnew(0);
-	tmp3 = ft_strnew(0);
-	tmp2 = va_arg(ap, wchar_t *);
-	if (tmp2 == NULL)
-		return ((tab = ft_strdup("(null)")));
-	while (tmp2[y] != '\0')
+	tmp = va_arg(ap, wchar_t *);
+	if (!(tab[0] = NULL) && tmp == NULL)
+		return ((tab[0] = ft_strdup("(null)")));
+	if (!(i = 0) && *tmp == '\0')
+		return (tab[0] = ft_strdup(""));
+	while (tmp[i])
 	{
-		tmp3 = ft_itoabase((unsigned)tmp2[y], 2);
-		y++;
-		tmp = ft_bintoa(tmp3);
-		while (*tmp)
-			tab[i++] = *tmp++;
-		ft_strclr(tmp3);
-		free(tmp3);
+		tab[1] = ft_itoabase((unsigned)tmp[i++], 2);
+		tab[2] = ft_bintoa(tab[1]);
+		if (!tab[0])
+			tab[0] = ft_strdup(tab[2]);
+		else
+		{
+			tab[1] = tab[0];
+			tab[0] = ft_strjoin(tab[1], tab[2]);
+			free(tab[1]);
+		}
+		ft_strclr(tab[2]);
+		free(tab[2]);
 	}
-	tab[i] = '\0';
-	return (tab);
+	return (tab[0]);
 }
 
 char	*ft_stocksimps(char *tab, va_list ap)

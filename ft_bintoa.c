@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 15:23:44 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/03/01 00:32:58 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 16:42:12 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_tabclr(char **tab, int len)
 	}
 }
 
-char	*ft_resul(char *res, char *tab, int lenb)
+char	*ft_resul(char *restab, char *res, int lenb)
 {
 	char	*tronc[4];
 	int		i;
@@ -35,16 +35,15 @@ char	*ft_resul(char *res, char *tab, int lenb)
 	tronc[1] = ft_strsub(res, 8, 8);
 	tronc[2] = ft_strsub(res, 16, 8);
 	tronc[3] = ft_strsub(res, 24, 8);
-	tab[i++] = ft_atoibase(tronc[0], 2);
+	restab[i++] = ft_atoibase(tronc[0], 2);
 	if (lenb > 7)
-		tab[i++] = ft_atoibase(tronc[1], 2);
+		restab[i++] = ft_atoibase(tronc[1], 2);
 	if (lenb > 11)
-		tab[i++] = ft_atoibase(tronc[2], 2);
+		restab[i++] = ft_atoibase(tronc[2], 2);
 	if (lenb > 16)
-		tab[i++] = ft_atoibase(tronc[3], 2);
-	ft_nstrclr(i, tab);
+		restab[i++] = ft_atoibase(tronc[3], 2);
 	ft_tabclr(tronc, 4);
-	return (tab);
+	return (restab);
 }
 
 char	*ft_trad(char *tab, char *bin, int lenb)
@@ -91,15 +90,19 @@ char	*ft_bintoa(char *tab)
 	char	*tabi;
 	char	*res;
 	int		lenb;
+	char	*restab;
 
 	tabi = NULL;
 	res = NULL;
+	restab = ft_strnew(4);
 	lenb = ft_strlen(tab);
 	tabi = ft_init(lenb);
 	res = ft_trad(tabi, tab, lenb);
-	tab = ft_resul(res, tab, lenb);
+	restab = ft_resul(restab, res, lenb);
+	ft_strclr(tab);
+	free(tab);
 	ft_strclr(tabi);
 	ft_strclr(res);
 	free(tabi);
-	return (tab);
+	return (restab);
 }

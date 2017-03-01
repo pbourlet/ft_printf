@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_nblen_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/06 21:02:38 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 18:35:12 by pbourlet         ###   ########.fr       */
+/*   Created: 2017/03/01 19:52:23 by pbourlet          #+#    #+#             */
+/*   Updated: 2017/03/01 19:52:25 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int n)
+int		ft_nblen_base(long long n, int base)
 {
+	int			len;
+	long double	pow;
+
+	pow = 1;
+	len = 0;
 	if (n < 0)
-	{
-		ft_putchar('-');
-		if (n == -2147483648)
-		{
-			ft_putchar('2');
-			n = -147483648;
-		}
-		n = -n;
-	}
-	if (n >= 10)
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
-	else
-		ft_putchar(n + 48);
+		len++;
+	n < 0 ? n = -n : 0;
+	while (n >= (pow *= base))
+		len++;
+	return (len + 1);
+}
+
+int		ft_unblen_base(uintmax_t n, int base)
+{
+	int			len;
+	long double	pow;
+
+	pow = 1;
+	len = 0;
+	while (n >= (pow *= base))
+		len++;
+	return (len + 1);
 }
