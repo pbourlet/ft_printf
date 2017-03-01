@@ -6,11 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 21:56:34 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/22 15:09:46 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/28 20:15:55 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
 int		ft_sols(int *t, int *d, char *tab, char *s)
 {

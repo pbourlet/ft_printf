@@ -6,7 +6,7 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 17:21:22 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 18:34:52 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/28 18:34:31 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../includes/ft_printf.h"
+# include "ft_printf.h"
 
 size_t	ft_strlen(const char *s);
 

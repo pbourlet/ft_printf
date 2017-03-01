@@ -6,11 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 15:23:44 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/20 20:24:59 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 00:32:58 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
 void	ft_tabclr(char **tab, int len)
 {
@@ -42,6 +42,7 @@ char	*ft_resul(char *res, char *tab, int lenb)
 		tab[i++] = ft_atoibase(tronc[2], 2);
 	if (lenb > 16)
 		tab[i++] = ft_atoibase(tronc[3], 2);
+	ft_nstrclr(i, tab);
 	ft_tabclr(tronc, 4);
 	return (tab);
 }
@@ -80,7 +81,7 @@ char	*ft_init(int lenb)
 		tabi = ft_strdup("110xxxxx10xxxxxx");
 	else if (lenb <= 16)
 		tabi = ft_strdup("1110xxxx10xxxxxx10xxxxxx");
-	else if (lenb <= 21)
+	else
 		tabi = ft_strdup("11110xxx10xxxxxx10xxxxxx10xxxxxx");
 	return (tabi);
 }
@@ -96,7 +97,6 @@ char	*ft_bintoa(char *tab)
 	lenb = ft_strlen(tab);
 	tabi = ft_init(lenb);
 	res = ft_trad(tabi, tab, lenb);
-	ft_strclr(tab);
 	tab = ft_resul(res, tab, lenb);
 	ft_strclr(tabi);
 	ft_strclr(res);

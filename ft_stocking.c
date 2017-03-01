@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
+/*   ft_stocking.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/15 16:37:48 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 17:37:58 by pbourlet         ###   ########.fr       */
+/*   Created: 2017/02/28 18:12:10 by pbourlet          #+#    #+#             */
+/*   Updated: 2017/02/28 22:14:03 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
 
-char	*stup(char *str)
+char	**ft_stocking(char *s, int *i, va_list ap, char **tab)
 {
-	int i;
+	int y;
+	int	z;
 
-	i = -1;
-	while (str[++i])
-		str[i] = ft_toupper(str[i]);
-	return (str);
+	y = i[1];
+	while (!ft_testall(s, &y) && s[y] != '%' && s[y])
+	{
+		if (s[y] == '*')
+		{
+			tab[i[2]++] = ft_teststock(s, y, ap);
+			y++;
+			i[1] = y;
+		}
+		y++;
+	}
+	z = y - 1;
+	(ft_testall(s, &y) || (s[y] == '%' && ft_testall(s, &z))
+	? i[1] = y : 0);
+	if ((tab[i[2]] = ft_teststock(s, i[1], ap)) == NULL)
+		free(tab[i[2]--]);
+	return (tab);
 }

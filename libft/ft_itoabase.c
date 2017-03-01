@@ -6,11 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 16:49:00 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/16 21:10:44 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:34:36 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 char	*ft_pos(char *str, intmax_t *i, int base, intmax_t nb)
 {

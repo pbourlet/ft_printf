@@ -6,11 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:47:54 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/22 15:21:00 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/28 22:04:14 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
 char	*ft_stocksimp(char *s, va_list ap, int i)
 {
@@ -21,7 +21,7 @@ char	*ft_stocksimp(char *s, va_list ap, int i)
 		tab = ft_stocksimps(tab, ap);
 	else if (s[i] == '%')
 		tab = ft_strdup("%");
-	else if (s[i] == 'd' || s[i] == 'i')
+	else if (s[i] == 'd' || s[i] == 'i' || s[i] == '*')
 		tab = ft_itoa(va_arg(ap, int));
 	else if (s[i] == 'c' && (tab = ft_strnew(0)))
 		tab = ft_strcjoin(tab, va_arg(ap, int));
@@ -98,7 +98,7 @@ char	*ft_teststock(char *s, int i, va_list ap)
 
 	ii = i;
 	res = ft_stockall(s, &i);
-	if ((ft_testall(s, &ii) == 1 || s[ii] == '%') && !res)
+	if ((ft_testall(s, &ii) == 1 || s[ii] == '%' || s[ii] == '*') && !res)
 		return (ft_stocksimp(s, ap, ii));
 	else if (res == 1)
 		return (ft_stocklong(s, ap, i));
@@ -116,29 +116,29 @@ char	*ft_teststock(char *s, int i, va_list ap)
 		return (NULL);
 }
 
-char	**ft_stock(int *d, char *s, va_list ap)
+char	**ft_stock(char *s, va_list ap)
 {
 	char	**tab;
-	int		i[2];
+	int		i[3];
 
 	i[0] = -1;
-	d[8] = 0;
+	i[2] = 0;
 	if (!(tab = malloc(sizeof(va_list) * 100)))
 		return (NULL);
 	while (s[++i[0]])
 	{
 		if (!(i[1] = 0) && s[i[0]] == '%')
 		{
-			d[8]++;
+			i[2]++;
 			i[1] = i[0] + 1;
 			while (ft_testpass(s, i[1]))
 				i[1]++;
 			if (s[i[1]] == 'S' || ((ft_testall(s, &i[1]) == 2)
 			&& (s[i[1] + 1] == 'S' || s[i[1] + 2] == 'S' || (s[i[1]] == 'l'
 			&& s[i[1] + 1] == 's'))))
-				tab[d[8]] = ft_stockss(ap, tab[d[8]]);
-			else if ((tab[d[8]] = ft_teststock(s, i[1], ap)) == NULL)
-				free(tab[d[8]--]);
+				tab[i[2]] = ft_stockss(ap, tab[i[2]]);
+			else
+				tab = ft_stocking(s, i, ap, tab);
 			i[0] = i[1];
 		}
 	}

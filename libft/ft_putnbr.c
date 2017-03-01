@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/15 16:37:48 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/28 17:37:58 by pbourlet         ###   ########.fr       */
+/*   Created: 2016/11/06 21:02:38 by pbourlet          #+#    #+#             */
+/*   Updated: 2017/02/28 18:35:12 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-char	*stup(char *str)
+void	ft_putnbr(int n)
 {
-	int i;
-
-	i = -1;
-	while (str[++i])
-		str[i] = ft_toupper(str[i]);
-	return (str);
+	if (n < 0)
+	{
+		ft_putchar('-');
+		if (n == -2147483648)
+		{
+			ft_putchar('2');
+			n = -147483648;
+		}
+		n = -n;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+		ft_putchar(n + 48);
 }

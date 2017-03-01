@@ -6,11 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 19:37:11 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/01/31 19:41:15 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:33:30 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 void	ft_putnstr(char *s, int n)
 {

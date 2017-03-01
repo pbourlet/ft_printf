@@ -6,11 +6,11 @@
 /*   By: pbourlet <pbourlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:01:12 by pbourlet          #+#    #+#             */
-/*   Updated: 2017/02/22 15:22:58 by pbourlet         ###   ########.fr       */
+/*   Updated: 2017/03/01 01:24:42 by pbourlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
 char	*ft_stockss(va_list ap, char *tab)
 {
@@ -18,25 +18,26 @@ char	*ft_stockss(va_list ap, char *tab)
 	wchar_t	*tmp2;
 	char	*tmp3;
 	int		y;
+	int		i;
 
 	y = 0;
+	i = 0;
 	tab = ft_strnew(0);
-	tmp = NULL;
-	tmp3 = NULL;
+	tmp3 = ft_strnew(0);
 	tmp2 = va_arg(ap, wchar_t *);
 	if (tmp2 == NULL)
 		return ((tab = ft_strdup("(null)")));
 	while (tmp2[y] != '\0')
 	{
-		tmp = tab;
 		tmp3 = ft_itoabase((unsigned)tmp2[y], 2);
 		y++;
-		tab = ft_strjoin(tmp, ft_bintoa(tmp3));
-		ft_strclr(tmp);
+		tmp = ft_bintoa(tmp3);
+		while (*tmp)
+			tab[i++] = *tmp++;
 		ft_strclr(tmp3);
-		free(tmp);
 		free(tmp3);
 	}
+	tab[i] = '\0';
 	return (tab);
 }
 
